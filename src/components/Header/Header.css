@@ -32,9 +32,9 @@
 }
 
 .logo img {
-  height: 50px;
+  height: 65px;
   width: auto;
-  border-radius: var(--radius-md);
+  /* border-radius: var(--radius-md); */
 }
 
 .logo-text {
