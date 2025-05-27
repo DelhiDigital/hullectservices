@@ -3,7 +3,7 @@ import "./WhatsAppButton.css"
 
 const WhatsAppButton = () => {
   // Replace with your actual WhatsApp number
-  const whatsappNumber = "+917042034792"
+  const whatsappNumber = "+919120018844"
   const message = "Hello, I'm interested in immigration services."
 
   const handleClick = () => {
