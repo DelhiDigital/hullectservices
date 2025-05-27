@@ -7,6 +7,7 @@ import Services from "./pages/Services/Services"
 import Partners from "./pages/Partners/Partners"
 import Media from "./pages/Media/Media"
 import Contact from "./pages/Contact/Contact"
+import WhatsappButton from "./components/WhatsappButton/WhatsappButton"
 import "./index.css"
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
           <Route path="/contact1" element={<Contact />} />
         </Routes>
       </main>
+      <WhatsappButton />
+      {/* Footer should be at the bottom of the page */}
       <Footer />
     </div>
   )
