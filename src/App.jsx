@@ -7,7 +7,7 @@ import Services from "./pages/Services/Services"
 import Partners from "./pages/Partners/Partners"
 import Media from "./pages/Media/Media"
 import Contact from "./pages/Contact/Contact"
-import WhatsappButton from "./components/WhatsappButton/WhatsappButton"
+import WhatsappButton from "./components/WhatsappButton/WhatsAppButton"
 import "./index.css"
 
 function App() {
