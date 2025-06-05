@@ -261,15 +261,15 @@ const Services = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="services-cta">
+      {/* CTA Section - Fixed with Unique Classes */}
+      <section className="services-page-cta-section">
         <div className="container">
-          <div className="cta-content">
-            <h3 className="heading-tertiary">Ready to Get Started?</h3>
-            <p className="text-large">
+          <div className="services-page-cta-content">
+            <h3 className="services-page-cta-heading">Ready to Get Started?</h3>
+            <p className="services-page-cta-text">
               Let's discuss how our comprehensive staffing solutions can help your business grow.
             </p>
-            <div className="cta-actions">
+            <div className="services-page-cta-actions">
               <Link to="/contact" className="btn btn-primary">
                 Contact Us Today
               </Link>

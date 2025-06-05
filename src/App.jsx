@@ -8,20 +8,23 @@ import Partners from "./pages/Partners/Partners"
 import Media from "./pages/Media/Media"
 import Contact from "./pages/Contact/Contact"
 import WhatsappButton from "./components/WhatsappButton/WhatsAppButton"
+import ScrollToTop from "./components/ScrollToTop"
 import "./index.css"
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <ScrollToTop />
+      {/* Main content should be wrapped in a main tag for better semantics */}
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about1" element={<About />} />
-          <Route path="/services1" element={<Services />} />
-          <Route path="/partners1" element={<Partners />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/partners" element={<Partners />} />
           <Route path="/media1" element={<Media />} />
-          <Route path="/contact1" element={<Contact />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <WhatsappButton />

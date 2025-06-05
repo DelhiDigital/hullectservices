@@ -343,8 +343,8 @@
   margin: 0;
 }
 
-/* CTA Section */
-.partners-cta {
+/* Partners Page CTA Section - Fixed with Unique Classes */
+.partners-page-cta-section {
   background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
   padding: var(--spacing-3xl) 0;
   text-align: center;
@@ -353,7 +353,7 @@
   overflow: hidden;
 }
 
-.partners-cta::before {
+.partners-page-cta-section::before {
   content: "";
   position: absolute;
   top: 0;
@@ -364,38 +364,50 @@
     radial-gradient(circle at 80% 20%, rgba(249, 115, 22, 0.2) 0%, transparent 50%);
 }
 
-.cta-content {
+.partners-page-cta-content {
   position: relative;
   z-index: 2;
 }
 
-.cta-content .heading-tertiary {
-  color: var(--white);
+.partners-page-cta-heading {
+  font-family: var(--font-secondary);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--white) !important;
   margin-bottom: var(--spacing-lg);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
 
-.cta-content .text-large {
-  color: rgba(255, 255, 255, 0.9);
+.partners-page-cta-text {
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9) !important;
   margin-bottom: var(--spacing-2xl);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
 
-.cta-actions {
+.partners-page-cta-actions {
   display: flex;
   gap: var(--spacing-lg);
   justify-content: center;
   align-items: center;
 }
 
-.cta-actions .btn-outline {
+.partners-page-cta-actions .btn-outline {
   background-color: transparent;
   color: var(--white);
   border-color: var(--white);
 }
 
-.cta-actions .btn-outline:hover {
+.partners-page-cta-actions .btn-outline:hover {
   background-color: var(--white);
   color: var(--primary-blue);
 }
@@ -426,12 +438,12 @@
     gap: var(--spacing-xl);
   }
 
-  .cta-actions {
+  .partners-page-cta-actions {
     flex-direction: column;
     gap: var(--spacing-md);
   }
 
-  .cta-actions .btn {
+  .partners-page-cta-actions .btn {
     width: 100%;
     max-width: 300px;
   }

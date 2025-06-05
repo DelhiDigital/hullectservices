@@ -57,6 +57,8 @@ const Contact = () => {
       phone: "+91 11 4567 8900",
       email: "delhi@hullectservices.com",
       image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&h=200&fit=crop&crop=center",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Connaught+Place+New+Delhi+India",
+      coordinates: "28.6315,77.2167", // New Delhi coordinates
     },
     {
       city: "Mumbai",
@@ -64,6 +66,8 @@ const Contact = () => {
       phone: "+91 22 6789 0123",
       email: "mumbai@hullectservices.com",
       image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=300&h=200&fit=crop&crop=center",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Bandra+Kurla+Complex+Mumbai+India",
+      coordinates: "19.0596,72.8656", // Mumbai coordinates
     },
     {
       city: "Bangalore",
@@ -71,6 +75,8 @@ const Contact = () => {
       phone: "+91 80 9876 5432",
       email: "bangalore@hullectservices.com",
       image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop&crop=center",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Electronic+City+Bangalore+India",
+      coordinates: "12.9716,77.5946", // Bangalore coordinates
     },
     {
       city: "Chennai",
@@ -78,6 +84,8 @@ const Contact = () => {
       phone: "+91 44 5432 1098",
       email: "chennai@hullectservices.com",
       image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=300&h=200&fit=crop&crop=center",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=OMR+Road+Chennai+India",
+      coordinates: "13.0827,80.2707", // Chennai coordinates
     },
   ]
 
@@ -90,6 +98,13 @@ const Contact = () => {
     "Payroll & Compliance",
     "Other",
   ]
+
+  // Head office details for map
+  const headOffice = {
+    address: "123 Business District, Connaught Place, New Delhi - 110001",
+    coordinates: "28.6315,77.2167",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=123+Business+District+Connaught+Place+New+Delhi+India",
+  }
 
   return (
     <div className="contact-page">
@@ -251,7 +266,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Office Locations */}
+      {/* Office Locations - Updated with Location Buttons */}
       <section className="office-locations section">
         <div className="container">
           <div className="section-header text-center">
@@ -282,6 +297,17 @@ const Contact = () => {
                     <span className="detail-icon">📧</span>
                     <a href={`mailto:${location.email}`}>{location.email}</a>
                   </div>
+                  {/* New Location Button */}
+                  <div className="location-actions">
+                    <a
+                      href={location.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary location-btn"
+                    >
+                      📍 View Location
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -289,25 +315,44 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Map Section */}
+      {/* Interactive Map Section - Updated with Real Map */}
       <section className="map-section">
         <div className="container">
           <div className="map-content">
-            <h3 className="heading-tertiary text-center">Find Us on Map</h3>
-            <div className="map-placeholder">
-              <img
-                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&h=400&fit=crop&crop=center"
-                alt="Office Location Map"
-                className="map-image"
-              />
-              <div className="map-overlay">
-                <div className="map-info">
-                  <h4>Head Office Location</h4>
-                  <p>123 Business District, New Delhi, India</p>
-                  <a href="#" className="btn btn-primary">
-                    Get Directions
-                  </a>
+            <h3 className="heading-tertiary text-center">Find Our Head Office</h3>
+            <div className="interactive-map-container">
+              {/* Google Maps Embed with Zoom Controls */}
+              <iframe
+                className="interactive-map"
+                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.2!2d${headOffice.coordinates.split(",")[1]}!3d${headOffice.coordinates.split(",")[0]}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM3JzUzLjQiTiA3N8KwMTMnMDAuMSJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin&zoom=15`}
+                width="100%"
+                height="500"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Hullect Services Head Office Location"
+              ></iframe>
+
+              {/* Map Overlay Info */}
+              <div className="map-overlay-info">
+                <div className="map-info-card">
+                  <h4>🏢 Head Office</h4>
+                  <p>{headOffice.address}</p>
+                  <div className="map-actions">
+                    <a href={headOffice.mapUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                      🧭 Get Directions
+                    </a>
+                    <a href="tel:9120018844" className="btn btn-outline">
+                      📞 Call Office
+                    </a>
+                  </div>
                 </div>
+              </div>
+
+              {/* Map Controls Info */}
+              <div className="map-controls-info">
+                <p>💡 Use mouse wheel to zoom in/out • Click and drag to move around the map</p>
               </div>
             </div>
           </div>

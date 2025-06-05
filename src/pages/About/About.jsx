@@ -50,41 +50,41 @@ const About = () => {
       experience: "PhD in Physical Chemistry",
       description:
         "Dr. Shalini Singh is a seasoned professional with the passion to achieve operational excellence! Instrumental in great team building and business management.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
+      image: "./team3.png",
     },
   ]
 
   return (
     <div className="about-page">
       {/* Hero Section */}
-      <section className="page-hero">
-        <div className="hero-background">
+      <section className="about-hero-section">
+        <div className="about-hero-background">
           <img
             src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1920&h=600&fit=crop&crop=center"
             alt="About Hullect Services"
-            className="hero-bg-image"
+            className="about-hero-bg-image"
           />
-          <div className="hero-overlay"></div>
+          <div className="about-hero-overlay"></div>
         </div>
         <div className="container">
-          <div className="hero-content">
-            <h1 className="page-title">About Hullect Services</h1>
-            <p className="page-subtitle">Transforming Careers and Building Teams Since 2008</p>
+          <div className="about-hero-content">
+            <h1 className="about-page-title">About Hullect Services</h1>
+            <p className="about-page-subtitle">Transforming Careers and Building Teams Since 2008</p>
           </div>
         </div>
       </section>
 
-      {/* About Content */}
-      <section className="about-content section">
+      {/* About Content - Who We Are Section */}
+      <section className="about-who-we-are-section section">
         <div className="container">
-          <div className="content-grid">
-            <div className="content-text">
-              <div className="section-header">
-                <span className="section-tag">Our Story</span>
-                <h2 className="heading-secondary">Who We Are</h2>
+          <div className="about-who-content-grid">
+            <div className="about-who-text">
+              <div className="about-who-header">
+                <span className="about-section-tag">Our Story</span>
+                <h2 className="about-who-heading">Who We Are</h2>
               </div>
 
-              <div className="about-description">
+              <div className="about-who-description">
                 <p>
                   At Hullect Services Private Limited, we provide staffing and managed outsourcing services across
                   processes such as sales and marketing, customer care, HR & F&A operations, back-office operations,
@@ -105,7 +105,7 @@ const About = () => {
               </div>
             </div>
 
-            <div className="content-image">
+            <div className="about-who-image">
               <img
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=500&fit=crop&crop=center"
                 alt="Professional team collaboration"
@@ -116,22 +116,22 @@ const About = () => {
       </section>
 
       {/* Vision & Mission */}
-      <section className="vision-mission section">
+      <section className="about-vision-mission section">
         <div className="container">
-          <div className="vm-grid">
-            <div className="vm-card">
-              <div className="vm-icon">🎯</div>
-              <h3 className="vm-title">Our Vision</h3>
-              <p className="vm-description">
+          <div className="about-vm-grid">
+            <div className="about-vm-card">
+              <div className="about-vm-icon">🎯</div>
+              <h3 className="about-vm-title">Our Vision</h3>
+              <p className="about-vm-description">
                 At Hullect we aspire to create an economical & societal value while reducing the financial burden along
                 the value chains in which we operate, enabling people and businesses to realize their full potential.
               </p>
             </div>
 
-            <div className="vm-card">
-              <div className="vm-icon">🚀</div>
-              <h3 className="vm-title">Our Mission</h3>
-              <p className="vm-description">
+            <div className="about-vm-card">
+              <div className="about-vm-icon">🚀</div>
+              <h3 className="about-vm-title">Our Mission</h3>
+              <p className="about-vm-description">
                 To connect businesses with the right talent, empowering success through strategic staffing solutions. We
                 are committed to delivering exceptional service, fostering meaningful relationships, and driving
                 innovation in workforce management to meet the evolving needs of our clients and candidates.
@@ -142,19 +142,19 @@ const About = () => {
       </section>
 
       {/* Features */}
-      <section className="features-section section">
+      <section className="about-features-section section">
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Why Choose Us</span>
             <h2 className="heading-secondary">What Sets Us Apart</h2>
           </div>
 
-          <div className="features-grid">
+          <div className="about-features-grid">
             {features.map((feature, index) => (
-              <div key={index} className="feature-card">
-                <div className="feature-icon">{feature.icon}</div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-description">{feature.description}</p>
+              <div key={index} className="about-feature-card">
+                <div className="about-feature-icon">{feature.icon}</div>
+                <h3 className="about-feature-title">{feature.title}</h3>
+                <p className="about-feature-description">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -162,7 +162,7 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="team-section section">
+      <section className="about-team-section section">
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Leadership Team</span>
@@ -170,17 +170,17 @@ const About = () => {
             <p className="text-large">Experienced leaders driving innovation and excellence in staffing solutions</p>
           </div>
 
-          <div className="team-grid">
+          <div className="about-team-grid">
             {teamMembers.map((member, index) => (
-              <div key={index} className="team-card">
-                <div className="team-image">
+              <div key={index} className="about-team-card">
+                <div className="about-team-image">
                   <img src={member.image || "/placeholder.svg"} alt={member.name} />
                 </div>
-                <div className="team-content">
-                  <h3 className="team-name">{member.name}</h3>
-                  <p className="team-position">{member.position}</p>
-                  <p className="team-experience">{member.experience}</p>
-                  <p className="team-description">{member.description}</p>
+                <div className="about-team-content">
+                  <h3 className="about-team-name">{member.name}</h3>
+                  <p className="about-team-position">{member.position}</p>
+                  <p className="about-team-experience">{member.experience}</p>
+                  <p className="about-team-description">{member.description}</p>
                 </div>
               </div>
             ))}
@@ -188,15 +188,15 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="about-cta">
+      {/* CTA Section - Unique About Page CTA */}
+      <section className="about-page-cta-section">
         <div className="container">
-          <div className="cta-content">
-            <h3 className="heading-tertiary">Ready to Transform Your Hiring Process?</h3>
-            <p className="text-large">
+          <div className="about-page-cta-content">
+            <h3 className="about-page-cta-heading">Ready to Transform Your Hiring Process?</h3>
+            <p className="about-page-cta-text">
               Let's discuss how we can help you find the perfect talent for your organization.
             </p>
-            <div className="cta-actions">
+            <div className="about-page-cta-actions">
               <Link to="/contact" className="btn btn-primary">
                 Get Started Today
               </Link>

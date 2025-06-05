@@ -22,7 +22,7 @@ const Services = () => {
     },
     {
       icon: "🛡️",
-      title: "Facility Management & Security",
+      title: "Security Services",
       description: "Comprehensive facility and security management services",
       features: ["Security Services", "Facility Management", "Maintenance Services", "Safety Management"],
     },

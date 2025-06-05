@@ -1,12 +1,11 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { TextPlugin } from "gsap/TextPlugin"
 import "./Home.css"
 import { Link } from "react-router-dom"
-import Clients from "../Home/OurClients/ourClients"
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin)
@@ -19,6 +18,7 @@ const Home = () => {
   const aboutPreviewRef = useRef(null)
   const servicesPreviewRef = useRef(null)
   const ctaSectionRef = useRef(null)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const stats = [
     { number: "20+", label: "Years Experience" },
@@ -43,23 +43,42 @@ const Home = () => {
     {
       icon: "🏢",
       title: "Managed Services",
-      description: "Outcome-based HR-driven outsourcing",
+      description: "Outcome-based HR-driven & Security outsourcing",
       link: "/services",
     },
     {
       icon: "🛡️",
-      title: "Facility Management",
-      description: "Comprehensive facility and security services",
+      title: "security Services",
+      description: "Comprehensive security and facility services",
       link: "/services",
     },
   ]
+
+  // Handle window resize to update content
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   useEffect(() => {
     // Hero section animations
     const tl = gsap.timeline()
 
-    // Typing animation for hero title - Letter by letter from bottom
-    const titleText = "Your Trusted Partner in Staffing & Managed Outsourcing"
+    // Get the appropriate title text based on screen size
+    let titleText = "Your Trusted Partner in Staffing, Security & Managed Outsourcing"
+
+    if (windowWidth <= 320) {
+      titleText = "Your Trusted Staffing Partner"
+    } else if (windowWidth <= 480) {
+      titleText = "Your Trusted Partner in Staffing"
+    } else if (windowWidth <= 768) {
+      titleText = "Your Trusted Partner in Staffing & Outsourcing"
+    }
+
     const characters = titleText.split("")
 
     // Clear the title initially and create character spans
@@ -85,7 +104,7 @@ const Home = () => {
 
         // Initial state - hidden and positioned below
         span.style.opacity = "0"
-        span.style.transform = "translateY(100px)"
+        span.style.transform = "translateY(50px)"
         span.style.display = "inline-block"
 
         heroTitleRef.current.appendChild(span)
@@ -96,43 +115,74 @@ const Home = () => {
       cursor.className = "typing-cursor"
       cursor.innerHTML = "|"
       cursor.style.opacity = "1"
-      cursor.style.animation = "blink 1s infinite"
+      cursor.style.animation = "blink 1.2s infinite"
       heroTitleRef.current.appendChild(cursor)
 
-      // Animate each character appearing with typing effect
+      // Create realistic typing timeline with varied timing
       const charSpans = heroTitleRef.current.querySelectorAll(".char")
       const typingCursor = heroTitleRef.current.querySelector(".typing-cursor")
 
-      tl.to(charSpans, {
-        opacity: 1,
-        y: 0,
-        duration: 0.05,
-        stagger: 0.03,
-        ease: "power2.out",
+      // Animate each character with realistic human-like timing
+      charSpans.forEach((char, index) => {
+        const character = characters[index]
+        let delay = index * 0.08 // Base delay between characters
+
+        // Add longer pauses after spaces (word breaks)
+        if (index > 0 && characters[index - 1] === " ") {
+          delay += 0.15 // Extra pause after spaces
+        }
+
+        // Add slight pause before important words
+        if (character === "S" && titleText.substring(index).startsWith("Staffing")) {
+          delay += 0.2 // Pause before "Staffing"
+        }
+        if (character === "M" && titleText.substring(index).startsWith("Managed")) {
+          delay += 0.15 // Pause before "Managed"
+        }
+
+        // Add slight randomness to make it feel more human
+        const randomDelay = (Math.random() - 0.5) * 0.02
+
+        tl.to(
+          char,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.15,
+            ease: "power2.out",
+          },
+          delay + randomDelay,
+        )
       })
 
-      // Hide cursor after typing is complete
-      tl.to(typingCursor, {
-        opacity: 0,
-        duration: 0.5,
-        delay: 0.5,
-      })
+      // Keep cursor blinking during typing
+      tl.set(typingCursor, { opacity: 1 }, 0)
+
+      // Hide cursor after typing is complete with a longer pause
+      tl.to(
+        typingCursor,
+        {
+          opacity: 0,
+          duration: 0.8,
+        },
+        "+=1", // Wait 1 second after typing completes
+      )
     }
 
-    // Hero description animation
+    // Hero description animation - starts after typing is mostly complete
     tl.fromTo(
       heroDescRef.current,
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-      "-=0.5",
+      { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
+      "-=2", // Start 2 seconds before typing completes
     )
 
     // Hero actions animation
     tl.fromTo(
       heroActionsRef.current?.children,
       { opacity: 0, y: 20, scale: 0.9 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.2, ease: "back.out(1.7)" },
-      "-=0.3",
+      { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.3, ease: "back.out(1.7)" },
+      "-=1.5", // Start 1.5 seconds before typing completes
     )
 
     // Stats section animation
@@ -265,7 +315,20 @@ const Home = () => {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     }
-  }, [])
+  }, [windowWidth])
+
+  // Get responsive description text based on screen size
+  const getResponsiveDescription = () => {
+    if (windowWidth <= 320) {
+      return "We provide staffing services across multiple industries."
+    } else if (windowWidth <= 480) {
+      return "We provide comprehensive staffing services across multiple industries."
+    } else if (windowWidth <= 768) {
+      return "We provide comprehensive staffing and managed outsourcing services across multiple industries."
+    } else {
+      return "We provide comprehensive staffing and managed outsourcing services across sales & marketing, customer care, HR & F&A operations, manufacturing, IT staffing, and facility management services."
+    }
+  }
 
   return (
     <div className="home">
@@ -287,12 +350,11 @@ const Home = () => {
                 {/* Content will be populated by GSAP */}
               </h1>
               <p ref={heroDescRef} className="hero-description">
-                We provide comprehensive staffing and managed outsourcing services across sales & marketing, customer
-                care, HR & F&A operations, manufacturing, IT staffing, and facility management services.
+                {getResponsiveDescription()}
               </p>
               <div ref={heroActionsRef} className="hero-actions">
                 <Link to="/services" className="btn btn-primary btn-large">
-                  Explore Services
+                  {windowWidth <= 480 ? "Services" : "Explore Services"}
                 </Link>
                 <Link to="/contact" className="btn btn-outline btn-large">
                   Contact Us
@@ -323,11 +385,22 @@ const Home = () => {
           <div className="about-content">
             <div className="about-text">
               <span className="section-tag">About Hullect Services</span>
-              <h2 className="heading-secondary">Transforming Careers and Building Teams Since 2008</h2>
+              <h2 className="heading-secondary">
+                <span className="desktop-only">Transforming Careers and Building Teams Since 2008</span>
+                <span className="tablet-only">Transforming Careers Since 2008</span>
+                <span className="mobile-only">Building Teams Since 2008</span>
+              </h2>
               <p className="text-large">
-                At Hullect Services Private Limited, we provide staffing and managed outsourcing services across
-                multiple industries. We help our clients find the best talent with the most relevant skills for their
-                business.
+                <span className="desktop-only">
+                  At Hullect Services Private Limited, we provide staffing and managed outsourcing services across
+                  multiple industries. We help our clients find the best talent with the most relevant skills for their
+                  business.
+                </span>
+                <span className="tablet-only">
+                  We provide staffing and managed outsourcing services across multiple industries, helping clients find
+                  the best talent.
+                </span>
+                <span className="mobile-only">We help clients find the best talent for their business needs.</span>
               </p>
               <Link to="/about" className="btn btn-primary">
                 Learn More About Us
@@ -348,9 +421,17 @@ const Home = () => {
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Our Services</span>
-            <h2 className="heading-secondary">Comprehensive Staffing Solutions</h2>
+            <h2 className="heading-secondary">
+              <span className="desktop-only">Comprehensive Staffing Solutions</span>
+              <span className="tablet-only">Staffing Solutions</span>
+              <span className="mobile-only">Our Solutions</span>
+            </h2>
             <p className="text-large">
-              End-to-end staffing and managed outsourcing services across multiple industries
+              <span className="desktop-only">
+                End-to-end staffing and managed outsourcing services across multiple industries
+              </span>
+              <span className="tablet-only">Staffing and outsourcing services for all industries</span>
+              <span className="mobile-only">Services for your business needs</span>
             </p>
           </div>
 
@@ -369,13 +450,11 @@ const Home = () => {
 
           {/* <div className="services-cta text-center">
             <Link to="/services" className="btn btn-primary btn-large">
-              View All Services
+              {windowWidth <= 480 ? "All Services" : "View All Services"}
             </Link>
           </div> */}
         </div>
       </section>
-      {/* Our Clients Section */}
-      <Clients />
 
       {/* CTA Section */}
       <section ref={ctaSectionRef} className="cta-section">
@@ -389,9 +468,17 @@ const Home = () => {
         </div>
         <div className="container">
           <div className="cta-content">
-            <h2 className="heading-secondary">Ready to Transform Your Hiring Process?</h2>
+            <h2 className="heading-secondary">
+              <span className="desktop-only">Ready to Transform Your Hiring Process?</span>
+              <span className="tablet-only">Transform Your Hiring Process</span>
+              <span className="mobile-only">Need Staffing Help?</span>
+            </h2>
             <p className="text-large">
-              Let's discuss how we can help you find the perfect talent for your organization.
+              <span className="desktop-only">
+                Let's discuss how we can help you find the perfect talent for your organization.
+              </span>
+              <span className="tablet-only">We can help you find the perfect talent for your needs.</span>
+              <span className="mobile-only">Contact us today to get started.</span>
             </p>
             <div className="cta-actions">
               <Link to="/contact" className="btn btn-primary btn-large">

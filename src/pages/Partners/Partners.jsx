@@ -1,5 +1,6 @@
 import "./Partners.css"
 import { Link } from "react-router-dom"
+import OurPartner from "./OurClients/ourClients"
 
 const Partners = () => {
   const clientLogos = [
@@ -15,7 +16,7 @@ const Partners = () => {
     },
     {
       name: "Healthcare Plus",
-      logo: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=200&h=100&fit=crop&crop=center",
+      logo: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=200&h=100&fit=crop&crop=center",
       industry: "Healthcare",
     },
     {
@@ -40,7 +41,7 @@ const Partners = () => {
     },
     {
       name: "Financial Services Co",
-      logo: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=100&fit=crop&crop=center",
+      logo: "https://images.unsplash.com/photo-1554224154-26032fced8bd?w=200&h=100&fit=crop&crop=center",
       industry: "Finance",
     },
   ]
@@ -154,6 +155,9 @@ const Partners = () => {
           </div>
         </div>
       </section>
+
+      {/* Our Clients Section */}
+      <OurPartner />
 
       {/* Client Logos */}
       <section className="clients-section section">
@@ -278,15 +282,15 @@ const Partners = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="partners-cta">
+      {/* CTA Section - Fixed with Unique Classes */}
+      <section className="partners-page-cta-section">
         <div className="container">
-          <div className="cta-content">
-            <h3 className="heading-tertiary">Ready to Become Our Partner?</h3>
-            <p className="text-large">
+          <div className="partners-page-cta-content">
+            <h3 className="partners-page-cta-heading">Ready to Become Our Partner?</h3>
+            <p className="partners-page-cta-text">
               Join hundreds of companies that trust Hullect Services for their staffing needs.
             </p>
-            <div className="cta-actions">
+            <div className="partners-page-cta-actions">
               <Link to="/contact" className="btn btn-primary">
                 Start Partnership
               </Link>
