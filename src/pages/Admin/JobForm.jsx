@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import "./admin.css"
+import "./Admin.css"
 
 const JobForm = ({ job, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -15,15 +15,21 @@ const JobForm = ({ job, onSave, onCancel }) => {
     responsibilities: [""],
     isActive: true,
   })
+  const [loading, setLoading] = useState(false)
 
   // If editing an existing job, populate the form
   useEffect(() => {
     if (job) {
       setFormData({
-        ...job,
-        // Ensure arrays are properly initialized
-        requirements: job.requirements || [""],
-        responsibilities: job.responsibilities || [""],
+        title: job.title || "",
+        company: job.company || "",
+        location: job.location || "",
+        type: job.type || "Full Time",
+        closingDate: job.closingDate ? job.closingDate.split("T")[0] : "",
+        description: job.description || "",
+        requirements: job.requirements && job.requirements.length > 0 ? job.requirements : [""],
+        responsibilities: job.responsibilities && job.responsibilities.length > 0 ? job.responsibilities : [""],
+        isActive: job.isActive !== undefined ? job.isActive : true,
       })
     }
   }, [job])
@@ -62,23 +68,39 @@ const JobForm = ({ job, onSave, onCancel }) => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
 
     // Basic validation
-    if (!formData.title || !formData.company || !formData.location) {
+    if (!formData.title || !formData.company || !formData.location || !formData.description) {
       alert("Please fill in all required fields")
+      setLoading(false)
       return
     }
 
-    // Filter out empty requirements and responsibilities
-    const cleanedData = {
-      ...formData,
-      requirements: formData.requirements.filter((item) => item.trim() !== ""),
-      responsibilities: formData.responsibilities.filter((item) => item.trim() !== ""),
+    // Validate closing date
+    const closingDate = new Date(formData.closingDate)
+    if (closingDate <= new Date()) {
+      alert("Closing date must be in the future")
+      setLoading(false)
+      return
     }
 
-    onSave(cleanedData)
+    try {
+      // Filter out empty requirements and responsibilities
+      const cleanedData = {
+        ...formData,
+        requirements: formData.requirements.filter((item) => item.trim() !== ""),
+        responsibilities: formData.responsibilities.filter((item) => item.trim() !== ""),
+      }
+
+      await onSave(cleanedData)
+    } catch (error) {
+      console.error("Save job error:", error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -89,12 +111,28 @@ const JobForm = ({ job, onSave, onCancel }) => {
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="title">Job Title *</label>
-            <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+              disabled={loading}
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="company">Company *</label>
-            <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} required />
+            <input
+              type="text"
+              id="company"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              required
+              disabled={loading}
+            />
           </div>
         </div>
 
@@ -108,12 +146,13 @@ const JobForm = ({ job, onSave, onCancel }) => {
               value={formData.location}
               onChange={handleChange}
               required
+              disabled={loading}
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="type">Job Type *</label>
-            <select id="type" name="type" value={formData.type} onChange={handleChange} required>
+            <select id="type" name="type" value={formData.type} onChange={handleChange} required disabled={loading}>
               <option value="Full Time">Full Time</option>
               <option value="Part Time">Part Time</option>
               <option value="Contract">Contract</option>
@@ -133,6 +172,7 @@ const JobForm = ({ job, onSave, onCancel }) => {
               value={formData.closingDate}
               onChange={handleChange}
               required
+              disabled={loading}
             />
           </div>
 
@@ -148,6 +188,7 @@ const JobForm = ({ job, onSave, onCancel }) => {
                   isActive: e.target.value === "true",
                 })
               }
+              disabled={loading}
             >
               <option value="true">Active</option>
               <option value="false">Inactive</option>
@@ -164,6 +205,7 @@ const JobForm = ({ job, onSave, onCancel }) => {
             onChange={handleChange}
             rows="4"
             required
+            disabled={loading}
           ></textarea>
         </div>
 
@@ -176,17 +218,24 @@ const JobForm = ({ job, onSave, onCancel }) => {
                 value={req}
                 onChange={(e) => handleListItemChange("requirements", index, e.target.value)}
                 placeholder="Enter a requirement"
+                disabled={loading}
               />
               <button
                 type="button"
                 className="list-item-button remove"
                 onClick={() => removeListItem("requirements", index)}
+                disabled={loading || formData.requirements.length === 1}
               >
                 Remove
               </button>
             </div>
           ))}
-          <button type="button" className="list-item-button add" onClick={() => addListItem("requirements")}>
+          <button
+            type="button"
+            className="list-item-button add"
+            onClick={() => addListItem("requirements")}
+            disabled={loading}
+          >
             Add Requirement
           </button>
         </div>
@@ -200,27 +249,34 @@ const JobForm = ({ job, onSave, onCancel }) => {
                 value={resp}
                 onChange={(e) => handleListItemChange("responsibilities", index, e.target.value)}
                 placeholder="Enter a responsibility"
+                disabled={loading}
               />
               <button
                 type="button"
                 className="list-item-button remove"
                 onClick={() => removeListItem("responsibilities", index)}
+                disabled={loading || formData.responsibilities.length === 1}
               >
                 Remove
               </button>
             </div>
           ))}
-          <button type="button" className="list-item-button add" onClick={() => addListItem("responsibilities")}>
+          <button
+            type="button"
+            className="list-item-button add"
+            onClick={() => addListItem("responsibilities")}
+            disabled={loading}
+          >
             Add Responsibility
           </button>
         </div>
 
         <div className="form-actions">
-          <button type="button" onClick={onCancel} className="cancel-button">
+          <button type="button" onClick={onCancel} className="cancel-button" disabled={loading}>
             Cancel
           </button>
-          <button type="submit" className="submit-button">
-            {job ? "Update Job" : "Create Job"}
+          <button type="submit" className="submit-button" disabled={loading}>
+            {loading ? "Saving..." : job ? "Update Job" : "Create Job"}
           </button>
         </div>
       </form>

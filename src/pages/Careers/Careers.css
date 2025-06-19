@@ -53,67 +53,90 @@ body {
   opacity: 0.9;
 }
 
+
+
 /* Search Section */
-.search-section {
-  background: #f8f9fa;
-  padding: 60px 20px;
-}
 
 .search-container {
   max-width: 800px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding: 0 0px; /* Add padding for spacing on mobile */
 }
 
-.search-container h2 {
-  color: #2563eb;
-  font-size: 2rem;
-  margin-bottom: 30px;
-  text-align: center;
-}
 
+/* Search form box */
 .search-form {
   background: white;
-  padding: 30px;
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  /* width: 100%;  */
 }
 
+
+/* Row alignment */
 .search-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+
+/* Inputs and button style */
+.search-input,
+.search-button {
+  margin-left: 14px;
+  height: 52px;
+  padding: 0 5px;
+  font-size: 1rem;
+  border-radius: 5px;
+
 }
 
 .search-input {
-  padding: 15px;
+   width: 450px;
+  flex: 1 1 0;
+  min-width: 0;
   border: 2px solid #e5e7eb;
-  border-radius: 5px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: #2563eb;
 }
 
 .search-button {
   background: #2563eb;
   color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.1rem;
   font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
+  border: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 180px; /* Set button width */
 }
 
-.search-button:hover {
-  background: #1d4ed8;
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+
+  /* .search-row {
+   
+    flex-direction: column;
+    align-items: stretch;
+  } */
+
+  .search-input {
+    width: 100%;
+    margin-bottom: 10px; /* Add margin for spacing */
+  }
+
+
+  .search-button {
+    margin-top: 10px;
+  }
 }
+
+
 
 /* Jobs Section */
 .jobs-section {
@@ -199,6 +222,10 @@ body {
 .job-type.full-time {
   background: #dcfce7;
   color: #166534;
+}
+.job-type.contract {
+  background: #ebe6c3;
+  color: #dfaa0a;
 }
 
 .job-type.part-time {

@@ -2,13 +2,17 @@
 
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { jobsAPI } from "../../services/api"
 import JobForm from "./JobForm"
-import "./admin.css"
+import "./Admin.css"
 
 const AdminDashboard = () => {
   const [jobs, setJobs] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
   const [showJobForm, setShowJobForm] = useState(false)
   const [currentJob, setCurrentJob] = useState(null)
+  const [pagination, setPagination] = useState({})
   const navigate = useNavigate()
 
   // Check authentication on component mount
@@ -16,41 +20,32 @@ const AdminDashboard = () => {
     const authData = JSON.parse(localStorage.getItem("adminAuth"))
     if (!authData || !authData.isAuthenticated) {
       navigate("/admin/login")
+      return
     }
 
-    // Load sample jobs data
-    setJobs([
-      {
-        id: "1",
-        title: "Multi-Media Journalist",
-        company: "KOAM NEWS NOW",
-        location: "Pittsburg",
-        type: "Full Time",
-        postedDate: "2023-06-01",
-        closingDate: "2023-07-31",
-        description: "We are seeking a dynamic Multi-Media Journalist to join our news team.",
-        requirements: ["Bachelor's degree in Journalism", "Minimum 2 years of experience"],
-        responsibilities: ["Research and develop news stories", "Conduct interviews with sources"],
-        isActive: true,
-      },
-      {
-        id: "2",
-        title: "Part-time News Reporter",
-        company: "WMUK-FM",
-        location: "Kalamazoo",
-        type: "Part Time",
-        postedDate: "2023-06-01",
-        closingDate: "2023-07-04",
-        description: "Public radio station seeking a part-time news reporter.",
-        requirements: ["Experience in radio or print journalism", "Strong research and writing skills"],
-        responsibilities: ["Cover local news events", "Conduct interviews"],
-        isActive: false,
-      },
-    ])
+    loadJobs()
   }, [navigate])
+
+  const loadJobs = async () => {
+    try {
+      setLoading(true)
+      const response = await jobsAPI.getAdminJobs()
+
+      if (response.success) {
+        setJobs(response.data.jobs)
+        setPagination(response.data.pagination)
+      }
+    } catch (error) {
+      setError(error.message || "Failed to load jobs")
+      console.error("Load jobs error:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("adminAuth")
+    localStorage.removeItem("adminToken")
     navigate("/admin/login")
   }
 
@@ -64,30 +59,51 @@ const AdminDashboard = () => {
     setShowJobForm(true)
   }
 
-  const handleDeleteJob = (jobId) => {
+  const handleDeleteJob = async (jobId) => {
     if (window.confirm("Are you sure you want to delete this job posting?")) {
-      setJobs(jobs.filter((job) => job.id !== jobId))
-    }
-  }
-
-  const handleToggleActive = (jobId) => {
-    setJobs(jobs.map((job) => (job.id === jobId ? { ...job, isActive: !job.isActive } : job)))
-  }
-
-  const handleSaveJob = (jobData) => {
-    if (currentJob) {
-      // Update existing job
-      setJobs(jobs.map((job) => (job.id === currentJob.id ? { ...jobData, id: job.id } : job)))
-    } else {
-      // Create new job with random ID (replace with API-generated ID later)
-      const newJob = {
-        ...jobData,
-        id: Date.now().toString(),
-        postedDate: new Date().toISOString().split("T")[0],
+      try {
+        await jobsAPI.deleteJob(jobId)
+        await loadJobs() // Reload jobs after deletion
+      } catch (error) {
+        alert(error.message || "Failed to delete job")
       }
-      setJobs([...jobs, newJob])
     }
-    setShowJobForm(false)
+  }
+
+  const handleToggleActive = async (jobId) => {
+    try {
+      await jobsAPI.toggleJobStatus(jobId)
+      await loadJobs() // Reload jobs after status change
+    } catch (error) {
+      alert(error.message || "Failed to update job status")
+    }
+  }
+
+  const handleSaveJob = async (jobData) => {
+    try {
+      if (currentJob) {
+        // Update existing job
+        await jobsAPI.updateJob(currentJob._id, jobData)
+      } else {
+        // Create new job
+        await jobsAPI.createJob(jobData)
+      }
+
+      setShowJobForm(false)
+      await loadJobs() // Reload jobs after save
+    } catch (error) {
+      alert(error.message || "Failed to save job")
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="admin-dashboard">
+        <div className="loading-container">
+          <p>Loading...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -103,6 +119,8 @@ const AdminDashboard = () => {
 
       <main className="admin-main">
         <div className="admin-container">
+          {error && <div className="error-message">{error}</div>}
+
           <div className="admin-actions">
             <h2>Job Management</h2>
             <button onClick={handleCreateJob} className="admin-create-button">
@@ -128,19 +146,21 @@ const AdminDashboard = () => {
                       <th>Type</th>
                       <th>Posted Date</th>
                       <th>Closing Date</th>
+                      <th>Applications</th>
                       <th>Status</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {jobs.map((job) => (
-                      <tr key={job.id} className={job.isActive ? "" : "inactive-job"}>
+                      <tr key={job._id} className={job.isActive ? "" : "inactive-job"}>
                         <td>{job.title}</td>
                         <td>{job.company}</td>
                         <td>{job.location}</td>
                         <td>{job.type}</td>
-                        <td>{job.postedDate}</td>
-                        <td>{job.closingDate}</td>
+                        <td>{new Date(job.createdAt).toLocaleDateString()}</td>
+                        <td>{new Date(job.closingDate).toLocaleDateString()}</td>
+                        <td>{job.applicationCount || 0}</td>
                         <td>
                           <span className={`status-badge ${job.isActive ? "active" : "inactive"}`}>
                             {job.isActive ? "Active" : "Inactive"}
@@ -151,12 +171,12 @@ const AdminDashboard = () => {
                             Edit
                           </button>
                           <button
-                            onClick={() => handleToggleActive(job.id)}
+                            onClick={() => handleToggleActive(job._id)}
                             className={`admin-action-button ${job.isActive ? "deactivate" : "activate"}`}
                           >
                             {job.isActive ? "Deactivate" : "Activate"}
                           </button>
-                          <button onClick={() => handleDeleteJob(job.id)} className="admin-action-button delete">
+                          <button onClick={() => handleDeleteJob(job._id)} className="admin-action-button delete">
                             Delete
                           </button>
                         </td>
