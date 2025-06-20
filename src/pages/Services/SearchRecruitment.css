@@ -1,0 +1,401 @@
+.search-recruitment-page {
+  padding-top: 80px;
+}
+
+/* Hero Section */
+.search-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.search-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("/placeholder.svg?height=600&width=1200") center / cover;
+  opacity: 0.1;
+}
+
+.search-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-hero h1 {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-secondary);
+}
+
+.search-hero > p {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-2xl);
+  opacity: 0.9;
+}
+
+.hero-metrics {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.metric {
+  text-align: center;
+}
+
+.metric-number {
+  display: block;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  font-family: var(--font-secondary);
+}
+
+.metric-label {
+  font-size: var(--text-sm);
+  opacity: 0.8;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+/* Services Section */
+.search-services {
+  padding: 100px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-secondary);
+}
+
+.section-header p {
+  font-size: var(--text-lg);
+  color: var(--gray-600);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.service-card {
+  background: white;
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal);
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.service-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.service-card h3 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-secondary);
+}
+
+.service-card p {
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+}
+
+.service-features {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.service-features li {
+  padding: var(--spacing-xs) 0;
+  color: var(--gray-700);
+  position: relative;
+  padding-left: var(--spacing-lg);
+}
+
+.service-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+/* Process Section */
+.search-process {
+  padding: 100px 0;
+  background-color: var(--gray-50);
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.process-card {
+  background: white;
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal);
+}
+
+.process-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.process-phase {
+  background: var(--primary-blue);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: var(--spacing-md);
+}
+
+.process-card h3 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-secondary);
+}
+
+.process-card p {
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+}
+
+.process-activities {
+  list-style: none;
+  padding: 0;
+}
+
+.process-activities li {
+  padding: var(--spacing-xs) 0;
+  color: var(--gray-700);
+  position: relative;
+  padding-left: var(--spacing-lg);
+  font-size: var(--text-sm);
+}
+
+.process-activities li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+/* Specializations Section */
+.specializations {
+  padding: 100px 0;
+}
+
+.specializations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.specialization-card {
+  background: white;
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: transform var(--transition-normal);
+}
+
+.specialization-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.spec-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.specialization-card h3 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-secondary);
+}
+
+.specialization-card p {
+  color: var(--gray-600);
+  line-height: 1.6;
+  font-size: var(--text-sm);
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+  padding: 100px 0;
+  background-color: var(--gray-50);
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.benefit-card {
+  background: white;
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal);
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.benefit-card h3 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-secondary);
+}
+
+.benefit-card p {
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.search-cta {
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+}
+
+.search-cta-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-cta h2 {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-secondary);
+}
+
+.search-cta p {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+  opacity: 0.9;
+}
+
+.cta-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-hero h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .hero-metrics {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .hero-actions,
+  .cta-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-actions .btn,
+  .cta-actions .btn {
+    width: 200px;
+  }
+
+  .services-grid,
+  .process-grid,
+  .specializations-grid,
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-hero {
+    padding: 80px 0;
+  }
+
+  .search-services,
+  .search-process,
+  .specializations,
+  .why-choose-us,
+  .search-cta {
+    padding: 60px 0;
+  }
+
+  .service-card,
+  .process-card,
+  .specialization-card,
+  .benefit-card {
+    padding: var(--spacing-lg);
+  }
+}

@@ -2,12 +2,36 @@ import "./Media.css"
 import { Link } from "react-router-dom"
 
 const Media = () => {
+  const foundationDayHighlights = [
+    {
+      title: "Foundation Day Celebration 2025",
+      excerpt:
+        "Hullect Services celebrated its Foundation Day with great enthusiasm, bringing together the entire team for a memorable celebration filled with achievements, recognition, and team bonding activities.",
+      date: "jun 11, 2025",
+      category: "Foundation Day",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0015.jpg-dX3SQfQrzfo1m6fs2fI4WavWzP5Ywo.jpeg",
+      readTime: "5 min read",
+      featured: true,
+    },
+  ]
+
   const newsArticles = [
+    {
+      title: "Team Excellence Awards Presented on Foundation Day",
+      excerpt:
+        "Outstanding team members were recognized for their exceptional contributions during our annual Foundation Day celebration.",
+      date: "jun 12, 2025",
+      category: "Awards",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0021.jpg-vjOqwZq3kCEDkz8mD8ufMz142tH93V.jpeg",
+      readTime: "3 min read",
+    },
     {
       title: "Hullect Services Expands Operations to New Cities",
       excerpt:
         "Company announces expansion plans to serve clients in tier-2 cities across India with new service centers.",
-      date: "March 15, 2024",
+      date: "March 15, 2025",
       category: "Company News",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop&crop=center",
       readTime: "3 min read",
@@ -16,7 +40,7 @@ const Media = () => {
       title: "ISO 9001:2015 Certification Renewed for Quality Excellence",
       excerpt:
         "Hullect Services successfully renews its ISO certification, reinforcing commitment to quality management systems.",
-      date: "February 28, 2024",
+      date: "February 28, 2025",
       category: "Achievements",
       image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=250&fit=crop&crop=center",
       readTime: "2 min read",
@@ -47,18 +71,15 @@ const Media = () => {
       image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=250&fit=crop&crop=center",
       readTime: "5 min read",
     },
-    {
-      title: "Award Recognition for Excellence in Staffing Services",
-      excerpt:
-        "Hullect Services receives industry recognition for outstanding performance in staffing and recruitment.",
-      date: "December 20, 2023",
-      category: "Awards",
-      image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=250&fit=crop&crop=center",
-      readTime: "2 min read",
-    },
   ]
 
   const pressReleases = [
+    {
+      title: "Foundation Day 2024 - Celebrating 16 Years of Excellence",
+      date: "December 12, 2024",
+      description: "Annual foundation day celebration highlights and team achievements",
+      downloadLink: "#",
+    },
     {
       title: "Q4 2023 Business Performance Report",
       date: "January 15, 2024",
@@ -79,40 +100,75 @@ const Media = () => {
     },
   ]
 
-  const mediaGallery = [
+  const foundationDayGallery = [
     {
-      title: "Office Inauguration Ceremony",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&h=200&fit=crop&crop=center",
-      category: "Events",
+      title: "Foundation Day Team Celebration",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0015.jpg-dX3SQfQrzfo1m6fs2fI4WavWzP5Ywo.jpeg",
+      category: "Foundation Day",
+      description:
+        "The entire Hullect Services team came together to celebrate our Foundation Day with cake cutting and team bonding.",
     },
     {
-      title: "Team Building Workshop",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&h=200&fit=crop&crop=center",
-      category: "Training",
+      title: "Leadership Team Group Photo",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0016.jpg-RzihIxTPt9uCca8Paoor0I9N8HL9Pn.jpeg",
+      category: "Foundation Day",
+      description: "Our leadership team and employees celebrating another successful year of growth and achievements.",
     },
     {
-      title: "Client Meeting Session",
-      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=300&h=200&fit=crop&crop=center",
-      category: "Business",
-    },
-    {
-      title: "Award Ceremony",
-      image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=300&h=200&fit=crop&crop=center",
+      title: "Award Presentation Ceremony",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0021.jpg-vjOqwZq3kCEDkz8mD8ufMz142tH93V.jpeg",
       category: "Awards",
+      description:
+        "Recognition ceremony for outstanding team members and their exceptional contributions to the company.",
     },
     {
-      title: "Technology Demo",
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=300&h=200&fit=crop&crop=center",
-      category: "Technology",
+      title: "Team Building Activities",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0012.jpg-cErmacbT4t3VnaI7ZjvSGhMY8Yv90q.jpeg",
+      category: "Team Building",
+      description: "Engaging team building activities that brought everyone together for fun and collaboration.",
     },
     {
-      title: "Industry Conference",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300&h=200&fit=crop&crop=center",
-      category: "Events",
+      title: "Gift Exchange Ceremony",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0013.jpg-qPP4pZKReere5AC5UGZWqIJdM6CK3K.jpeg",
+      category: "Foundation Day",
+      description: "Special gift exchange ceremony as part of our Foundation Day celebrations.",
+    },
+    {
+      title: "Strategic Planning Session",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0017.jpg-RGBgIJgF3ruvoBjEmuGTu32NRDRLXV.jpeg",
+      category: "Business",
+      description: "Leadership team discussing future strategies and growth plans during the Foundation Day event.",
+    },
+    {
+      title: "Leadership Recognition",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0018.jpg-U33L3ejd8r8HTOTaUZaQrk79NwBX3q.jpeg",
+      category: "Leadership",
+      description: "Recognizing our leadership team for their dedication and vision in driving company success.",
+    },
+    {
+      title: "Recreation Time - Chess Tournament",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0010.jpg-T4iQqJc4XNpUtHPDjhcX1V1AUGUALg.jpeg",
+      category: "Recreation",
+      description:
+        "Fun recreational activities including chess tournaments that showcase the diverse talents of our team.",
     },
   ]
 
   const achievements = [
+    {
+      year: "2025",
+      title: "Foundation Day Celebration - 16 Years of Excellence",
+      description:
+        "Celebrated our 16th Foundation Day with team recognition, awards, and renewed commitment to excellence",
+    },
     {
       year: "2024",
       title: "ISO 9001:2015 Certification Renewed",
@@ -141,8 +197,8 @@ const Media = () => {
       <section className="page-hero">
         <div className="hero-background">
           <img
-            src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1920&h=600&fit=crop&crop=center"
-            alt="Media Center"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0015.jpg-dX3SQfQrzfo1m6fs2fI4WavWzP5Ywo.jpeg"
+            alt="Foundation Day Celebration"
             className="hero-bg-image"
           />
           <div className="hero-overlay"></div>
@@ -150,7 +206,59 @@ const Media = () => {
         <div className="container">
           <div className="hero-content">
             <h1 className="page-title">Media Center</h1>
-            <p className="page-subtitle">Latest News, Updates & Company Highlights</p>
+            <p className="page-subtitle">Celebrating Our Journey & Latest Company Highlights</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Foundation Day Feature */}
+      <section className="foundation-day-feature section">
+        <div className="container">
+          <div className="section-header text-center">
+            <span className="section-tag foundation-tag">🎉 Foundation Day Special</span>
+            <h2 className="heading-secondary">Celebrating 16 Years of Excellence</h2>
+            <p className="text-large">
+              Join us as we celebrate our Foundation Day 2024 with team achievements, recognition, and memorable moments
+            </p>
+          </div>
+
+          <div className="foundation-day-content">
+            {foundationDayHighlights.map((article, index) => (
+              <article key={index} className="foundation-day-card">
+                <div className="foundation-image">
+                  <img src={article.image || "/placeholder.svg"} alt={article.title} />
+                  <div className="foundation-badge">
+                    <span>🎂 Foundation Day 2025</span>
+                  </div>
+                </div>
+                <div className="foundation-content">
+                  <div className="foundation-meta">
+                    <span className="foundation-date">{article.date}</span>
+                    <span className="foundation-read-time">{article.readTime}</span>
+                  </div>
+                  <h3 className="foundation-title">{article.title}</h3>
+                  <p className="foundation-excerpt">{article.excerpt}</p>
+                  <div className="foundation-highlights">
+                    <div className="highlight-item">
+                      <span className="highlight-icon">🏆</span>
+                      <span>Team Awards</span>
+                    </div>
+                    <div className="highlight-item">
+                      <span className="highlight-icon">🎯</span>
+                      <span>Goal Achievement</span>
+                    </div>
+                    <div className="highlight-item">
+                      <span className="highlight-icon">🤝</span>
+                      <span>Team Bonding</span>
+                    </div>
+                    <div className="highlight-item">
+                      <span className="highlight-icon">🎊</span>
+                      <span>Celebration</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -188,6 +296,34 @@ const Media = () => {
         </div>
       </section>
 
+      {/* Foundation Day Gallery */}
+      <section className="foundation-gallery section">
+        <div className="container">
+          <div className="section-header text-center">
+            <span className="section-tag">Foundation Day Gallery</span>
+            <h2 className="heading-secondary">Moments from Our Celebration</h2>
+            <p className="text-large">Capturing the joy, achievements, and team spirit from our Foundation Day 2025</p>
+          </div>
+
+          <div className="foundation-gallery-grid">
+            {foundationDayGallery.map((item, index) => (
+              <div key={index} className="foundation-gallery-item">
+                <div className="foundation-gallery-image">
+                  <img src={item.image || "/placeholder.svg"} alt={item.title} />
+                  <div className="foundation-gallery-overlay">
+                    <div className="foundation-gallery-content">
+                      <h4 className="foundation-gallery-title">{item.title}</h4>
+                      <span className="foundation-gallery-category">{item.category}</span>
+                      <p className="foundation-gallery-description">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Press Releases */}
       <section className="press-releases section">
         <div className="container">
@@ -209,33 +345,6 @@ const Media = () => {
                   <a href={release.downloadLink} className="btn btn-outline">
                     Download PDF
                   </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Media Gallery */}
-      <section className="media-gallery section">
-        <div className="container">
-          <div className="section-header text-center">
-            <span className="section-tag">Visual Stories</span>
-            <h2 className="heading-secondary">Media Gallery</h2>
-            <p className="text-large">A visual journey through our company events, achievements, and milestones</p>
-          </div>
-
-          <div className="gallery-grid">
-            {mediaGallery.map((item, index) => (
-              <div key={index} className="gallery-item">
-                <div className="gallery-image">
-                  <img src={item.image || "/placeholder.svg"} alt={item.title} />
-                  <div className="gallery-overlay">
-                    <div className="gallery-content">
-                      <h4 className="gallery-title">{item.title}</h4>
-                      <span className="gallery-category">{item.category}</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             ))}
@@ -275,11 +384,11 @@ const Media = () => {
               For press inquiries, interview requests, or additional information, please contact our media team.
             </p>
             <div className="contact-info">
-              <div className="mediacontact-item">
+              <div className="MediaContact-item">
                 <span className="contact-label">Email:</span>
                 <a href="mailto:media@hullectservices.com">media@hullectservices.com</a>
               </div>
-              <div className="mediacontact-item">
+              <div className="MediaContact-item">
                 <span className="contact-label">Phone:</span>
                 <a href="tel:9120018844">+91 9120018844</a>
               </div>
