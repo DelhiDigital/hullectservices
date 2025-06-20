@@ -65,7 +65,7 @@
 
 /* Who We Are Section - Fixed Alignment */
 .about-who-we-are-section {
-  background: var(--white);
+  background: #eef2f5;
 }
 
 .about-who-content-grid {
@@ -128,7 +128,7 @@
 
 /* Vision & Mission - Unique Classes */
 .about-vision-mission {
-  background: var(--gray-50);
+  background: rgb(48, 77, 84);
 }
 
 .about-vm-grid {
@@ -170,16 +170,17 @@
   color: var(--gray-600);
   line-height: 1.7;
   margin: 0;
+  text-align: justify;
 }
 
 /* Features - Unique Classes */
 .about-features-section {
-  background: var(--white);
+  background: #f4f1f1;
 }
 
 .about-features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
   gap: var(--spacing-xl);
 }
 
@@ -386,6 +387,11 @@
     gap: var(--spacing-xl);
     text-align: center;
   }
+  .about-features-grid {
+  
+  grid-template-columns: repeat(1, minmax(280px, 1fr));
+  
+}
 
   .about-vm-grid {
     grid-template-columns: 1fr;

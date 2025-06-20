@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { TextPlugin } from "gsap/TextPlugin"
 import "./Home.css"
 import { Link } from "react-router-dom"
+import StatisticsSection from "./StatisticsSection/StatisticsSection"
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin)
@@ -14,18 +15,10 @@ const Home = () => {
   const heroTitleRef = useRef(null)
   const heroDescRef = useRef(null)
   const heroActionsRef = useRef(null)
-  const statsRef = useRef(null)
   const aboutPreviewRef = useRef(null)
   const servicesPreviewRef = useRef(null)
   const ctaSectionRef = useRef(null)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-
-  const stats = [
-    { number: "20+", label: "Years Experience" },
-    { number: "500+", label: "Companies Served" },
-    { number: "10K+", label: "Placements Made" },
-    { number: "95%", label: "Client Satisfaction" },
-  ]
 
   const services = [
     {
@@ -43,13 +36,13 @@ const Home = () => {
     {
       icon: "🏢",
       title: "Managed Services",
-      description: "Outcome-based HR-driven & Security outsourcing",
+      description: "Outcome-based HR-driven outsourcing and security services",
       link: "/services",
     },
     {
       icon: "🛡️",
-      title: "security Services",
-      description: "Comprehensive security and facility services",
+      title: "Security Services",
+      description: "Comprehensive security solutions for businesses",
       link: "/services",
     },
   ]
@@ -69,45 +62,43 @@ const Home = () => {
     const tl = gsap.timeline()
 
     // Get the appropriate title text based on screen size
-    let titleText = "Your Trusted Partner in Staffing, Security & Managed Outsourcing"
+    let titleText = "Yout trusted partner in Recruitment, Staffing ,Managed  Services & HR Services"
 
     if (windowWidth <= 320) {
-      titleText = "Your Trusted Staffing Partner"
+      titleText = "Yout trusted partner in Recruitment, Staffing ,Managed  Services & HR Services"
     } else if (windowWidth <= 480) {
-      titleText = "Your Trusted Partner in Staffing"
+      titleText = "Yout trusted partner in Recruitment, Staffing ,Managed  Services & HR Services"
     } else if (windowWidth <= 768) {
-      titleText = "Your Trusted Partner in Staffing & Outsourcing"
+      titleText = "Yout trusted partner in Recruitment, Staffing ,Managed  Services & HR Services"
     }
 
-    const characters = titleText.split("")
+    // Split text into words instead of characters to prevent word breaking
+    const words = titleText.split(" ")
 
-    // Clear the title initially and create character spans
+    // Clear the title initially and create word spans
     if (heroTitleRef.current) {
       heroTitleRef.current.innerHTML = ""
 
-      // Create spans for each character
-      characters.forEach((char, index) => {
-        const span = document.createElement("span")
-        span.className = "char"
+      // Create spans for each word
+      words.forEach((word, index) => {
+        const wordSpan = document.createElement("span")
+        wordSpan.className = "word"
 
-        // Add special styling for "Staffing & Managed Outsourcing" characters
-        if (index >= titleText.indexOf("Staffing")) {
-          span.className = "char highlight"
+        // Add special styling for important wordsserv
+        if (word.includes("Recruitment")|| word.includes("Staffing") || word.includes("Managed") || word.includes("Services")  || word.includes("HR") || word.includes("Services")) {
+          wordSpan.className = "word highlight"
         }
 
-        // Handle spaces
-        if (char === " ") {
-          span.innerHTML = "&nbsp;"
-        } else {
-          span.innerHTML = char
-        }
+        wordSpan.innerHTML = word
 
         // Initial state - hidden and positioned below
-        span.style.opacity = "0"
-        span.style.transform = "translateY(50px)"
-        span.style.display = "inline-block"
+        wordSpan.style.opacity = "0"
+        wordSpan.style.transform = "translateY(30px)"
+        wordSpan.style.display = "inline-block"
+        wordSpan.style.marginRight = "0.3em" // Add space between words
+        wordSpan.style.whiteSpace = "nowrap" // Prevent word breaking
 
-        heroTitleRef.current.appendChild(span)
+        heroTitleRef.current.appendChild(wordSpan)
       })
 
       // Add typing cursor
@@ -115,40 +106,31 @@ const Home = () => {
       cursor.className = "typing-cursor"
       cursor.innerHTML = "|"
       cursor.style.opacity = "1"
-      cursor.style.animation = "blink 1.2s infinite"
+      cursor.style.animation = "blink 0.5s infinite"
       heroTitleRef.current.appendChild(cursor)
 
-      // Create realistic typing timeline with varied timing
-      const charSpans = heroTitleRef.current.querySelectorAll(".char")
+      // Create word-by-word animation timeline
+      const wordSpans = heroTitleRef.current.querySelectorAll(".word")
       const typingCursor = heroTitleRef.current.querySelector(".typing-cursor")
 
-      // Animate each character with realistic human-like timing
-      charSpans.forEach((char, index) => {
-        const character = characters[index]
-        let delay = index * 0.08 // Base delay between characters
+      // Animate each word with realistic timing
+      wordSpans.forEach((word, index) => {
+        let delay = index * 0.2 // Base delay between words
 
-        // Add longer pauses after spaces (word breaks)
-        if (index > 0 && characters[index - 1] === " ") {
-          delay += 0.15 // Extra pause after spaces
-        }
-
-        // Add slight pause before important words
-        if (character === "S" && titleText.substring(index).startsWith("Staffing")) {
-          delay += 0.2 // Pause before "Staffing"
-        }
-        if (character === "M" && titleText.substring(index).startsWith("Managed")) {
-          delay += 0.15 // Pause before "Managed"
+        // Add longer pauses for important words
+        if (word.classList.contains("highlight")) {
+          delay += 0.1 // Extra pause for highlighted words
         }
 
         // Add slight randomness to make it feel more human
-        const randomDelay = (Math.random() - 0.5) * 0.02
+        const randomDelay = (Math.random() - 0.5) * 0.1
 
         tl.to(
-          char,
+          word,
           {
             opacity: 1,
             y: 0,
-            duration: 0.15,
+            duration: 0.6,
             ease: "power2.out",
           },
           delay + randomDelay,
@@ -158,14 +140,14 @@ const Home = () => {
       // Keep cursor blinking during typing
       tl.set(typingCursor, { opacity: 1 }, 0)
 
-      // Hide cursor after typing is complete with a longer pause
+      // Hide cursor after typing is complete
       tl.to(
         typingCursor,
         {
           opacity: 0,
           duration: 0.8,
         },
-        "+=1", // Wait 1 second after typing completes
+        "+=0.5", // Wait 0.5 seconds after typing completes
       )
     }
 
@@ -174,7 +156,7 @@ const Home = () => {
       heroDescRef.current,
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
-      "-=2", // Start 2 seconds before typing completes
+      "-=1", // Start 1 second before typing completes
     )
 
     // Hero actions animation
@@ -182,57 +164,11 @@ const Home = () => {
       heroActionsRef.current?.children,
       { opacity: 0, y: 20, scale: 0.9 },
       { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.3, ease: "back.out(1.7)" },
-      "-=1.5", // Start 1.5 seconds before typing completes
+      "-=0.8", // Start 0.8 seconds before typing completes
     )
 
-    // Stats section animation
-    ScrollTrigger.create({
-      trigger: statsRef.current,
-      start: "top 80%",
-      onEnter: () => {
-        gsap.fromTo(
-          statsRef.current?.children,
-          { opacity: 0, y: 50, scale: 0.8 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "back.out(1.7)",
-          },
-        )
-
-        // Animate numbers counting up
-        const statNumbers = statsRef.current?.querySelectorAll(".stat-number")
-        statNumbers?.forEach((number) => {
-          const finalText = number.textContent
-          const isNumeric = /^\d+/.test(finalText)
-
-          if (isNumeric) {
-            const finalNumber = Number.parseInt(finalText.match(/\d+/)[0])
-            const suffix = finalText.replace(/^\d+/, "")
-
-            gsap.fromTo(
-              number,
-              { textContent: 0 },
-              {
-                textContent: finalNumber,
-                duration: 2,
-                ease: "power2.out",
-                snap: { textContent: 1 },
-                onUpdate: function () {
-                  number.textContent = Math.ceil(this.targets()[0].textContent) + suffix
-                },
-              },
-            )
-          }
-        })
-      },
-    })
-
     // About preview animation
-    ScrollTrigger.create({
+    const aboutPreviewScrollTrigger = ScrollTrigger.create({
       trigger: aboutPreviewRef.current,
       start: "top 75%",
       onEnter: () => {
@@ -251,13 +187,12 @@ const Home = () => {
     })
 
     // Services preview animation
-    ScrollTrigger.create({
+    const servicesPreviewScrollTrigger = ScrollTrigger.create({
       trigger: servicesPreviewRef.current,
       start: "top 75%",
       onEnter: () => {
         const sectionHeader = servicesPreviewRef.current?.querySelector(".section-header")
         const serviceCards = servicesPreviewRef.current?.querySelectorAll(".service-card")
-        const servicesCta = servicesPreviewRef.current?.querySelector(".services-cta")
 
         // Animate section header first
         gsap.fromTo(
@@ -280,18 +215,11 @@ const Home = () => {
             delay: 0.3,
           },
         )
-
-        // Finally animate CTA button
-        gsap.fromTo(
-          servicesCta,
-          { opacity: 0, scale: 0.9 },
-          { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.7)", delay: 1 },
-        )
       },
     })
 
     // CTA section animation
-    ScrollTrigger.create({
+    const ctaSectionScrollTrigger = ScrollTrigger.create({
       trigger: ctaSectionRef.current,
       start: "top 80%",
       onEnter: () => {
@@ -313,20 +241,22 @@ const Home = () => {
 
     // Cleanup function
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      if (aboutPreviewScrollTrigger) aboutPreviewScrollTrigger.kill()
+      if (servicesPreviewScrollTrigger) servicesPreviewScrollTrigger.kill()
+      if (ctaSectionScrollTrigger) ctaSectionScrollTrigger.kill()
     }
   }, [windowWidth])
 
   // Get responsive description text based on screen size
   const getResponsiveDescription = () => {
     if (windowWidth <= 320) {
-      return "We provide staffing services across multiple industries."
+      return "We offer comprehensive services across FMCG, Retail, FMCD, Telecom, E-commerce, BFSI, Manufacturing, Pharma, Healthcare Hospitality, Educaiton , Fintech , IT  & Life sciences"
     } else if (windowWidth <= 480) {
-      return "We provide comprehensive staffing services across multiple industries."
+      return "We offer comprehensive services across FMCG, Retail, FMCD, Telecom, E-commerce, BFSI, Manufacturing, Pharma, Healthcare Hospitality, Educaiton , Fintech , IT  & Life sciences"
     } else if (windowWidth <= 768) {
-      return "We provide comprehensive staffing and managed outsourcing services across multiple industries."
+      return "We offer comprehensive services across FMCG, Retail, FMCD, Telecom, E-commerce, BFSI, Manufacturing, Pharma, Healthcare Hospitality, Educaiton , Fintech , IT  & Life sciences"
     } else {
-      return "We provide comprehensive staffing and managed outsourcing services across sales & marketing, customer care, HR & F&A operations, manufacturing, IT staffing, and facility management services."
+      return "We offer comprehensive services across FMCG, Retail, FMCD, Telecom, E-commerce, BFSI, Manufacturing, Pharma, Healthcare Hospitality, Educaiton , Fintech , IT  & Life sciences"
     }
   }
 
@@ -366,18 +296,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="stats-section">
-        <div className="container">
-          <div ref={statsRef} className="stats-grid">
-            {stats.map((stat, index) => (
-              <div key={index} className="stat-card">
-                <span className="stat-number">{stat.number}</span>
-                <span className="stat-label">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatisticsSection />
 
       {/* About Preview */}
       <section ref={aboutPreviewRef} className="about-preview section">
@@ -386,9 +305,9 @@ const Home = () => {
             <div className="about-text">
               <span className="section-tag">About Hullect Services</span>
               <h2 className="heading-secondary">
-                <span className="desktop-only">Transforming Careers and Building Teams Since 2008</span>
-                <span className="tablet-only">Transforming Careers Since 2008</span>
-                <span className="mobile-only">Building Teams Since 2008</span>
+                <span className="desktop-only">Transforming careers and buliding Teams since 2021</span>
+                <span className="tablet-only">Transforming careers and buliding Teams since 2021</span>
+                <span className="mobile-only">Transforming careers and buliding Teams since 2021</span>
               </h2>
               <p className="text-large">
                 <span className="desktop-only">
@@ -435,7 +354,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="services-grid">
+          <div className="Home-services-grid">
             {services.map((service, index) => (
               <div key={index} className="service-card">
                 <div className="service-icon">{service.icon}</div>
@@ -447,12 +366,6 @@ const Home = () => {
               </div>
             ))}
           </div>
-
-          {/* <div className="services-cta text-center">
-            <Link to="/services" className="btn btn-primary btn-large">
-              {windowWidth <= 480 ? "All Services" : "View All Services"}
-            </Link>
-          </div> */}
         </div>
       </section>
 

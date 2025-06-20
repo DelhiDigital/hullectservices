@@ -69,7 +69,7 @@ const About = () => {
         <div className="container">
           <div className="about-hero-content">
             <h1 className="about-page-title">About Hullect Services</h1>
-            <p className="about-page-subtitle">Transforming Careers and Building Teams Since 2008</p>
+            <p className="about-page-subtitle">Transforming Careers and Building Teams Since 2021</p>
           </div>
         </div>
       </section>
@@ -86,10 +86,8 @@ const About = () => {
 
               <div className="about-who-description">
                 <p>
-                  At Hullect Services Private Limited, we provide staffing and managed outsourcing services across
-                  processes such as sales and marketing, customer care, HR & F&A operations, back-office operations,
-                  manufacturing operations, after sales service, mobility services & IT staffing, Facility Management &
-                  Security Services.
+                  At Hullect Services Private Limited, We provide Recruitment , General Staffing,Industrial Staffing, Managed Outsourcing Services and HR Services across processes such as sales & marketing, customer care, HR, F&A, Operations, Engineering, After Sales Service and Mobility Services.
+
                 </p>
 
                 <p>
@@ -101,6 +99,9 @@ const About = () => {
                 <p>
                   Our people with business strategy is aligned to this, including training and skill development for
                   better employability, helping active job seekers easily find employment opportunities.
+                </p>
+                <p>
+                  Hullect inherits a legacy of excellence, innovation, and a proven track record of success. The organization embodies the same commitment to quality, reliability, and customer satisfaction that has defined its predecessors journey in the staffing industry.
                 </p>
               </div>
             </div>
@@ -123,8 +124,7 @@ const About = () => {
               <div className="about-vm-icon">🎯</div>
               <h3 className="about-vm-title">Our Vision</h3>
               <p className="about-vm-description">
-                At Hullect we aspire to create an economical & societal value while reducing the financial burden along
-                the value chains in which we operate, enabling people and businesses to realize their full potential.
+                At Hullect, we’re committed to reducing financial pressure for businesses and individuals across India, especially in states like Uttar Pradesh. By simplifying systems and supporting local enterprises, we aim to create real economic and social value. Our mission is to empower people to grow stronger, become self-reliant, and achieve more right from the grassroots to the nation.
               </p>
             </div>
 
@@ -132,9 +132,7 @@ const About = () => {
               <div className="about-vm-icon">🚀</div>
               <h3 className="about-vm-title">Our Mission</h3>
               <p className="about-vm-description">
-                To connect businesses with the right talent, empowering success through strategic staffing solutions. We
-                are committed to delivering exceptional service, fostering meaningful relationships, and driving
-                innovation in workforce management to meet the evolving needs of our clients and candidates.
+                We connect businesses with the right talent to fuel growth and success through strategic staffing solutions. Our commitment lies in delivering exceptional service, building lasting partnerships, and driving innovation in workforce management ensuring our clients and candidates are always prepared to meet the demands of a dynamic, evolving market.
               </p>
             </div>
           </div>
