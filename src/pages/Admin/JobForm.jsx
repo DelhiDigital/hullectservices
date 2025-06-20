@@ -1,115 +1,87 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import "./Admin.css"
 
 const JobForm = ({ job, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
-    title: "",
-    company: "",
-    location: "",
-    type: "Full Time",
-    closingDate: "",
-    description: "",
-    requirements: [""],
-    responsibilities: [""],
-    isActive: true,
+    title: job?.title || "",
+    company: job?.company || "",
+    location: job?.location || "",
+    type: job?.type || "Full-time",
+    description: job?.description || "",
+    requirements: job?.requirements || [""],
+    responsibilities: job?.responsibilities || [""],
+    closingDate: job?.closingDate ? new Date(job.closingDate).toISOString().split("T")[0] : "",
+    isActive: job?.isActive !== undefined ? job.isActive : true,
   })
+
   const [loading, setLoading] = useState(false)
 
-  // If editing an existing job, populate the form
-  useEffect(() => {
-    if (job) {
-      setFormData({
-        title: job.title || "",
-        company: job.company || "",
-        location: job.location || "",
-        type: job.type || "Full Time",
-        closingDate: job.closingDate ? job.closingDate.split("T")[0] : "",
-        description: job.description || "",
-        requirements: job.requirements && job.requirements.length > 0 ? job.requirements : [""],
-        responsibilities: job.responsibilities && job.responsibilities.length > 0 ? job.responsibilities : [""],
-        isActive: job.isActive !== undefined ? job.isActive : true,
-      })
-    }
-  }, [job])
-
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
+    const { name, value, type, checked } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }))
   }
 
-  const handleListItemChange = (type, index, value) => {
-    const updatedList = [...formData[type]]
-    updatedList[index] = value
-    setFormData({
-      ...formData,
-      [type]: updatedList,
-    })
+  const handleArrayChange = (index, value, field) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: prev[field].map((item, i) => (i === index ? value : item)),
+    }))
   }
 
-  const addListItem = (type) => {
-    setFormData({
-      ...formData,
-      [type]: [...formData[type], ""],
-    })
+  const addArrayItem = (field) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: [...prev[field], ""],
+    }))
   }
 
-  const removeListItem = (type, index) => {
-    if (formData[type].length > 1) {
-      const updatedList = formData[type].filter((_, i) => i !== index)
-      setFormData({
-        ...formData,
-        [type]: updatedList,
-      })
-    }
+  const removeArrayItem = (index, field) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: prev[field].filter((_, i) => i !== index),
+    }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
 
-    // Basic validation
-    if (!formData.title || !formData.company || !formData.location || !formData.description) {
-      alert("Please fill in all required fields")
-      setLoading(false)
-      return
-    }
-
-    // Validate closing date
-    const closingDate = new Date(formData.closingDate)
-    if (closingDate <= new Date()) {
-      alert("Closing date must be in the future")
-      setLoading(false)
-      return
-    }
-
     try {
       // Filter out empty requirements and responsibilities
       const cleanedData = {
         ...formData,
-        requirements: formData.requirements.filter((item) => item.trim() !== ""),
-        responsibilities: formData.responsibilities.filter((item) => item.trim() !== ""),
+        requirements: formData.requirements.filter((req) => req.trim() !== ""),
+        responsibilities: formData.responsibilities.filter((resp) => resp.trim() !== ""),
       }
 
       await onSave(cleanedData)
     } catch (error) {
-      console.error("Save job error:", error)
+      console.error("Error saving job:", error)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="admin-job-form-container">
-      <h3>{job ? "Edit Job Posting" : "Create New Job Posting"}</h3>
+    <div className="job-form-container">
+      <div className="job-form-header">
+        <h3>{job ? "Edit Job" : "Create New Job"}</h3>
+        <button onClick={onCancel} className="job-form-close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
 
-      <form onSubmit={handleSubmit} className="admin-job-form">
-        <div className="form-row">
-          <div className="form-group">
+      <form onSubmit={handleSubmit} className="job-form">
+        <div className="job-form-grid">
+          <div className="job-form-group">
             <label htmlFor="title">Job Title *</label>
             <input
               type="text"
@@ -119,10 +91,11 @@ const JobForm = ({ job, onSave, onCancel }) => {
               onChange={handleChange}
               required
               disabled={loading}
+              placeholder="e.g. Senior Software Engineer"
             />
           </div>
 
-          <div className="form-group">
+          <div className="job-form-group">
             <label htmlFor="company">Company *</label>
             <input
               type="text"
@@ -132,12 +105,11 @@ const JobForm = ({ job, onSave, onCancel }) => {
               onChange={handleChange}
               required
               disabled={loading}
+              placeholder="e.g. TechCorp Inc."
             />
           </div>
-        </div>
 
-        <div className="form-row">
-          <div className="form-group">
+          <div className="job-form-group">
             <label htmlFor="location">Location *</label>
             <input
               type="text"
@@ -147,23 +119,21 @@ const JobForm = ({ job, onSave, onCancel }) => {
               onChange={handleChange}
               required
               disabled={loading}
+              placeholder="e.g. San Francisco, CA"
             />
           </div>
 
-          <div className="form-group">
+          <div className="job-form-group">
             <label htmlFor="type">Job Type *</label>
             <select id="type" name="type" value={formData.type} onChange={handleChange} required disabled={loading}>
-              <option value="Full Time">Full Time</option>
-              <option value="Part Time">Part Time</option>
+              <option value="Full-time">Full-time</option>
+              <option value="Part-time">Part-time</option>
               <option value="Contract">Contract</option>
               <option value="Internship">Internship</option>
-              <option value="Temporary">Temporary</option>
             </select>
           </div>
-        </div>
 
-        <div className="form-row">
-          <div className="form-group">
+          <div className="job-form-group">
             <label htmlFor="closingDate">Application Deadline *</label>
             <input
               type="date"
@@ -176,107 +146,138 @@ const JobForm = ({ job, onSave, onCancel }) => {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="isActive">Status</label>
-            <select
-              id="isActive"
-              name="isActive"
-              value={formData.isActive}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  isActive: e.target.value === "true",
-                })
-              }
-              disabled={loading}
-            >
-              <option value="true">Active</option>
-              <option value="false">Inactive</option>
-            </select>
+          <div className="job-form-group">
+            <label className="job-form-checkbox">
+              <input
+                type="checkbox"
+                name="isActive"
+                checked={formData.isActive}
+                onChange={handleChange}
+                disabled={loading}
+              />
+              <span className="checkmark"></span>
+              Active Job Posting
+            </label>
           </div>
         </div>
 
-        <div className="form-group">
+        <div className="job-form-group full-width">
           <label htmlFor="description">Job Description *</label>
           <textarea
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
-            rows="4"
             required
             disabled={loading}
-          ></textarea>
+            rows="6"
+            placeholder="Describe the role, responsibilities, and what you're looking for in a candidate..."
+          />
         </div>
 
-        <div className="form-group">
+        <div className="job-form-group full-width">
           <label>Requirements</label>
-          {formData.requirements.map((req, index) => (
-            <div key={`req-${index}`} className="list-item-row">
-              <input
-                type="text"
-                value={req}
-                onChange={(e) => handleListItemChange("requirements", index, e.target.value)}
-                placeholder="Enter a requirement"
-                disabled={loading}
-              />
-              <button
-                type="button"
-                className="list-item-button remove"
-                onClick={() => removeListItem("requirements", index)}
-                disabled={loading || formData.requirements.length === 1}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            className="list-item-button add"
-            onClick={() => addListItem("requirements")}
-            disabled={loading}
-          >
-            Add Requirement
-          </button>
+          <div className="job-form-array">
+            {formData.requirements.map((requirement, index) => (
+              <div key={index} className="job-form-array-item">
+                <input
+                  type="text"
+                  value={requirement}
+                  onChange={(e) => handleArrayChange(index, e.target.value, "requirements")}
+                  placeholder="e.g. 5+ years of experience with React"
+                  disabled={loading}
+                />
+                {formData.requirements.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeArrayItem(index, "requirements")}
+                    className="job-form-remove-btn"
+                    disabled={loading}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => addArrayItem("requirements")}
+              className="job-form-add-btn"
+              disabled={loading}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add Requirement
+            </button>
+          </div>
         </div>
 
-        <div className="form-group">
+        <div className="job-form-group full-width">
           <label>Responsibilities</label>
-          {formData.responsibilities.map((resp, index) => (
-            <div key={`resp-${index}`} className="list-item-row">
-              <input
-                type="text"
-                value={resp}
-                onChange={(e) => handleListItemChange("responsibilities", index, e.target.value)}
-                placeholder="Enter a responsibility"
-                disabled={loading}
-              />
-              <button
-                type="button"
-                className="list-item-button remove"
-                onClick={() => removeListItem("responsibilities", index)}
-                disabled={loading || formData.responsibilities.length === 1}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            className="list-item-button add"
-            onClick={() => addListItem("responsibilities")}
-            disabled={loading}
-          >
-            Add Responsibility
-          </button>
+          <div className="job-form-array">
+            {formData.responsibilities.map((responsibility, index) => (
+              <div key={index} className="job-form-array-item">
+                <input
+                  type="text"
+                  value={responsibility}
+                  onChange={(e) => handleArrayChange(index, e.target.value, "responsibilities")}
+                  placeholder="e.g. Lead development of new features"
+                  disabled={loading}
+                />
+                {formData.responsibilities.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeArrayItem(index, "responsibilities")}
+                    className="job-form-remove-btn"
+                    disabled={loading}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => addArrayItem("responsibilities")}
+              className="job-form-add-btn"
+              disabled={loading}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add Responsibility
+            </button>
+          </div>
         </div>
 
-        <div className="form-actions">
-          <button type="button" onClick={onCancel} className="cancel-button" disabled={loading}>
+        <div className="job-form-actions">
+          <button type="button" onClick={onCancel} className="job-form-cancel" disabled={loading}>
             Cancel
           </button>
-          <button type="submit" className="submit-button" disabled={loading}>
-            {loading ? "Saving..." : job ? "Update Job" : "Create Job"}
+          <button type="submit" className="job-form-submit" disabled={loading}>
+            {loading ? (
+              <>
+                <div className="job-form-spinner"></div>
+                {job ? "Updating..." : "Creating..."}
+              </>
+            ) : (
+              <>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <polyline points="9,11 12,14 22,4"></polyline>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                {job ? "Update Job" : "Create Job"}
+              </>
+            )}
           </button>
         </div>
       </form>
