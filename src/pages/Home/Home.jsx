@@ -327,7 +327,7 @@ const Home = () => {
             </div>
             <div className="about-image">
               <img
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop&crop=center"
+                src="/homepage.png"
                 alt="Professional team collaboration"
               />
             </div>

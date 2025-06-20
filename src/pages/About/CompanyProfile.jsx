@@ -303,7 +303,7 @@ const CompanyProfile = () => {
             </div>
             <div className="cp-leadership-image">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                src="/Manish.png"
                 alt="CEO Manish Pratap Singh"
               />
             </div>

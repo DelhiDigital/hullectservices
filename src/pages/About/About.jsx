@@ -34,7 +34,7 @@ const About = () => {
       experience: "22+ Years Experience",
       description:
         "Manish brings along 22 years of experience across industries spanning Services & Manufacturing with a focus on quality services, customer satisfaction and business development.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image: "/Manish.png",
     },
     {
       name: "Awadhendra Pratap Singh",
@@ -42,7 +42,7 @@ const About = () => {
       experience: "20+ Years Experience",
       description:
         "Awadhendra has over 20 years of experience across industries, seasoned business professional highly focused on product sales and managed services, business development, marketing & digital marketing.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+      image: "Awadhendra.png",
     },
     {
       name: "Dr. Shalini Singh",
@@ -50,7 +50,7 @@ const About = () => {
       experience: "PhD in Physical Chemistry",
       description:
         "Dr. Shalini Singh is a seasoned professional with the passion to achieve operational excellence! Instrumental in great team building and business management.",
-      image: "./team3.png",
+      image: "/Shalini.png",
     },
   ]
 
@@ -108,7 +108,7 @@ const About = () => {
 
             <div className="about-who-image">
               <img
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=500&fit=crop&crop=center"
+                src="/homepage.png"
                 alt="Professional team collaboration"
               />
             </div>
