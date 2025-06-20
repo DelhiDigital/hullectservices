@@ -18,7 +18,11 @@ import Media from "./pages/Media/Media"
 import Contact from "./pages/Contact/Contact"
 import WhatsappButton from "./components/WhatsappButton/WhatsAppButton"
 import ScrollToTop from "./components/ScrollToTop"
+import Careers from "./pages/Careers/Careers"
+import AdminLogin from './pages/Admin/AdminLogin'
+import AdminDashboard from './pages/Admin/AdminDashboard'
 import "./index.css"
+import { Car } from "lucide-react"
 
 function App() {
   return (
@@ -43,6 +47,10 @@ function App() {
           <Route path="/partners" element={<Partners />} />
           <Route path="/media" element={<Media />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          {/* Add more routes as needed */}
         </Routes>
       </main>
       <WhatsappButton />
