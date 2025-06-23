@@ -265,7 +265,7 @@
 
 /* Services Preview */
 .services-preview {
-  background: var(--white);
+  background:#dddddd;
 }
 
 .section-header > * {
@@ -292,7 +292,7 @@
   overflow: hidden;
   opacity: 0; /* Initially hidden for animation */
   transform: translateY(60px) rotateY(15deg); /* Initially offset for animation */
-  height: 100%; /* Ensure all cards have the same height */
+  /* height: 100%; Ensure all cards have the same height */
   display: flex;
   flex-direction: column;
 }

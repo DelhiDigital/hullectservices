@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import Header from "./components/Header/Header"
 import Footer from "./components/Footer/Footer"
+import SocialSidebar from "./components/SocialSidebar/SocialSidebar"
 import Home from "./pages/Home/Home"
 import About from "./pages/About/About"
 import CompanyProfile from "./pages/About/CompanyProfile"
@@ -16,7 +17,6 @@ import OurTeam from "./pages/About/OurTeam"
 import Partners from "./pages/Partners/Partners"
 import Media from "./pages/Media/Media"
 import Contact from "./pages/Contact/Contact"
-import WhatsappButton from "./components/WhatsappButton/WhatsAppButton"
 import ScrollToTop from "./components/ScrollToTop"
 import Careers from "./pages/Careers/Careers"
 import AdminLogin from './pages/Admin/AdminLogin'
@@ -29,6 +29,7 @@ function App() {
     <div className="App">
       <Header />
       <ScrollToTop />
+      <SocialSidebar />
       {/* Main content should be wrapped in a main tag for better semantics */}
       <main className="main-content">
         <Routes>
@@ -53,7 +54,7 @@ function App() {
           {/* Add more routes as needed */}
         </Routes>
       </main>
-      <WhatsappButton />
+      
       {/* Footer should be at the bottom of the page */}
       <Footer />
     </div>

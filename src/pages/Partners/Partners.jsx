@@ -1,48 +1,48 @@
-import "./Partners.css"
+import "./partners.css"
 import { Link } from "react-router-dom"
 import OurPartner from "./OurClients/ourClients"
 
 const Partners = () => {
-  const clientLogos = [
+  const clientSectors = [
     {
-      name: "TechCorp Solutions",
-      logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop&crop=center",
+      name: "Information Technology",
+      icon: "💻",
       industry: "Technology",
     },
     {
-      name: "Global Finance Ltd",
-      logo: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&h=100&fit=crop&crop=center",
+      name: "Banking & Finance",
+      icon: "🏦",
       industry: "Finance",
     },
     {
-      name: "Healthcare Plus",
-      logo: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=200&h=100&fit=crop&crop=center",
+      name: "Healthcare & Medical",
+      icon: "🏥",
       industry: "Healthcare",
     },
     {
-      name: "Manufacturing Pro",
-      logo: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&h=100&fit=crop&crop=center",
+      name: "Manufacturing & Production",
+      icon: "🏭",
       industry: "Manufacturing",
     },
     {
-      name: "E-Commerce Hub",
-      logo: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=200&h=100&fit=crop&crop=center",
+      name: "E-Commerce & Retail",
+      icon: "🛒",
       industry: "E-Commerce",
     },
     {
-      name: "Digital Innovations",
-      logo: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200&h=100&fit=crop&crop=center",
-      industry: "Technology",
+      name: "Telecommunications",
+      icon: "📡",
+      industry: "Telecom",
     },
     {
-      name: "Retail Excellence",
-      logo: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=100&fit=crop&crop=center",
-      industry: "Retail",
+      name: "Education & Training",
+      icon: "🎓",
+      industry: "Education",
     },
     {
-      name: "Financial Services Co",
-      logo: "https://images.unsplash.com/photo-1554224154-26032fced8bd?w=200&h=100&fit=crop&crop=center",
-      industry: "Finance",
+      name: "Logistics & Supply Chain",
+      icon: "🚚",
+      industry: "Logistics",
     },
   ]
 
@@ -53,7 +53,7 @@ const Partners = () => {
       author: "Rajesh Kumar",
       position: "HR Director",
       company: "TechCorp Solutions",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=100&h=100&fit=crop&crop=face",
       rating: 5,
     },
     {
@@ -62,7 +62,7 @@ const Partners = () => {
       author: "Priya Sharma",
       position: "Operations Manager",
       company: "Global Finance Ltd",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
       rating: 5,
     },
     {
@@ -71,7 +71,7 @@ const Partners = () => {
       author: "Amit Patel",
       position: "CEO",
       company: "Healthcare Plus",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       rating: 5,
     },
   ]
@@ -112,27 +112,27 @@ const Partners = () => {
   const caseStudies = [
     {
       title: "IT Staffing Success Story",
-      company: "Leading Fintech Company",
+      company: "Leading Indian Fintech Company",
       challenge: "Rapid scaling of development team for new product launch",
       solution: "Deployed 50+ skilled developers within 30 days",
       result: "Product launched on time, 40% faster hiring process",
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=250&fit=crop&crop=center",
     },
     {
       title: "Manufacturing Operations",
-      company: "Automotive Parts Manufacturer",
+      company: "Indian Automotive Parts Manufacturer",
       challenge: "Seasonal workforce management and compliance",
       solution: "Implemented managed services with full compliance coverage",
       result: "30% cost reduction, 100% compliance adherence",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=250&fit=crop&crop=center",
     },
     {
       title: "Customer Service Excellence",
-      company: "E-Commerce Platform",
+      company: "Indian E-Commerce Platform",
       challenge: "24/7 customer support across multiple channels",
       solution: "Deployed dedicated customer service teams with technology integration",
       result: "95% customer satisfaction, 50% reduction in response time",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=250&fit=crop&crop=center",
     },
   ]
 
@@ -142,7 +142,7 @@ const Partners = () => {
       <section className="page-hero">
         <div className="hero-background">
           <img
-            src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&h=600&fit=crop&crop=center"
+            src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1920&h=600&fit=crop&crop=center"
             alt="Our Partners"
             className="hero-bg-image"
           />
@@ -159,24 +159,22 @@ const Partners = () => {
       {/* Our Clients Section */}
       <OurPartner />
 
-      {/* Client Logos */}
+      {/* Client Sectors */}
       <section className="clients-section section">
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Trusted Partners</span>
-            <h2 className="heading-secondary">Companies That Trust Us</h2>
-            <p className="text-large">We're proud to partner with industry leaders across various sectors</p>
+            <h2 className="heading-secondary">Industries We Serve</h2>
+            <p className="text-large">We're proud to partner with industry leaders across various sectors in India</p>
           </div>
 
           <div className="clients-grid">
-            {clientLogos.map((client, index) => (
+            {clientSectors.map((sector, index) => (
               <div key={index} className="client-card">
-                <div className="client-logo">
-                  <img src={client.logo || "/placeholder.svg"} alt={client.name} />
-                </div>
+                <div className="client-icon">{sector.icon}</div>
                 <div className="client-info">
-                  <h4 className="client-name">{client.name}</h4>
-                  <span className="client-industry">{client.industry}</span>
+                  <h4 className="client-name">{sector.name}</h4>
+                  <span className="client-industry">{sector.industry}</span>
                 </div>
               </div>
             ))}
@@ -249,7 +247,7 @@ const Partners = () => {
           <div className="section-header text-center">
             <span className="section-tag">Success Stories</span>
             <h2 className="heading-secondary">Case Studies</h2>
-            <p className="text-large">Real-world examples of how we've helped businesses achieve their goals</p>
+            <p className="text-large">Real-world examples of how we've helped Indian businesses achieve their goals</p>
           </div>
 
           <div className="case-studies-grid">

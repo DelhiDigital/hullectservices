@@ -27,32 +27,32 @@ const About = () => {
     },
   ]
 
-  const teamMembers = [
-    {
-      name: "Manish Pratap Singh",
-      position: "CEO",
-      experience: "22+ Years Experience",
-      description:
-        "Manish brings along 22 years of experience across industries spanning Services & Manufacturing with a focus on quality services, customer satisfaction and business development.",
-      image: "/Manish.png",
-    },
-    {
-      name: "Awadhendra Pratap Singh",
-      position: "CBO - Chief Business Officer",
-      experience: "20+ Years Experience",
-      description:
-        "Awadhendra has over 20 years of experience across industries, seasoned business professional highly focused on product sales and managed services, business development, marketing & digital marketing.",
-      image: "Awadhendra.png",
-    },
-    {
-      name: "Dr. Shalini Singh",
-      position: "Director",
-      experience: "PhD in Physical Chemistry",
-      description:
-        "Dr. Shalini Singh is a seasoned professional with the passion to achieve operational excellence! Instrumental in great team building and business management.",
-      image: "/Shalini.png",
-    },
-  ]
+  // const teamMembers = [
+  //   {
+  //     name: "Manish Pratap Singh",
+  //     position: "CEO",
+  //     experience: "22+ Years Experience",
+  //     description:
+  //       "Manish brings along 22 years of experience across industries spanning Services & Manufacturing with a focus on quality services, customer satisfaction and business development.",
+  //     image: "/Manish.png",
+  //   },
+  //   {
+  //     name: "Awadhendra Pratap Singh",
+  //     position: "CBO - Chief Business Officer",
+  //     experience: "20+ Years Experience",
+  //     description:
+  //       "Awadhendra has over 20 years of experience across industries, seasoned business professional highly focused on product sales and managed services, business development, marketing & digital marketing.",
+  //     image: "Awadhendra.png",
+  //   },
+  //   {
+  //     name: "Dr. Shalini Singh",
+  //     position: "Director",
+  //     experience: "PhD in Physical Chemistry",
+  //     description:
+  //       "Dr. Shalini Singh is a seasoned professional with the passion to achieve operational excellence! Instrumental in great team building and business management.",
+  //     image: "/Shalini.png",
+  //   },
+  // ]
 
   return (
     <div className="about-page">
@@ -160,7 +160,7 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="about-team-section section">
+      {/* <section className="about-team-section section">
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Leadership Team</span>
@@ -184,7 +184,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section - Unique About Page CTA */}
       <section className="about-page-cta-section">

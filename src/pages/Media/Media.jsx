@@ -1,4 +1,4 @@
-import "./Media.css"
+import "./media.css"
 import { Link } from "react-router-dom"
 
 const Media = () => {
@@ -33,7 +33,7 @@ const Media = () => {
         "Company announces expansion plans to serve clients in tier-2 cities across India with new service centers.",
       date: "March 15, 2025",
       category: "Company News",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&h=250&fit=crop&crop=center",
       readTime: "3 min read",
     },
     {
@@ -42,7 +42,7 @@ const Media = () => {
         "Hullect Services successfully renews its ISO certification, reinforcing commitment to quality management systems.",
       date: "February 28, 2025",
       category: "Achievements",
-      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=250&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=250&fit=crop&crop=center",
       readTime: "2 min read",
     },
     {
@@ -50,7 +50,7 @@ const Media = () => {
       excerpt: "Launching new mobile-enabled solutions for better workforce management and employee experience.",
       date: "February 10, 2024",
       category: "Technology",
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=250&fit=crop&crop=center",
       readTime: "4 min read",
     },
     {
@@ -59,7 +59,7 @@ const Media = () => {
         "Strategic partnerships established with major manufacturing firms to provide comprehensive staffing solutions.",
       date: "January 25, 2024",
       category: "Partnerships",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=250&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=250&fit=crop&crop=center",
       readTime: "3 min read",
     },
     {
@@ -68,9 +68,10 @@ const Media = () => {
         "New training initiatives designed to enhance employability and bridge the skill gap in various industries.",
       date: "January 12, 2024",
       category: "Training",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=250&fit=crop&crop=center",
+      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=250&fit=crop&crop=center",
       readTime: "5 min read",
     },
+    
   ]
 
   const pressReleases = [
@@ -160,14 +161,21 @@ const Media = () => {
       description:
         "Fun recreational activities including chess tournaments that showcase the diverse talents of our team.",
     },
+    {
+      title: "Team Bonding Moments",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG-20250612-WA0016.jpg-RzihIxTPt9uCca8Paoor0I9N8HL9Pn.jpeg",
+      category: "Team Bonding",
+      description: "Capturing the essence of teamwork and camaraderie during our Foundation Day celebrations.",
+    },
   ]
 
   const achievements = [
     {
       year: "2025",
-      title: "Foundation Day Celebration - 16 Years of Excellence",
+      title: "Foundation Day Celebration - 4 Years of Excellence",
       description:
-        "Celebrated our 16th Foundation Day with team recognition, awards, and renewed commitment to excellence",
+        "Celebrated our 4th Foundation Day with team recognition, awards, and renewed commitment to excellence",
     },
     {
       year: "2024",
@@ -175,7 +183,7 @@ const Media = () => {
       description: "Quality management system certification renewed for continued excellence",
     },
     {
-      year: "2023",
+      year: "2024",
       title: "Best Staffing Company Award",
       description: "Recognized for outstanding performance in the staffing industry",
     },
@@ -186,8 +194,13 @@ const Media = () => {
     },
     {
       year: "2022",
-      title: "Startup India Recognition",
-      description: "Officially registered and recognized under Startup India initiative",
+      title: "Expansion to Multiple Cities",
+      description: "Successfully expanded operations to serve clients across major Indian cities",
+    },
+    {
+      year: "2021",
+      title: "Company Foundation & Startup India Recognition",
+      description: "Hullect Services founded and officially registered under Startup India initiative",
     },
   ]
 
@@ -216,9 +229,9 @@ const Media = () => {
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag foundation-tag">🎉 Foundation Day Special</span>
-            <h2 className="heading-secondary">Celebrating 16 Years of Excellence</h2>
+            <h2 className="heading-secondary">Celebrating 4 Years of Excellence</h2>
             <p className="text-large">
-              Join us as we celebrate our Foundation Day 2024 with team achievements, recognition, and memorable moments
+              Join us as we celebrate our Foundation Day 2025 with team achievements, recognition, and memorable moments
             </p>
           </div>
 
@@ -325,7 +338,7 @@ const Media = () => {
       </section>
 
       {/* Press Releases */}
-      <section className="press-releases section">
+      {/* <section className="press-releases section">
         <div className="container">
           <div className="section-header text-center">
             <span className="section-tag">Official Communications</span>
@@ -350,7 +363,7 @@ const Media = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Achievements Timeline */}
       <section className="achievements-section section">
@@ -358,7 +371,9 @@ const Media = () => {
           <div className="section-header text-center">
             <span className="section-tag">Our Journey</span>
             <h2 className="heading-secondary">Achievements & Milestones</h2>
-            <p className="text-large">Key achievements and recognitions that mark our journey of excellence</p>
+            <p className="text-large">
+              Key achievements and recognitions that mark our journey of excellence since 2021
+            </p>
           </div>
 
           <div className="achievements-timeline">
@@ -395,7 +410,7 @@ const Media = () => {
             </div>
             <div className="contact-actions">
               <Link to="/contact" className="btn btn-primary">
-                Contact Media Team
+                Contact Us
               </Link>
             </div>
           </div>

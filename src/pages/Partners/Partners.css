@@ -56,7 +56,7 @@
 
 /* Clients Section */
 .clients-section {
-  background: var(--white);
+  background: #e9e8e9;
 }
 
 .clients-grid {
@@ -81,27 +81,22 @@
   border-color: var(--primary-blue);
 }
 
-.client-logo {
+.client-icon {
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: var(--spacing-lg);
-  background: var(--gray-50);
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-orange));
   border-radius: var(--radius-md);
-  overflow: hidden;
+  font-size: var(--text-4xl);
+  color: var(--white);
+  transition: all var(--transition-normal);
 }
 
-.client-logo img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  filter: grayscale(100%);
-  transition: filter var(--transition-normal);
-}
-
-.client-card:hover .client-logo img {
-  filter: grayscale(0%);
+.client-card:hover .client-icon {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
 }
 
 .client-name {
@@ -180,7 +175,7 @@
 
 /* Testimonials Section */
 .testimonials-section {
-  background: var(--white);
+  background: #efefef;
 }
 
 .testimonials-grid {

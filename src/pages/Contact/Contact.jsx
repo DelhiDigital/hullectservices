@@ -363,7 +363,7 @@ const Contact = () => {
       <section className="business-hours section">
         <div className="container">
           <div className="hours-content">
-            <div className="hours-info">
+            {/* <div className="hours-info">
               <h3 className="heading-tertiary">Business Hours</h3>
               <div className="hours-grid">
                 <div className="hours-item">
@@ -379,14 +379,14 @@ const Contact = () => {
                   <span className="time">Closed</span>
                 </div>
               </div>
-            </div>
-            <div className="emergency-contact">
+            </div> */}
+            {/* <div className="emergency-contact">
               <h4>Emergency Contact</h4>
               <p>For urgent staffing requirements outside business hours:</p>
               <a href="tel:9120018844" className="emergency-number">
                 +91 9120018844
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
