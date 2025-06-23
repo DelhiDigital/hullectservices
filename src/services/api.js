@@ -1,154 +1,192 @@
-const API_BASE_URL = "http://localhost:5000/api"
+const BASE_URL =  "http://localhost:3000/api"
 
-// Helper function to handle API responses
 const handleResponse = async (response) => {
-  const data = await response.json()
+  const contentType = response.headers.get("content-type")
+  let data
+
+  if (contentType && contentType.includes("application/json")) {
+    data = await response.json()
+  } else {
+    data = await response.text()
+  }
 
   if (!response.ok) {
-    throw new Error(data.message || "Something went wrong")
+    const message = (data && data.message) || response.statusText
+    return Promise.reject(new Error(message))
   }
 
   return data
 }
 
-// Helper function to get auth headers
-const getAuthHeaders = () => {
-  const token = localStorage.getItem("adminToken")
-  return {
-    "Content-Type": "application/json",
-    ...(token && { Authorization: `Bearer ${token}` }),
-  }
-}
-
-// Auth API
 export const authAPI = {
   login: async (credentials) => {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    })
-    return handleResponse(response)
-  },
+    try {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      })
 
-  getProfile: async () => {
-    const response = await fetch(`${API_BASE_URL}/auth/profile`, {
-      headers: getAuthHeaders(),
-    })
-    return handleResponse(response)
-  },
-
-  changePassword: async (passwordData) => {
-    const response = await fetch(`${API_BASE_URL}/auth/change-password`, {
-      method: "PUT",
-      headers: getAuthHeaders(),
-      body: JSON.stringify(passwordData),
-    })
-    return handleResponse(response)
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to login:", error)
+      throw error
+    }
   },
 }
 
-// Jobs API
 export const jobsAPI = {
-  // Public endpoints
   getJobs: async (params = {}) => {
-    const queryString = new URLSearchParams(params).toString()
-    const response = await fetch(`${API_BASE_URL}/jobs?${queryString}`)
-    return handleResponse(response)
+    const queryParams = new URLSearchParams(params)
+    const url = `${BASE_URL}/jobs?${queryParams}`
+
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to get jobs:", error)
+      throw error
+    }
   },
 
-  getJob: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/jobs/${id}`)
-    return handleResponse(response)
-  },
+  getAdminJobs: async () => {
+    try {
+      const token = localStorage.getItem("adminToken")
+      const response = await fetch(`${BASE_URL}/admin/jobs`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
-  // Admin endpoints
-  getAdminJobs: async (params = {}) => {
-    const queryString = new URLSearchParams(params).toString()
-    const response = await fetch(`${API_BASE_URL}/jobs/admin/my-jobs?${queryString}`, {
-      headers: getAuthHeaders(),
-    })
-    return handleResponse(response)
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to get admin jobs:", error)
+      throw error
+    }
   },
 
   createJob: async (jobData) => {
-    const response = await fetch(`${API_BASE_URL}/jobs`, {
-      method: "POST",
-      headers: getAuthHeaders(),
-      body: JSON.stringify(jobData),
-    })
-    return handleResponse(response)
+    try {
+      const token = localStorage.getItem("adminToken")
+      const response = await fetch(`${BASE_URL}/admin/jobs`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(jobData),
+      })
+
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to create job:", error)
+      throw error
+    }
   },
 
-  updateJob: async (id, jobData) => {
-    const response = await fetch(`${API_BASE_URL}/jobs/${id}`, {
-      method: "PUT",
-      headers: getAuthHeaders(),
-      body: JSON.stringify(jobData),
-    })
-    return handleResponse(response)
+  updateJob: async (jobId, jobData) => {
+    try {
+      const token = localStorage.getItem("adminToken")
+      const response = await fetch(`${BASE_URL}/admin/jobs/${jobId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(jobData),
+      })
+
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to update job:", error)
+      throw error
+    }
   },
 
-  deleteJob: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/jobs/${id}`, {
-      method: "DELETE",
-      headers: getAuthHeaders(),
-    })
-    return handleResponse(response)
+  deleteJob: async (jobId) => {
+    try {
+      const token = localStorage.getItem("adminToken")
+      const response = await fetch(`${BASE_URL}/admin/jobs/${jobId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to delete job:", error)
+      throw error
+    }
   },
 
-  toggleJobStatus: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/jobs/${id}/toggle-status`, {
-      method: "PATCH",
-      headers: getAuthHeaders(),
-    })
-    return handleResponse(response)
+  toggleJobStatus: async (jobId) => {
+    try {
+      const token = localStorage.getItem("adminToken")
+      const response = await fetch(`${BASE_URL}/admin/jobs/${jobId}/toggle`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to toggle job status:", error)
+      throw error
+    }
   },
 }
 
-// Applications API
 export const applicationsAPI = {
-  // Public endpoint
   submitApplication: async (formData) => {
-    const response = await fetch(`${API_BASE_URL}/applications`, {
-      method: "POST",
-      body: formData, // FormData object for file upload
-    })
-    return handleResponse(response)
+    try {
+      const response = await fetch(`${BASE_URL}/applications`, {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to submit application:", error)
+      throw error
+    }
   },
 
-  // Admin endpoints
-  getApplications: async (params = {}) => {
-    const queryString = new URLSearchParams(params).toString()
-    const response = await fetch(`${API_BASE_URL}/applications?${queryString}`, {
-      headers: getAuthHeaders(),
-    })
-    return handleResponse(response)
-  },
+  getJobApplications: async (jobId) => {
+    try {
+      const token = localStorage.getItem("adminToken")
+      const response = await fetch(`${BASE_URL}/admin/jobs/${jobId}/applications`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
-  getApplication: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
-      headers: getAuthHeaders(),
-    })
-    return handleResponse(response)
-  },
-
-  updateApplicationStatus: async (id, status) => {
-    const response = await fetch(`${API_BASE_URL}/applications/${id}/status`, {
-      method: "PATCH",
-      headers: getAuthHeaders(),
-      body: JSON.stringify({ status }),
-    })
-    return handleResponse(response)
-  },
-
-  deleteApplication: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/applications/${id}`, {
-      method: "DELETE",
-      headers: getAuthHeaders(),
-    })
-    return handleResponse(response)
+      const data = await handleResponse(response)
+      return { success: true, data: data }
+    } catch (error) {
+      console.error("Failed to get job applications:", error)
+      throw error
+    }
   },
 }
