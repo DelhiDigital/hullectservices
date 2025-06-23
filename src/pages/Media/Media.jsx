@@ -401,7 +401,7 @@ const Media = () => {
             <div className="contact-info">
               <div className="MediaContact-item">
                 <span className="contact-label">Email:</span>
-                <a href="mailto:media@hullectservices.com">media@hullectservices.com</a>
+                <a href="mailto:connect@hullectservices.com">connect@hullectservices.com</a>
               </div>
               <div className="MediaContact-item">
                 <span className="contact-label">Phone:</span>

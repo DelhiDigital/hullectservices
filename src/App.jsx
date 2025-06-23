@@ -7,12 +7,12 @@ import About from "./pages/About/About"
 import CompanyProfile from "./pages/About/CompanyProfile"
 import OurTeam from "./pages/About/OurTeam"
 // import Services from "./pages/Services/Services"
-// import Staffing from "./pages/Services/Staffing"
-// import SearchRecruitment from "./pages/Services/SearchRecruitment"
-// import SkillingLearning from "./pages/Services/SkillingLearning"
-// import ManagedServices from "./pages/Services/ManagedServices"
-// import Apprenticeship from "./pages/Services/Apprenticeship"
-// import Compliance from "./pages/Services/Compliance"
+import Staffing from "./pages/Services/Staffing"
+import SearchRecruitment from "./pages/Services/SearchRecruitment"
+import SkillingLearning from "./pages/Services/SkillingLearning"
+import ManagedServices from "./pages/Services/managed-services"
+import Apprenticeship from "./pages/Services/Apprenticeship"
+import Compliance from "./pages/Services/compliance"
 // import Security from "./pages/Services/Security"
 import Partners from "./pages/Partners/Partners"
 import Media from "./pages/Media/Media"
@@ -37,14 +37,14 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/about/company-profile" element={<CompanyProfile />} />
           <Route path="/about/our-team" element={<OurTeam />} />
-          {/* <Route path="/services" element={<Services />} />
+           {/*<Route path="/services" element={<Services />} />*/}
           <Route path="/services/staffing" element={<Staffing />} />
           <Route path="/services/search-recruitment" element={<SearchRecruitment />} />
-          <Route path="/services/skilling-learning" element={<SkillingLearning />} /> */}
-          {/* <Route path="/services/managed-services" element={<ManagedServices />} />
+          <Route path="/services/skilling-learning" element={<SkillingLearning />} /> 
+           <Route path="/services/managed-services" element={<ManagedServices />} />
           <Route path="/services/apprenticeship" element={<Apprenticeship />} />
           <Route path="/services/compliance" element={<Compliance />} />
-          <Route path="/services/security" element={<Security />} /> */}
+        {/* <Route path="/services/security" element={<Security />} />  */}
           <Route path="/partners" element={<Partners />} />
           <Route path="/media" element={<Media />} />
           <Route path="/contact" element={<Contact />} />

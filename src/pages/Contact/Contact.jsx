@@ -31,17 +31,17 @@ const Contact = () => {
     {
       icon: "📍",
       title: "Head Office",
-      details: ["123 Business District", "New Delhi, India - 110001"],
+      details: ["Office No - SF - 05E, 2nd Floor,Riverview Arcade Plot No - 4/17, Sector 4, Gomti Nagar Extension, Lucknow, Uttar Pradesh 226010"],
     },
     {
       icon: "📞",
       title: "Phone Numbers",
-      details: ["+91 9120018844", "+91 11 4567 8900"],
+      details: ["0522 3504137"],
     },
     {
       icon: "📧",
       title: "Email Addresses",
-      details: ["connect@hullectservices.com", "info@hullectservices.com"],
+      details: ["connect@hullectservices.com", "corphr@hullectservices.com"],
     },
     {
       icon: "🌐",
@@ -53,17 +53,17 @@ const Contact = () => {
   const officeLocations = [
     {
       city: "New Delhi",
-      address: "123 Business District, Connaught Place, New Delhi - 110001",
-      phone: "+91 11 4567 8900",
+      address: "Office No - SF - 05E, 2nd Floor,Riverview Arcade Plot No - 4/17, Sector 4, Gomti Nagar Extension, Lucknow, Uttar Pradesh 226010",
+      phone: "0522 3504137",
       email: "delhi@hullectservices.com",
       image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&h=200&fit=crop&crop=center",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Connaught+Place+New+Delhi+India",
       coordinates: "28.6315,77.2167", // New Delhi coordinates
     },
     {
-      city: "Mumbai",
-      address: "456 Corporate Hub, Bandra Kurla Complex, Mumbai - 400051",
-      phone: "+91 22 6789 0123",
+      city: "Varanasi",
+      address: "C/O Churamanpur,Near Bank of BarodaRegional Office , Chandpur,Varanasi 221106",
+      phone: "+91-9785-005-691",
       email: "mumbai@hullectservices.com",
       image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=300&h=200&fit=crop&crop=center",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Bandra+Kurla+Complex+Mumbai+India",
@@ -71,7 +71,7 @@ const Contact = () => {
     },
     {
       city: "Bangalore",
-      address: "789 Tech Park, Electronic City, Bangalore - 560100",
+      address: "No. 258, 4th main,near Shrinivasa temple,Kithiganur, T.C. Palya road,K.R. Puram bangalore 560049",
       phone: "+91 80 9876 5432",
       email: "bangalore@hullectservices.com",
       image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop&crop=center",
@@ -79,9 +79,9 @@ const Contact = () => {
       coordinates: "12.9716,77.5946", // Bangalore coordinates
     },
     {
-      city: "Chennai",
-      address: "321 IT Corridor, OMR Road, Chennai - 600096",
-      phone: "+91 44 5432 1098",
+      city: "Rajasthan",
+      address: "G-205 ,RIICO Industrial area Bagru,Ajmer Road,Jaipur -303007",
+      phone: "+91-978 500 5691",
       email: "chennai@hullectservices.com",
       image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=300&h=200&fit=crop&crop=center",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=OMR+Road+Chennai+India",
@@ -101,7 +101,7 @@ const Contact = () => {
 
   // Head office details for map
   const headOffice = {
-    address: "123 Business District, Connaught Place, New Delhi - 110001",
+    address: "Office No - SF - 05E, 2nd Floor,Riverview Arcade Plot No - 4/17, Sector 4, Gomti Nagar Extension, Lucknow, Uttar Pradesh 226010",
     coordinates: "28.6315,77.2167",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=123+Business+District+Connaught+Place+New+Delhi+India",
   }
