@@ -4,7 +4,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { jobsAPI, applicationsAPI } from "../../services/api"
-import "./careers.css"
+import "./Careers.css"
 
 // Mock data for cities - you can replace this with your actual cities API
 const initialCities = [
