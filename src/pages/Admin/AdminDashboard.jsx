@@ -4,10 +4,16 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { jobsAPI, applicationsAPI } from "../../services/api"
 import JobForm from "./JobForm"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import ApplicationsModal from "./ApplicationsModal"
 import "./Admin.css"
+import { BASE_URL } from "../../services/api"
+import { ShieldUser } from 'lucide-react';
+
 const AdminDashboard = () => {
   const [jobs, setJobs] = useState([])
+  const [applications, setApplications] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
   const [showJobForm, setShowJobForm] = useState(false)
@@ -31,69 +37,134 @@ const AdminDashboard = () => {
       return
     }
 
-    loadJobs()
+    loadData()
   }, [navigate])
+
+  //update whole stats when jobs or applications change
+  useEffect(() => {
+    if (jobs.length > 0 || applications.length > 0) {
+      calculateStats(jobs, applications)
+    }
+  }, [jobs, applications])
+
+  // data loading function
+  const loadData = async () => {
+    try {
+      setLoading(true)
+      setError("")
+      console.log("Loading all data...")
+
+      const [jobsResponse, applicationsResponse] = await Promise.all([
+        jobsAPI.getAdminJobs(),
+        applicationsAPI.getApplications(),
+      ])
+
+      const jobsArray = Array.isArray(jobsResponse.data?.jobs) ? jobsResponse.data.jobs : jobsResponse.data || []
+
+      const applicationsArray = Array.isArray(applicationsResponse.data?.applications)
+        ? applicationsResponse.data.applications
+        : applicationsResponse.data || []
+
+      console.log("Jobs loaded:", jobsArray.length)
+      console.log("Applications loaded:", applicationsArray.length)
+
+      setJobs(jobsArray)
+      setApplications(applicationsArray)
+
+      // Stats will be calculated by useEffect automatically
+    } catch (error) {
+      console.error("Load data error:", error)
+      setError("Failed to load dashboard data")
+      toast.error("Failed to load dashboard data")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const loadJobs = async () => {
     try {
       setLoading(true)
       setError("")
+      console.log("Loading jobs...")
+
       const response = await jobsAPI.getAdminJobs()
+      console.log("Jobs response:", response)
 
       if (response.success && response.data) {
-        // Handle different possible response structures
+        // Handle the response structure from your backend
         let jobsArray = []
 
-        if (Array.isArray(response.data)) {
-          jobsArray = response.data
-        } else if (response.data.jobs && Array.isArray(response.data.jobs)) {
+        if (Array.isArray(response.data.jobs)) {
           jobsArray = response.data.jobs
-        } else if (response.data.data && Array.isArray(response.data.data)) {
-          jobsArray = response.data.data
+        } else if (Array.isArray(response.data)) {
+          jobsArray = response.data
         } else {
           console.warn("Unexpected response structure:", response.data)
           jobsArray = []
         }
 
         setJobs(jobsArray)
-        calculateStats(jobsArray)
+        // Don't calculate stats here - let useEffect handle it
       } else {
         setJobs([])
         setError("Failed to load jobs")
       }
     } catch (error) {
+      console.error("Load jobs error:", error)
       setError(error.message || "Failed to load jobs")
       setJobs([])
-      console.error("Load jobs error:", error)
     } finally {
       setLoading(false)
     }
   }
 
-  const calculateStats = (jobsArray) => {
+  const loadApplications = async () => {
     try {
-      if (!Array.isArray(jobsArray)) {
-        console.warn("Jobs is not an array:", jobsArray)
-        setStats({
-          totalJobs: 0,
-          activeJobs: 0,
-          totalApplications: 0,
-          pendingApplications: 0,
-        })
-        return
+      const response = await applicationsAPI.getApplications()
+      console.log("Applications response:", response)
+
+      if (response.success && response.data) {
+        let applicationsArray = []
+
+        if (Array.isArray(response.data.applications)) {
+          applicationsArray = response.data.applications
+        } else if (Array.isArray(response.data)) {
+          applicationsArray = response.data
+        } else {
+          console.warn("Unexpected applications response structure:", response.data)
+          applicationsArray = []
+        }
+
+        setApplications(applicationsArray)
+      } else {
+        setApplications([])
       }
+    } catch (error) {
+      console.error("Load applications error:", error)
+      setApplications([])
+    }
+  }
 
-      const totalApplications = jobsArray.reduce((sum, job) => {
-        const count = job.applicationCount || job.applications?.length || 0
-        return sum + count
-      }, 0)
+  // FIXED: Enhanced stats calculation with better logging
+  const calculateStats = (jobsArray, applicationsArray) => {
+    try {
+      const totalApplications = jobsArray.reduce((sum, job) => sum + (job.applicationCount || 0), 0)
 
-      setStats({
+      const pendingApplications = applicationsArray.filter((app) => app.status === "pending").length
+
+      const newStats = {
         totalJobs: jobsArray.length,
         activeJobs: jobsArray.filter((job) => job.isActive).length,
-        totalApplications: totalApplications,
-        pendingApplications: totalApplications, // You can modify this based on your needs
-      })
+        totalApplications,
+        pendingApplications,
+      }
+
+      console.log("Calculating stats:")
+      console.log("Jobs array length:", jobsArray.length)
+      console.log("Applications array length:", applicationsArray.length)
+      console.log("New stats:", newStats)
+
+      setStats(newStats)
     } catch (error) {
       console.error("Calculate stats error:", error)
       setStats({
@@ -106,8 +177,20 @@ const AdminDashboard = () => {
   }
 
   const handleLogout = () => {
+    // Clear all admin-related data from localStorage
     localStorage.removeItem("adminAuth")
     localStorage.removeItem("adminToken")
+    localStorage.removeItem("admin")
+    localStorage.removeItem("token")
+
+    // Clear any other potential admin data
+    Object.keys(localStorage).forEach((key) => {
+      if (key.toLowerCase().includes("admin")) {
+        localStorage.removeItem(key)
+      }
+    })
+
+    // Redirect to login page
     navigate("/admin/login")
   }
 
@@ -121,38 +204,50 @@ const AdminDashboard = () => {
     setShowJobForm(true)
   }
 
+  // FIXED: Use loadData instead of loadJobs to update stats
   const handleDeleteJob = async (jobId) => {
     if (window.confirm("Are you sure you want to delete this job posting?")) {
       try {
         await jobsAPI.deleteJob(jobId)
-        await loadJobs()
+        toast.success("Job deleted successfully!")
+        await loadData() // FIXED: Load all data to update stats
       } catch (error) {
         alert(error.message || "Failed to delete job")
+        toast.error(error.message || "Failed to delete job")
       }
     }
   }
 
+  // FIXED: Use loadData instead of loadJobs to update stats
   const handleToggleActive = async (jobId) => {
     try {
       await jobsAPI.toggleJobStatus(jobId)
-      await loadJobs()
+      toast.success("Job status updated successfully!")
+      await loadData() // FIXED: Load all data to update stats
     } catch (error) {
       alert(error.message || "Failed to update job status")
+      toast.error(error.message || "Failed to update job status")
     }
   }
 
+  // FIXED: Use loadData instead of loadJobs to update stats
   const handleSaveJob = async (jobData) => {
     try {
       if (currentJob) {
         await jobsAPI.updateJob(currentJob._id, jobData)
+        alert("Job updated successfully!")
+        toast.success("Job updated successfully!")
       } else {
         await jobsAPI.createJob(jobData)
+        alert("Job created successfully!")
+        toast.success("Job created successfully!")
       }
 
       setShowJobForm(false)
-      await loadJobs()
+      await loadData() // FIXED: Load all data to update stats
     } catch (error) {
       alert(error.message || "Failed to save job")
+      toast.error(error.message || "Failed to save job")
     }
   }
 
@@ -160,15 +255,12 @@ const AdminDashboard = () => {
     try {
       const response = await applicationsAPI.getJobApplications(job._id)
       if (response.success && response.data) {
-        // Handle different possible response structures
         let applicationsArray = []
 
-        if (Array.isArray(response.data)) {
-          applicationsArray = response.data
-        } else if (response.data.applications && Array.isArray(response.data.applications)) {
+        if (Array.isArray(response.data.applications)) {
           applicationsArray = response.data.applications
-        } else if (response.data.data && Array.isArray(response.data.data)) {
-          applicationsArray = response.data.data
+        } else if (Array.isArray(response.data)) {
+          applicationsArray = response.data
         } else {
           console.warn("Unexpected applications response structure:", response.data)
           applicationsArray = []
@@ -182,6 +274,33 @@ const AdminDashboard = () => {
       }
     } catch (error) {
       alert(error.message || "Failed to load applications")
+      toast.error(error.message || "Failed to load applications")
+    }
+  }
+
+  // FIXED: Use loadData instead of loadApplications to update stats
+  const handleUpdateApplicationStatus = async (applicationId, status) => {
+    try {
+      await applicationsAPI.updateApplicationStatus(applicationId, status)
+      toast.success("Application status updated!")
+      await loadData() // FIXED: Load all data to update stats
+    } catch (error) {
+      alert(error.message || "Failed to update application status")
+      toast.error(error.message || "Failed to update application status")
+    }
+  }
+
+  // FIXED: Use loadData instead of loadApplications to update stats
+  const handleDeleteApplication = async (applicationId) => {
+    if (window.confirm("Are you sure you want to delete this application?")) {
+      try {
+        await applicationsAPI.deleteApplication(applicationId)
+        toast.success("Application deleted successfully!")
+        await loadData() // FIXED: Load all data to update stats
+      } catch (error) {
+        alert(error.message || "Failed to delete application")
+        toast.error(error.message || "Failed to delete application")
+      }
     }
   }
 
@@ -214,18 +333,35 @@ const AdminDashboard = () => {
               <p>Manage jobs and applications</p>
             </div>
           </div>
-          <button onClick={handleLogout} className="admin-logout-button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16,17 21,12 16,7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-            Logout
-          </button>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {(() => {
+              const authData = JSON.parse(localStorage.getItem("adminAuth") || "{}")
+              const userEmail = authData?.user?.email || authData?.data?.admin?.email || "admin@example.com"
+              const userName = authData?.user?.name || authData?.data?.admin?.name || "Admin"
+
+              return (
+                <div className="admin-user-info">
+                  <div className="admin-user-avatar">{userName.charAt(0).toUpperCase()}</div>
+                  <div className="admin-user-details">
+                    <span className="admin-user-email">{userEmail}</span>
+                    <span className="admin-user-role">Administrator</span>
+                  </div>
+                </div>
+              )
+            })()}
+            <button onClick={handleLogout} className="admin-logout-button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16,17 21,12 16,7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Stats Cards */}
+      {/* Stats Cards - FIXED: Now shows correct stats that update on every action */}
       <div className="admin-stats">
         <div className="admin-stat-card">
           <div className="admin-stat-icon jobs">
@@ -309,6 +445,28 @@ const AdminDashboard = () => {
               </svg>
               Job Management
             </button>
+            <button
+              className={`admin-tab ${activeTab === "applications" ? "active" : ""}`}
+              onClick={() => setActiveTab("applications")}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              Applications
+            </button>
+
+            {/* under development */}
+            {/* <button
+              className={`admin-tab ${activeTab === "users" ? "active" : ""}`}
+              onClick={() => setActiveTab("users")}
+            >
+              <ShieldUser className="lucide-icon" width={28} height={28} />
+
+              Users
+            </button> */}
           </div>
 
           {/* Jobs Tab Content */}
@@ -353,6 +511,7 @@ const AdminDashboard = () => {
                                 {job.isActive ? "Active" : "Inactive"}
                               </span>
                             </div>
+
                             <div className="admin-job-actions">
                               <button
                                 onClick={() => handleViewApplications(job)}
@@ -365,9 +524,7 @@ const AdminDashboard = () => {
                                   <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                 </svg>
-                                <span className="admin-applications-count">
-                                  {job.applicationCount || job.applications?.length || 0}
-                                </span>
+                                <span className="admin-applications-count">{job.applicationCount || 0}</span>
                               </button>
                               <button
                                 onClick={() => handleEditJob(job)}
@@ -440,6 +597,7 @@ const AdminDashboard = () => {
                               <span>Posted: {new Date(job.createdAt).toLocaleDateString()}</span>
                               <span>Closes: {new Date(job.closingDate).toLocaleDateString()}</span>
                             </div>
+                            <p className="admin-job-id">Job ID: {job?.jobId}</p>
                           </div>
                         </div>
                       ))}
@@ -449,6 +607,115 @@ const AdminDashboard = () => {
               )}
             </>
           )}
+
+          {/* Applications Tab Content */}
+          {activeTab === "applications" && (
+            <>
+              <div className="admin-section-header">
+                <h2>All Applications</h2>
+              </div>
+
+              <div className="admin-applications-container">
+                {applications.length === 0 ? (
+                  <div className="admin-empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <h3>No applications found</h3>
+                    <p>Applications will appear here when candidates apply for jobs.</p>
+                  </div>
+                ) : (
+                  <div className="admin-applications-list">
+                    {applications.map((application) => {
+                      const downloadUrl = application.resumeUrl?.startsWith("http")
+                        ? application.resumeUrl
+                        : `${BASE_URL}${application.resumeUrl}`
+
+                      return (
+                        <div key={application._id} className="admin-application-card">
+                          <div className="admin-application-header">
+                            <div className="admin-applicant-info">
+                              <div className="admin-applicant-avatar">
+                                {application.firstName?.charAt(0)}
+                                {application.lastName?.charAt(0)}
+                              </div>
+                              <div>
+                                <h3>
+                                  {application.firstName} {application.lastName}
+                                </h3>
+                                <p>{application.email}</p>
+                                <span className="admin-application-job">
+                                  Applied for: {application.jobId?.title || "Unknown Job"}
+                                </span>
+                              </div>
+                            </div>
+
+                            <div className="admin-application-status">
+                              <select
+                                value={application.status}
+                                onChange={(e) => handleUpdateApplicationStatus(application._id, e.target.value)}
+                                className="admin-status-select"
+                              >
+                                <option value="pending">Pending</option>
+                                <option value="reviewed">Reviewed</option>
+                                <option value="shortlisted">Shortlisted</option>
+                                <option value="rejected">Rejected</option>
+                              </select>
+                            </div>
+
+                            <div className="admin-application-actions">
+                              <button
+                                onClick={() => {
+                                  console.log("Resume URL:", downloadUrl)
+                                  window.open(downloadUrl, "_blank")
+                                }}
+                                className="admin-action-btn download"
+                                title="Download Resume"
+                              >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                  <polyline points="7,10 12,15 17,10"></polyline>
+                                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                              </button>
+
+                              <button
+                                onClick={() => handleDeleteApplication(application._id)}
+                                className="admin-action-btn delete"
+                                title="Delete Application"
+                              >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                  <polyline points="3,6 5,6 21,6"></polyline>
+                                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="admin-application-details">
+                            <div className="admin-application-meta">
+                              <span>Phone: {application.phone}</span>
+                              <span>Applied: {new Date(application.createdAt).toLocaleDateString()}</span>
+                            </div>
+
+                            {application.coverLetter && (
+                              <div className="admin-cover-letter">
+                                <strong>Cover Letter:</strong>
+                                <p>{application.coverLetter}</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </main>
 
@@ -456,6 +723,7 @@ const AdminDashboard = () => {
       {showApplications && selectedJobApplications && (
         <ApplicationsModal jobData={selectedJobApplications} onClose={() => setShowApplications(false)} />
       )}
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   )
 }

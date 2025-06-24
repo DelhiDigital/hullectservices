@@ -5,6 +5,7 @@ import "./Admin.css"
 
 const JobForm = ({ job, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
+    jobId: job?.jobId || "",
     title: job?.title || "",
     company: job?.company || "",
     location: job?.location || "",
@@ -52,6 +53,46 @@ const JobForm = ({ job, onSave, onCancel }) => {
     setLoading(true)
 
     try {
+      // Client-side validation
+      if (!formData.title.trim()) {
+        throw new Error("Job title is required")
+      }
+      if (!formData.company.trim()) {
+        throw new Error("Company name is required")
+      }
+      if (!formData.location.trim()) {
+        throw new Error("Location is required")
+      }
+      if (!formData.description.trim()) {
+        throw new Error("Job description is required")
+      }
+      if (!formData.closingDate) {
+        throw new Error("Application deadline is required")
+      }
+
+      // Validate closing date is in the future
+      const closingDate = new Date(formData.closingDate)
+      const today = new Date()
+      today.setHours(0, 0, 0, 0) // Reset time to start of day
+
+      if (closingDate <= today) {
+        throw new Error("Application deadline must be in the future")
+      }
+
+      // Validate field lengths
+      if (formData.title.length > 100) {
+        throw new Error("Job title cannot exceed 100 characters")
+      }
+      if (formData.company.length > 100) {
+        throw new Error("Company name cannot exceed 100 characters")
+      }
+      if (formData.location.length > 100) {
+        throw new Error("Location cannot exceed 100 characters")
+      }
+      if (formData.description.length > 2000) {
+        throw new Error("Description cannot exceed 2000 characters")
+      }
+
       // Filter out empty requirements and responsibilities
       const cleanedData = {
         ...formData,
@@ -59,13 +100,41 @@ const JobForm = ({ job, onSave, onCancel }) => {
         responsibilities: formData.responsibilities.filter((resp) => resp.trim() !== ""),
       }
 
+      // Validate requirements and responsibilities length
+      cleanedData.requirements.forEach((req, index) => {
+        if (req.length > 500) {
+          throw new Error(`Requirement ${index + 1} cannot exceed 500 characters`)
+        }
+      })
+
+      cleanedData.responsibilities.forEach((resp, index) => {
+        if (resp.length > 500) {
+          throw new Error(`Responsibility ${index + 1} cannot exceed 500 characters`)
+        }
+      })
+
+      // Ensure at least one requirement and responsibility
+      if (cleanedData.requirements.length === 0) {
+        cleanedData.requirements = ["To be discussed"]
+      }
+      if (cleanedData.responsibilities.length === 0) {
+        cleanedData.responsibilities = ["To be discussed"]
+      }
+
+      console.log("Submitting job data:", cleanedData) // Debug log
+
       await onSave(cleanedData)
     } catch (error) {
       console.error("Error saving job:", error)
+      alert(`Error: ${error.message}`)
     } finally {
       setLoading(false)
     }
   }
+
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const minDate = tomorrow.toISOString().split("T")[0]
 
   return (
     <div className="job-form-container">
@@ -95,6 +164,18 @@ const JobForm = ({ job, onSave, onCancel }) => {
             />
           </div>
 
+<div className="job-form-group">
+  <label htmlFor="jobId">Job ID (optional)</label>
+  <input
+    type="text"
+    id="jobId"
+    name="jobId"
+    value={formData.jobId || ""}
+    onChange={handleChange}
+    disabled={loading}
+    placeholder="e.g. HR-MKT-001"
+  />
+</div>
           <div className="job-form-group">
             <label htmlFor="company">Company *</label>
             <input
@@ -126,10 +207,11 @@ const JobForm = ({ job, onSave, onCancel }) => {
           <div className="job-form-group">
             <label htmlFor="type">Job Type *</label>
             <select id="type" name="type" value={formData.type} onChange={handleChange} required disabled={loading}>
-              <option value="Full-time">Full-time</option>
-              <option value="Part-time">Part-time</option>
+              <option value="Full-time">Full Time</option>
+              <option value="Part-time">Part Time</option>
               <option value="Contract">Contract</option>
               <option value="Internship">Internship</option>
+              <option value="Temporary">Temporary</option>
             </select>
           </div>
 
@@ -143,6 +225,7 @@ const JobForm = ({ job, onSave, onCancel }) => {
               onChange={handleChange}
               required
               disabled={loading}
+              min={minDate} // Prevent selecting past dates
             />
           </div>
 

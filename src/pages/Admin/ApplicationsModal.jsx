@@ -2,14 +2,19 @@
 
 import { useState } from "react"
 import "./Admin.css"
+import { BASE_URL } from "../../services/api"
 
 const ApplicationsModal = ({ jobData, onClose }) => {
   const [selectedApplication, setSelectedApplication] = useState(null)
 
+  
   const handleDownloadResume = (application) => {
     // Implement resume download logic
     if (application.resumeUrl) {
-      window.open(application.resumeUrl, "_blank")
+      const downloadUrl = application.resumeUrl?.startsWith("http")
+          ? application.resumeUrl
+          : `${BASE_URL}${application.resumeUrl}`
+      window.open(downloadUrl, "_blank")
     }
   }
 
