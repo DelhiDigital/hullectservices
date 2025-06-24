@@ -14,9 +14,9 @@ const ManagedServices = () => {
   ];
 
   return (
-    <div className="search-recruitment-page">
-      {/* Banner with Title Overlay */}
-      <section className="search-hero no-padding">
+    <div className="managed-services-page">
+      {/* Banner */}
+      <section className="search-hero">
         <div className="search-hero-wrapper">
           <img
             src={bannerImg}
@@ -32,64 +32,67 @@ const ManagedServices = () => {
         </div>
       </section>
 
-      <section className="process-flow-section">
-        <div className="container">
-          <p>
-            The solution focuses on providing end-to-end management of the GT
-            and MT stores of FMCG and other consumer goods companies of all
-            scales.
-          </p>
-
-          <div className="process-flow-icons">
-            {processSteps.map((step, index) => (
-              <div className="process-flow-card" key={index}>
-                <div className="process-flow-icon">{step.icon}</div>
-                <div className="process-flow-label">{step.label}</div>
-              </div>
-            ))}
+      {/* Cards for Process Steps */}
+      <section className="managed-services-cards">
+        {processSteps.map((step, index) => (
+          <div className="managed-service-card" key={index}>
+            <div className="managed-service-icon" style={{ fontSize: "2rem" }}>
+              {step.icon}
+            </div>
+            <h3>{step.label}</h3>
+            <p>
+              We provide excellent support in {step.label.toLowerCase()} to
+              streamline your operations.
+            </p>
           </div>
+        ))}
+      </section>
 
-          <div className="process-flow-description-wrapper">
-            <div className="process-flow-description-text">
+      {/* Our Approach Section */}
+      <section className="our-approach-section">
+        <div className="our-approach-container">
+          <h2>Our Approach</h2>
+          <div className="approach-cards">
+            <div className="approach-card">
+              <h4>Smart Hiring</h4>
               <p>
-                We are committed to recruit, train, and deploy the best field
-                force available at cost-effective prices...
-              </p>
-              <p>
-                Our application and back-end portals are fully customizable to
-                your needs...
-              </p>
-              <p>
-                We have taken it one step further by providing a direct bank
-                account payment option...
+                We recruit, train, and deploy a dedicated field team tailored to
+                your retail goals.
               </p>
             </div>
-            <div className="process-flow-description-image">
-              <img
-                src="/managed-services-photo.png"
-                alt="Managed Service Visual"
-              />
+            <div className="approach-card">
+              <h4>Tech-First Execution</h4>
+              <p>
+                Custom portals and mobile apps ensure real-time tracking,
+                reporting, and team performance insights.
+              </p>
+            </div>
+            <div className="approach-card">
+              <h4>Seamless Operations</h4>
+              <p>
+                We manage compliance, documentation, audits, and offer direct
+                salary payments to your field force.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Call To Action */}
       <section className="search-cta">
         <div className="container">
-          <div className="search-cta-content">
-            <h2>Let Us Handle Your Store Operations</h2>
-            <p>
-              From visibility tracking to workforce payments and technology
-              support — Hullect is your partner in retail productivity.
-            </p>
-            <div className="cta-actions">
-              <a href="/contact" className="btn btn-primary">
-                Get In Touch
-              </a>
-              <a href="tel:9120018844" className="btn btn-outline">
-                Call +91-9120018844
-              </a>
-            </div>
+          <h2>Let Us Handle Your Store Operations</h2>
+          <p>
+            From visibility tracking to workforce payments and technology
+            support — Hullect is your partner in retail productivity.
+          </p>
+          <div className="cta-actions">
+            <a href="/contact" className="btn btn-primary">
+              Get In Touch
+            </a>
+            <a href="tel:9120018844" className="btn btn-outline">
+              Call +91-9120018844
+            </a>
           </div>
         </div>
       </section>

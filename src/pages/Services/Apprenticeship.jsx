@@ -1,5 +1,5 @@
 import "./Apprenticeship.css";
-import bannerImg from "/aprentice_banner.png";
+import bannerImg from "/apprentice_banner1.png";
 
 const ApprenticeshipProgram = () => {
   const highlights = [

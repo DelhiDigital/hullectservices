@@ -1,7 +1,8 @@
-.search-recruitment-page {
+.managed-services-page {
   font-family: "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f9f9f9;
 }
 
 /* Banner */
@@ -21,7 +22,6 @@
   height: 500px;
   object-fit: cover;
   display: block;
-  margin: 0;
   margin-top: 100px;
 }
 
@@ -33,6 +33,9 @@
   color: white;
   text-align: center;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .search-hero-overlay h1 {
@@ -44,35 +47,96 @@
   font-size: 1rem;
 }
 
-/* Process Flow Section */
-.process-flow-icons {
+/* Card Section */
+.managed-services-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 1rem;
+}
+
+.managed-service-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  width: 320px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.managed-service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.managed-service-card h3 {
+  font-size: 1.4rem;
+  color: #004aad;
+  margin-bottom: 0.5rem;
+}
+
+.managed-service-card p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Our Approach Section */
+.our-approach-section {
+  padding: 3rem 1rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.our-approach-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.our-approach-container h2 {
+  font-size: 2rem;
+  color: #004aad;
+  margin-bottom: 2rem;
+}
+
+.approach-cards {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; /* wrap instead of nowrap */
-  gap: 12px;
-  margin: 1.5rem 0;
-  padding: 0 1rem;
-  max-width: 100%;
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
-.process-flow-step {
-  background-color: #004aad;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-weight: 600;
-  white-space: nowrap;
-  font-size: 14px;
+.approach-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
 }
 
-.process-flow-plus {
-  font-weight: bold;
+.approach-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.approach-card h4 {
+  font-size: 1.3rem;
   color: #004aad;
-  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
+.approach-card p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
 
 /* CTA Section */
 .search-cta {
@@ -89,16 +153,22 @@
 
 .cta-actions {
   margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  margin: 0.5rem;
   font-weight: 600;
   text-decoration: none;
   border-radius: 5px;
   transition: all 0.3s ease;
+  font-size: 1rem;
+  min-width: 160px;
+  text-align: center;
 }
 
 .btn-primary {
@@ -117,4 +187,60 @@
 
 .btn-outline:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-banner-image.reduced-height {
+    height: 280px;
+    margin-top: 80px;
+  }
+
+  .search-hero-overlay h1 {
+    font-size: 1.6rem;
+  }
+
+  .search-hero-overlay .tagline {
+    font-size: 0.9rem;
+  }
+
+  .search-cta h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .managed-service-card,
+  .approach-card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-hero-overlay h1 {
+    font-size: 1.4rem;
+  }
+
+  .search-banner-image.reduced-height {
+    height: 220px;
+  }
+
+  .btn {
+    min-width: 100%;
+  }
 }
