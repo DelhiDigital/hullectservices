@@ -29,6 +29,7 @@ const Compliance = () => {
           </p>
         </div>
       </section>
+      
 
       <section className="compliance-acts">
         <div className="container">

@@ -1,11 +1,27 @@
 import "./Apprenticeship.css";
-import bannerImg from "/Gemini_Generated_Image_88afuu88afuu88af.png"; // updated to cropped banner-style image
+import bannerImg from "/aprentice_banner.png";
 
 const ApprenticeshipProgram = () => {
+  const highlights = [
+    {
+      title: "Real-World Experience",
+      image: "/apprentice1.png",
+      description: "Apprentices work on-site, gaining valuable practical knowledge that goes beyond classroom training."
+    },
+    {
+      title: "Personalized Mentorship",
+      image: "/apprentice2.png",
+      description: "Each apprentice is paired with an experienced mentor for guidance and career growth."
+    },
+    {
+      title: "Industry-Relevant Skills",
+      image: "/apprentice3.png",
+      description: "Focus on upskilling in-demand technical and soft skills tailored to your industry."
+    }
+  ];
+
   return (
     <div className="apprenticeship-page">
-
-      {/* Banner with Title Overlay */}
       <section className="apprenticeship-hero">
         <div className="apprenticeship-banner-wrapper">
           <img src={bannerImg} alt="Apprenticeship Banner" className="apprenticeship-banner-image shift-up" />
@@ -16,7 +32,6 @@ const ApprenticeshipProgram = () => {
         </div>
       </section>
 
-      {/* Intro Section */}
       <section className="apprenticeship-intro">
         <div className="container">
           <p>
@@ -25,7 +40,21 @@ const ApprenticeshipProgram = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      <section className="apprenticeship-highlights">
+        <div className="container">
+          <h2>Why Join Our Program?</h2>
+          <div className="highlight-cards">
+            {highlights.map((item, index) => (
+              <div className="highlight-card" key={index}>
+                <img src={item.image} alt={item.title} className="highlight-image" />
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="apprenticeship-section">
         <div className="container">
           <p><strong>Every year, out of 15 MILLION YOUTH entering the job market, OVER 75% are NOT JOB READY!*</strong></p>
@@ -34,7 +63,6 @@ const ApprenticeshipProgram = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="apprenticeship-cta">
         <div className="container">
           <div className="apprenticeship-cta-content">
