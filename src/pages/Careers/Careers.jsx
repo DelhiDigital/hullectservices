@@ -360,6 +360,7 @@ const Careers = () => {
 
       {/* Jobs Section */}
       <div className="jobs-section">
+        
         <div className="jobs-header">
           <h2 className="jobs-title">
             {filteredJobs.length} Job{filteredJobs.length !== 1 ? "s" : ""} Found
@@ -388,6 +389,7 @@ const Careers = () => {
               <div key={job._id} className="job-card" onClick={() => openJobModal(job)}>
                 <div className="job-header">
                   <div className="job-info">
+                     <p className="admin-job-id">Job ID: {job?.jobId}</p> 
                     <h3 className="job-title">{job.title}</h3>
                     <div className="job-company">
                       <svg className="company-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -407,6 +409,7 @@ const Careers = () => {
                   </div>
                   <div className="job-meta">
                     <span className={`job-type ${job.type?.toLowerCase().replace(" ", "-")}`}>{job.type}</span>
+                    
                   </div>
                 </div>
                 <div className="job-description">
@@ -434,6 +437,7 @@ const Careers = () => {
                     <span>{job.applicationCount || 0} applicants</span>
                   </div>
                 </div>
+                  
               </div>
             ))}
           </div>

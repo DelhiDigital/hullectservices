@@ -2,6 +2,7 @@
 
 /* Admin Login Container */
 .admin-login-container {
+  margin-top: 80px;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -91,9 +92,9 @@
   flex-shrink: 0;
 }
 
-.admin-login-form {
+/* .admin-login-form {
   space-y: 24px;
-}
+} */
 
 .admin-form-group {
   margin-bottom: 24px;
@@ -228,6 +229,7 @@
 
 /* Admin Dashboard */
 .admin-dashboard {
+  margin-top: 120px;
   min-height: 100vh;
   background: #f8fafc;
 }
@@ -394,6 +396,18 @@
   height: 24px;
   stroke-width: 2;
 }
+.admin-job-id{
+    background: #dbeafe;
+    color: #1e40af;
+    border-radius: 6px;
+    font-size: 11px;
+    width: 100px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
 
 .admin-stat-content h3 {
   font-size: 2rem;
@@ -445,11 +459,13 @@
 
 /* Tabs */
 .admin-tabs {
+  outline: none;
   display: flex;
   border-bottom: 1px solid #e2e8f0;
 }
 
 .admin-tab {
+  outline: none;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -470,6 +486,7 @@
 }
 
 .admin-tab.active {
+  outline: none;
   color: #667eea;
   border-bottom-color: #667eea;
   background: #f8fafc;
@@ -1437,5 +1454,256 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+}
+
+/* ===== APPLICATIONS TAB STYLES ===== */
+
+/* Applications Container */
+.admin-applications-container {
+  padding: 24px;
+}
+
+/* Applications List */
+.admin-applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Application Card */
+.admin-application-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+
+.admin-application-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
+}
+
+/* Application Header */
+.admin-application-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Applicant Info */
+.admin-applicant-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-applicant-avatar {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.admin-applicant-info h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 4px 0;
+}
+
+.admin-applicant-info p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0 0 4px 0;
+}
+
+.admin-application-job {
+  font-size: 0.85rem;
+  color: #667eea;
+  font-weight: 500;
+}
+
+/* Application Status */
+.admin-application-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-status-select {
+  padding: 8px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.admin-status-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.admin-status-select option[value="pending"] {
+  color: #f59e0b;
+}
+
+.admin-status-select option[value="reviewed"] {
+  color: #3b82f6;
+}
+
+.admin-status-select option[value="shortlisted"] {
+  color: #10b981;
+}
+
+.admin-status-select option[value="rejected"] {
+  color: #ef4444;
+}
+
+/* Application Actions */
+.admin-application-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Application Details */
+.admin-application-details {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.admin-application-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.admin-application-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Cover Letter */
+.admin-cover-letter {
+  margin-top: 16px;
+}
+
+.admin-cover-letter strong {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.admin-cover-letter p {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* User Info in Header */
+.admin-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 16px;
+}
+
+.admin-user-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.admin-user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.admin-user-email {
+  font-size: 0.875rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.admin-user-role {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Responsive for Applications */
+@media (max-width: 768px) {
+  .admin-applications-container {
+    padding: 16px;
+  }
+
+  .admin-application-card {
+    padding: 20px;
+  }
+
+  .admin-application-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .admin-applicant-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .admin-application-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .admin-user-info {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-application-card {
+    padding: 16px;
+  }
+
+  .admin-applicant-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
   }
 }

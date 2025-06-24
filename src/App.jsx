@@ -23,6 +23,8 @@ import AdminLogin from './pages/Admin/AdminLogin'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import "./index.css"
 import { Car } from "lucide-react"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
   return (
@@ -50,12 +52,14 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+         
           {/* Add more routes as needed */}
         </Routes>
       </main>
       <WhatsappButton />
       {/* Footer should be at the bottom of the page */}
       <Footer />
+       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   )
 }
