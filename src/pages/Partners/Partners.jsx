@@ -1,4 +1,4 @@
-import "./partners.css"
+import "./Partners.css"
 import { Link } from "react-router-dom"
 import OurPartner from "./OurClients/ourClients"
 

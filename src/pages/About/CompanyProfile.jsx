@@ -1,37 +1,33 @@
 import "./CompanyProfile.css"
-import { Link } from "react-router-dom"
 
 const CompanyProfile = () => {
   const milestones = [
     {
-      year: "2008",
+      year: "2021",
       title: "Company Founded",
       description: "Hullect Services Private Limited was established with a vision to transform staffing solutions.",
     },
     {
-      year: "2012",
-      title: "ISO Certification",
-      description: "Achieved ISO 9001:2015 certification for quality management systems.",
+      year: "2022",
+      title: "First Major Expansion",
+      description: "Expanded operations and established key partnerships with leading companies across India.",
     },
     {
-      year: "2015",
-      title: "Pan-India Expansion",
-      description: "Expanded operations across major cities in India with 10+ offices.",
-    },
-    {
-      year: "2018",
-      title: "Technology Integration",
-      description: "Launched mobile-enabled technology solutions and HRMS platforms.",
-    },
-    {
-      year: "2020",
-      title: "Digital Transformation",
-      description: "Implemented GPS attendance, employee self-service, and digital workflows.",
+      year: "2023",
+      title: "ISO Certification & Technology Integration",
+      description:
+        "Achieved ISO 9001:2015 certification and launched mobile-enabled technology solutions and HRMS platforms.",
     },
     {
       year: "2024",
-      title: "Industry Leadership",
-      description: "Recognized as a leading staffing partner with 50,000+ successful placements.",
+      title: "Digital Transformation",
+      description: "Implemented GPS attendance, employee self-service, and digital workflows for enhanced efficiency.",
+    },
+    {
+      year: "2025",
+      title: "Industry Recognition",
+      description:
+        "Recognized as a leading staffing partner with significant growth in successful placements and client satisfaction.",
     },
   ]
 
@@ -65,12 +61,12 @@ const CompanyProfile = () => {
       icon: "📅",
     },
     {
-      number: "50,000+",
+      number: "10,000+",
       label: "Successful Placements",
       icon: "👥",
     },
     {
-      number: "50+",
+      number: "100+",
       label: "Happy Clients",
       icon: "🤝",
     },
@@ -125,7 +121,7 @@ const CompanyProfile = () => {
       <section className="cp-hero-section">
         <div className="cp-hero-background">
           <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=600&fit=crop&crop=center"
+            src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920&h=600&fit=crop&crop=center"
             alt="Company Profile"
             className="cp-hero-bg-image"
           />
@@ -134,18 +130,18 @@ const CompanyProfile = () => {
         <div className="container">
           <div className="cp-hero-content">
             <h1 className="cp-page-title">Company Profile</h1>
-            <p className="cp-page-subtitle">Building Excellence Since 2008</p>
+            <p className="cp-page-subtitle">Building Excellence Since 2021</p>
             <div className="cp-hero-stats">
               <div className="cp-hero-stat">
-                <span className="cp-stat-number">16+</span>
+                <span className="cp-stat-number">4+</span>
                 <span className="cp-stat-label">Years</span>
               </div>
               <div className="cp-hero-stat">
-                <span className="cp-stat-number">50K+</span>
+                <span className="cp-stat-number">10K+</span>
                 <span className="cp-stat-label">Placements</span>
               </div>
               <div className="cp-hero-stat">
-                <span className="cp-stat-number">500+</span>
+                <span className="cp-stat-number">100+</span>
                 <span className="cp-stat-label">Clients</span>
               </div>
             </div>
@@ -165,14 +161,14 @@ const CompanyProfile = () => {
               <div className="cp-overview-text">
                 <p>
                   Hullect Services Private Limited stands as a premier staffing and managed outsourcing company,
-                  established in 2008 with a commitment to transforming the way businesses connect with talent. Over the
-                  past 16 years, we have evolved into a trusted partner for organizations across India, providing
+                  established in 2021 with a commitment to transforming the way businesses connect with talent. Over the
+                  past 4 years, we have evolved into a trusted partner for organizations across India, providing
                   comprehensive workforce solutions that drive business success.
                 </p>
                 <p>
                   Our journey began with a simple yet powerful vision: to bridge the gap between exceptional talent and
-                  forward-thinking organizations. Today, we proudly serve over 500 clients across 25+ industry
-                  verticals, having successfully placed more than 50,000 professionals in roles that align with their
+                  forward-thinking organizations. Today, we proudly serve over 100 clients across 15+ industry
+                  verticals, having successfully placed more than 10,000 professionals in roles that align with their
                   skills and career aspirations.
                 </p>
                 <p>
@@ -184,10 +180,7 @@ const CompanyProfile = () => {
               </div>
             </div>
             <div className="cp-overview-image">
-              <img
-                src="/CompanyProfile1.png"
-                alt="Company Overview"
-              />
+              <img src="/CompanyProfile1.png" alt="Company Overview" />
             </div>
           </div>
         </div>
@@ -259,7 +252,7 @@ const CompanyProfile = () => {
           <div className="section-header text-center">
             <span className="section-tag">Our Journey</span>
             <h2 className="heading-secondary">Company Milestones</h2>
-            <p className="text-large">Key achievements that shaped our growth</p>
+            <p className="text-large">Key achievements that shaped our growth since 2021</p>
           </div>
           <div className="cp-timeline">
             {milestones.map((milestone, index) => (
@@ -275,56 +268,6 @@ const CompanyProfile = () => {
           </div>
         </div>
       </section>
-
-      {/* Leadership Message */}
-      {/* <section className="cp-leadership-section section">
-        <div className="container">
-          <div className="cp-leadership-content">
-            <div className="cp-leadership-text">
-              <div className="section-header">
-                <span className="section-tag">Leadership Message</span>
-                <h2 className="heading-secondary">From Our Leadership</h2>
-              </div>
-              <blockquote className="cp-leadership-quote">
-                "At Hullect Services, we believe that the right talent in the right place can transform businesses and
-                lives. Our commitment to excellence, integrity, and innovation has been the cornerstone of our success
-                over the past 16 years. We continue to evolve and adapt to meet the changing needs of the modern
-                workforce while staying true to our core values."
-              </blockquote>
-              <div className="cp-leadership-author">
-                <strong>Manish Pratap Singh</strong>
-                <span>Chief Executive Officer</span>
-              </div>
-            </div>
-            <div className="cp-leadership-image">
-              <img
-                src="/Manish.png"
-                alt="CEO Manish Pratap Singh"
-              />
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* CTA Section */}
-      {/* <section className="cp-cta-section">
-        <div className="container">
-          <div className="cp-cta-content">
-            <h3 className="cp-cta-heading">Ready to Partner with Us?</h3>
-            <p className="cp-cta-text">
-              Discover how our expertise can help transform your workforce and drive business success.
-            </p>
-            <div className="cp-cta-actions">
-              <Link to="/contact" className="btn btn-primary">
-                Get In Touch
-              </Link>
-              <Link to="/services" className="btn btn-outline">
-                Our Services
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </div>
   )
 }

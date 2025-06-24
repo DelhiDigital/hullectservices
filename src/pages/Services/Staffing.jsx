@@ -45,7 +45,7 @@ export default function Staffing() {
     <p>Flexible and reliable hiring models for every scenario</p>
   </div>
 
-  <div className="service-grid">
+  <div className="Staffing-service-grid">
     <div className="service-card">
       <div className="icon">👷‍♂️</div>
       <h3>Temporary Staffing</h3>
