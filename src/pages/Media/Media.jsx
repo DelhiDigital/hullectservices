@@ -1,4 +1,4 @@
-import "./media.css"
+import "./Media.css"
 import { Link } from "react-router-dom"
 
 const Media = () => {
