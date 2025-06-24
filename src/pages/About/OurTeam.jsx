@@ -13,7 +13,7 @@ const OurTeam = () => {
       bio: "Visionary leader with extensive experience in HR services and business development. Under his leadership, Hullect Services has grown to become a trusted partner for 500+ clients.",
       expertise: ["Strategic Planning", "Business Development", "Client Relations", "Team Leadership"],
       email: "manish@hullectservices.com",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/manish-pratap-singh-72938342/",
     },
     {
       name: "Dr.Shalini Singh",
@@ -33,7 +33,7 @@ const OurTeam = () => {
       bio: "Awadhendra has over 15 years of experience across industries spanning Telecom, Retail, Financial, Advertising and E-commerce components. seasoned business professional highly focused on product sales and services, business development & marketing.",
       expertise: ["Technology Strategy", "Digital Innovation", "System Integration", "Data Analytics"],
       email: "rajesh@hullectservices.com",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/awadhendra-pratap-singh-155975126/",
     },
     {
       name: "Arvind Singh",

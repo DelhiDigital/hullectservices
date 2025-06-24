@@ -195,29 +195,6 @@ const SearchRecruitment = () => {
         </div>
       </section>
 
-      {/* Search Process */}
-      <section id="process" className="search-process">
-        <div className="container">
-          <div className="section-header">
-            <h2>Our Search Process</h2>
-            <p>A systematic approach to finding exceptional talent</p>
-          </div>
-          <div className="process-grid">
-            {searchProcess.map((phase, index) => (
-              <div key={index} className="process-card">
-                <div className="process-phase">{phase.phase}</div>
-                <h3>{phase.title}</h3>
-                <p>{phase.description}</p>
-                <ul className="process-activities">
-                  {phase.activities.map((activity, activityIndex) => (
-                    <li key={activityIndex}>{activity}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Specializations */}
       <section className="specializations">

@@ -203,7 +203,7 @@
 
 /* Foundation Day Gallery */
 .foundation-gallery {
-  background: var(--white);
+  background: #ebebeb;
 }
 
 .foundation-gallery-grid {
@@ -432,7 +432,7 @@
 
 /* Achievements Timeline */
 .achievements-section {
-  background: var(--gray-50);
+  background: #e1ebf5;
 }
 
 .achievements-timeline {

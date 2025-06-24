@@ -60,7 +60,7 @@ const CompanyProfile = () => {
 
   const statistics = [
     {
-      number: "16+",
+      number: "4+",
       label: "Years of Excellence",
       icon: "📅",
     },
@@ -70,19 +70,14 @@ const CompanyProfile = () => {
       icon: "👥",
     },
     {
-      number: "500+",
+      number: "50+",
       label: "Happy Clients",
       icon: "🤝",
     },
     {
-      number: "15+",
+      number: "5+",
       label: "Office Locations",
       icon: "🏢",
-    },
-    {
-      number: "25+",
-      label: "Industry Verticals",
-      icon: "🎯",
     },
     {
       number: "99%",
@@ -190,7 +185,7 @@ const CompanyProfile = () => {
             </div>
             <div className="cp-overview-image">
               <img
-                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=500&fit=crop&crop=center"
+                src="/CompanyProfile1.png"
                 alt="Company Overview"
               />
             </div>
@@ -282,7 +277,7 @@ const CompanyProfile = () => {
       </section>
 
       {/* Leadership Message */}
-      <section className="cp-leadership-section section">
+      {/* <section className="cp-leadership-section section">
         <div className="container">
           <div className="cp-leadership-content">
             <div className="cp-leadership-text">
@@ -309,10 +304,10 @@ const CompanyProfile = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
-      <section className="cp-cta-section">
+      {/* <section className="cp-cta-section">
         <div className="container">
           <div className="cp-cta-content">
             <h3 className="cp-cta-heading">Ready to Partner with Us?</h3>
@@ -329,7 +324,7 @@ const CompanyProfile = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }
