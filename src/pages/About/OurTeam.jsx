@@ -89,9 +89,9 @@ const OurTeam = () => {
 
       <section className="leadership-section">
         <div className="container">
-          <div className="section-header">
-            <h2>
-              Leadership <span className="highlight">Team</span>
+          <div className="teamteamteamsection-header">
+            <h2  style={{ textAlign: "center", paddingBottom: "40px" }}>
+              Leadership Team
             </h2>
           </div>
           <div className="leadership-row four-columns">

@@ -385,7 +385,7 @@
   .about-who-content-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
-    text-align: center;
+    text-align: justify;
   }
   .about-features-grid {
   

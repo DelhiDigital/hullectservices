@@ -1,0 +1,543 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Typography */
+.heading-primary {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.heading-secondary {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.heading-tertiary {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.text-large {
+  font-size: 1.4rem;
+  color: #ffffff;
+  line-height: 1.6;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+.text-medium {
+  font-size: 1rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Spacing Utilities */
+.mt-lg {
+  margin-top: 2rem;
+}
+
+.mb-md {
+  margin-bottom: 1rem;
+}
+
+.mb-lg {
+  margin-bottom: 2rem;
+}
+
+.mb-xl {
+  margin-bottom: 3rem;
+}
+
+/* Section Styles */
+.section {
+  padding: 4rem 0;
+}
+
+.section-sm {
+  padding: 2rem 0;
+}
+
+.bg-light {
+  background-color: #dddddd;
+}
+
+/* Grid Layouts */
+.grid-2-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.grid-3-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.grid-4-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* Hero Section with Blue Gradient Overlay */
+.hero-section {
+  position: relative;
+  min-height: 60vh; /* Use viewport height for better responsiveness */
+  background-image: url('/SecurityServices_banner.jpeg?w=1400&h=500&fit=crop&crop=center');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* Changed from fixed for mobile compatibility */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  padding: 40px 20px;
+}
+
+/* Ensure image behaves well on small screens */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 50vh;
+    background-attachment: scroll;
+    padding: 30px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 40vh;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .hero-section {
+    min-height: 400px;
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 350px;
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 250px;
+    background-attachment: scroll;
+  }
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 900px;
+  padding: 3rem 2rem;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-weight: 400;
+  opacity: 0.9;
+  margin-top: 1rem;
+  letter-spacing: 0.02em;
+}
+
+/* Intro Split Section */
+.intro-split-section {
+  padding: 5rem 0;
+  background-color: #eef2f5;
+}
+
+.intro-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.intro-image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.intro-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.intro-content p {
+  font-size: 1.1rem;
+  color: #6b7280;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+/* Cards */
+.card,
+.process-step,
+.service-card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.card:hover,
+.process-step:hover,
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Service Cards */
+.service-card {
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.service-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image {
+  transform: scale( 1.05);
+}
+
+.service-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.service-description {
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.5;
+  text-align: left;
+  margin-top: auto;
+}
+
+/* Why Us Section */
+.why-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  margin-bottom: 0.75rem;
+  padding-left: 2rem;
+  position: relative;
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.benefits-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #10b981;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, #5a81d6 0%, #1a398c 100%);
+  color: #ffffff;
+  text-align: center;
+}
+
+.cta-section h2,
+.cta-section p {
+  color: #ffffff;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Process Steps */
+.process-step {
+  text-align: center;
+  position: relative;
+}
+
+.process-step::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 4px;
+  background-color: #2563eb;
+  border-radius: 2px;
+}
+
+.process-step h3 {
+  color: #2563eb;
+  margin-bottom: 1rem;
+}
+
+/* Service Cards Section */
+.service-cards {
+  background-color: #ffffff;
+}
+
+.service-cards .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Image Placeholder Fallback */
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .grid-4-cols {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .heading-primary {
+    font-size: 2.8rem;
+  }
+  
+  .heading-secondary {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .text-large {
+    font-size: 1.2rem;
+  }
+  
+  .grid-2-cols,
+  .grid-3-cols,
+  .intro-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .grid-4-cols {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .why-image {
+    height: 300px;
+    margin-bottom: 2rem;
+  }
+  
+  .section {
+    padding: 3rem 0;
+  }
+  
+  .hero-section {
+    min-height: 400px;
+  }
+  
+  .intro-content h2 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .intro-image {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .heading-primary {
+    font-size: 2.2rem;
+  }
+  
+  .heading-secondary {
+    font-size: 1.75rem;
+  }
+  
+  .heading-tertiary {
+    font-size: 1.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .text-large {
+    font-size: 1.1rem;
+  }
+  
+  .grid-4-cols {
+    grid-template-columns: 1fr;
+  }
+  
+  .card,
+  .process-step,
+  .service-card {
+    padding: 1.5rem;
+  }
+  
+  .section {
+    padding: 2rem 0;
+  }
+  
+  .hero-section {
+    min-height: 350px;
+    padding: 2rem 0;
+  }
+  
+  .hero-content {
+    padding: 2rem 1rem;
+  }
+  
+  .intro-image {
+    height: 250px;
+  }
+  
+  .intro-content h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Additional Visibility Fixes */
+.services-page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.services-page * {
+  box-sizing: border-box;
+}
+
+/* Ensure all sections are visible */
+.hero-section,
+.intro-split-section,
+.service-cards,
+.why-us,
+.cta-section,
+.process-section {
+  width: 100%;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Make sure grid items are visible */
+.grid-2-cols > *,
+.grid-3-cols > *,
+.grid-4-cols > * {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}

@@ -120,11 +120,11 @@ const CompanyProfile = () => {
       {/* Hero Section */}
       <section className="cp-hero-section">
         <div className="cp-hero-background">
-          <img
-            src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920&h=600&fit=crop&crop=center"
-            alt="Company Profile"
+          {/* <img
+            src="/CompanyProfileHeroImage.png"
+            // alt="Company Profile"
             className="cp-hero-bg-image"
-          />
+          /> */}
           <div className="cp-hero-overlay"></div>
         </div>
         <div className="container">

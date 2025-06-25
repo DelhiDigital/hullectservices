@@ -14,6 +14,7 @@ const acts = [
   { name: "Employee Pension Scheme 1995", emoji: "🏦" },
   { name: "Workman’s Compensation Act 1923", emoji: "🧑‍🔧" },
   { name: "Payment of Gratuity Act 1972", emoji: "📈" },
+  { name: "Employee's Provident Funds and Miscellaneous Provisions Act, 1952", emoji: "💰" },
 ];
 
 const Compliance = () => {

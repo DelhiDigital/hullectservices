@@ -186,14 +186,14 @@ body {
   color: var(--white);
 }
 
-/* Container and Layout */
-.container {
+/* globlecontainer and Layout */
+.globlecontainer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
 }
 
-.container-wide {
+.globlecontainer-wide {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
@@ -335,7 +335,7 @@ body {
     font-size: var(--text-2xl);
   }
 
-  .container {
+  .globlecontainer {
     padding: 0 var(--spacing-md);
   }
 

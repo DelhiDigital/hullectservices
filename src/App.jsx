@@ -6,10 +6,10 @@ import Home from "./pages/Home/Home"
 import About from "./pages/About/About"
 import CompanyProfile from "./pages/About/CompanyProfile"
 import OurTeam from "./pages/About/OurTeam"
-// import Services from "./pages/Services/Services"
-// import Staffing from "./pages/Services/Staffing"
-// import SearchRecruitment from "./pages/Services/SearchRecruitment"
-// import SkillingLearning from "./pages/Services/SkillingLearning"
+ import SecurityServices from "./pages/Services/SecurityServices"
+import Staffing from "./pages/Services/Staffing"
+import SearchRecruitment from "./pages/Services/SearchRecruitment"
+import SkillingLearning from "./pages/Services/SkillingLearning"
 import ManagedServices from "./pages/Services/managed-services"
 import Apprenticeship from "./pages/Services/Apprenticeship"
 import Compliance from "./pages/Services/compliance"
@@ -29,7 +29,9 @@ import "react-toastify/dist/ReactToastify.css"
 function App() {
   return (
     <div className="App">
-      <Header />
+      <div style={{ position: "sticky", top: 0, zIndex: 1000, paddingBottom: "30px"}}>
+        <Header />
+      </div>
       <ScrollToTop />
       <SocialSidebar />
       {/* Main content should be wrapped in a main tag for better semantics */}
@@ -39,10 +41,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/about/company-profile" element={<CompanyProfile />} />
           <Route path="/about/our-team" element={<OurTeam />} />
-           {/*<Route path="/services" element={<Services />} />*/}
-          {/* <Route path="/services/staffing" element={<Staffing />} />
+           <Route path="/services/SecurityServices" element={<SecurityServices />} />
+          <Route path="/services/staffing" element={<Staffing />} />
           <Route path="/services/search-recruitment" element={<SearchRecruitment />} />
-          <Route path="/services/skilling-learning" element={<SkillingLearning />} />  */}
+          <Route path="/services/skilling-learning" element={<SkillingLearning />} /> 
            <Route path="/services/managed-services" element={<ManagedServices />} />
           <Route path="/services/apprenticeship" element={<Apprenticeship />} />
           <Route path="/services/compliance" element={<Compliance />} />

@@ -4,7 +4,7 @@ const staffingServices = [
   {
     title: "Temporary Staffing",
     description: "Quick and scalable workforce solutions tailored to short-term projects.",
-    icon: "🧑‍💼",
+    icon: "👷‍♂️",
   },
   {
     title: "Permanent Recruitment",
@@ -14,70 +14,54 @@ const staffingServices = [
   {
     title: "Contract Staffing",
     description: "Specialized professionals on a project basis with flexible terms.",
-    icon: "📄",
+    icon: "📝",
   },
   {
     title: "Executive Search",
-    description: "Leadership hiring through targeted, confidential executive searches.",
-    icon: "🎯",
+    description: "Leadership hiring with precision and confidentiality.",
+    icon: "🔍",
   },
 ];
 
 export default function Staffing() {
   return (
     <div className="staffing-wrapper">
-      <header className="staffing-header">
-        <div className="header-content">
-          <h1>Staffing Services</h1>
+      <header className="staffing-hero">
+        <div className="staffing-hero-content">
+          <h1>Build Your Workforce with Confidence</h1>
           <p>
-            Whether you're scaling quickly or hiring strategically, our staffing solutions adapt to your business needs.
+            Our flexible staffing solutions are designed to meet your evolving business demands — whether temporary or permanent.
           </p>
-          <div className="cta-buttons">
-            <a href="/contact" className="btn primary">Talk to Us</a>
-            <a href="#services" className="btn outline">View Services</a>
+          <div className="hero-buttons">
+            <a href="/contact" className="btn hero-btn primary">Talk to an Expert</a>
+            <a href="#services" className="btn hero-btn outline">Explore Services</a>
           </div>
         </div>
       </header>
 
-     <section className="services-section">
-  <div className="section-title">
-    <h2>What We Offer</h2>
-    <p>Flexible and reliable hiring models for every scenario</p>
-  </div>
+      <section id="services" className="staffing-services-section">
+        <div className="section-intro">
+          <h2>Our Staffing Solutions</h2>
+          <p>Customized hiring models designed to match your scale, industry, and timeline.</p>
+        </div>
+        <div className="staffing-services-grid">
+          {staffingServices.map((service, index) => (
+            <div className="staffing-card" key={index}>
+              <div className="staffing-icon">{service.icon}</div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-  <div className="Staffing-service-grid">
-    <div className="service-card">
-      <div className="icon">👷‍♂️</div>
-      <h3>Temporary Staffing</h3>
-      <p>Quick and scalable workforce solutions tailored to short-term projects.</p>
-    </div>
-
-    <div className="service-card">
-      <div className="icon">🏢</div>
-      <h3>Permanent Recruitment</h3>
-      <p>End-to-end hiring support for critical full-time roles.</p>
-    </div>
-
-    <div className="service-card">
-      <div className="icon">📝</div>
-      <h3>Contract Staffing</h3>
-      <p>Specialized professionals on a project basis with flexible terms.</p>
-    </div>
-
-    <div className="service-card">
-      <div className="icon">🔍</div>
-      <h3>Executive Search</h3>
-      <p>Leadership hiring with precision and confidentiality.</p>
-    </div>
-  </div>
-</section>
-
-
-      <section className="contact-banner">
-        <div className="banner-content">
-          <h2>Ready to Build Your Dream Team?</h2>
-          <p>Let us help you find the right talent to drive your success forward.</p>
-          <a href="/contact" className="btn white">Get in Touch</a>
+      <section className="staffing-cta">
+        <div className="staffing-cta-content">
+          <h2>Let’s Find the Right Talent Together</h2>
+          <p>
+            Partner with us to streamline your recruitment, minimize overheads, and secure high-performance professionals.
+          </p>
+          <a href="/contact" className="btn cta-btn">Get Started</a>
         </div>
       </section>
     </div>

@@ -17,7 +17,7 @@ const Home = () => {
   const heroActionsRef = useRef(null)
   const aboutPreviewRef = useRef(null)
   const servicesPreviewRef = useRef(null)
-  const ctaSectionRef = useRef(null)
+  const homectaSectionRef = useRef(null)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const services = [
@@ -218,15 +218,15 @@ const Home = () => {
       },
     })
 
-    // CTA section animation
-    const ctaSectionScrollTrigger = ScrollTrigger.create({
-      trigger: ctaSectionRef.current,
+    // homecta section animation
+    const homectaSectionScrollTrigger = ScrollTrigger.create({
+      trigger: homectaSectionRef.current,
       start: "top 80%",
       onEnter: () => {
-        const ctaContent = ctaSectionRef.current?.querySelector(".cta-content")
+        const homectaContent = homectaSectionRef.current?.querySelector(".homecta-content")
 
         gsap.fromTo(
-          ctaContent?.children,
+          homectaContent?.children,
           { opacity: 0, y: 30 },
           {
             opacity: 1,
@@ -243,7 +243,7 @@ const Home = () => {
     return () => {
       if (aboutPreviewScrollTrigger) aboutPreviewScrollTrigger.kill()
       if (servicesPreviewScrollTrigger) servicesPreviewScrollTrigger.kill()
-      if (ctaSectionScrollTrigger) ctaSectionScrollTrigger.kill()
+      if (homectaSectionScrollTrigger) homectaSectionScrollTrigger.kill()
     }
   }, [windowWidth])
 
@@ -369,18 +369,18 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section ref={ctaSectionRef} className="cta-section">
-        <div className="cta-background">
+      {/* homecta Section */}
+      <section ref={homectaSectionRef} className="homecta-section">
+        <div className="homecta-background">
           <img
             src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1920&h=600&fit=crop&crop=center"
             alt="Modern office space"
-            className="cta-bg-image"
+            className="homecta-bg-image"
           />
-          <div className="cta-overlay"></div>
+          <div className="homecta-overlay"></div>
         </div>
         <div className="container">
-          <div className="cta-content">
+          <div className="homecta-content">
             <h2 className="heading-secondary">
               <span className="desktop-only">Ready to Transform Your Hiring Process?</span>
               <span className="tablet-only">Transform Your Hiring Process</span>
@@ -393,7 +393,7 @@ const Home = () => {
               <span className="tablet-only">We can help you find the perfect talent for your needs.</span>
               <span className="mobile-only">Contact us today to get started.</span>
             </p>
-            <div className="cta-actions">
+            <div className="homecta-actions">
               <Link to="/contact" className="btn btn-primary btn-large">
                 Get Started Today
               </Link>

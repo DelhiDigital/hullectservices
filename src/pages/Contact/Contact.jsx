@@ -65,16 +65,16 @@ const Contact = () => {
       address: "C/O Churamanpur,Near Bank of BarodaRegional Office , Chandpur,Varanasi 221106",
       phone: "+91-9785-005-691",
       email: "mumbai@hullectservices.com",
-      image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=300&h=200&fit=crop&crop=center",
+      image: "/Varanasi.png",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Bandra+Kurla+Complex+Mumbai+India",
       coordinates: "19.0596,72.8656", // Mumbai coordinates
     },
     {
-      city: "Bangalore",
+      city: "bangalore.png",
       address: "No. 258, 4th main,near Shrinivasa temple,Kithiganur, T.C. Palya road,K.R. Puram bangalore 560049",
       phone: "+91 80 9876 5432",
       email: "bangalore@hullectservices.com",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop&crop=center",
+      image: "/bangalore.png",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Electronic+City+Bangalore+India",
       coordinates: "12.9716,77.5946", // Bangalore coordinates
     },
@@ -83,7 +83,7 @@ const Contact = () => {
       address: "G-205 ,RIICO Industrial area Bagru,Ajmer Road,Jaipur -303007",
       phone: "+91-978 500 5691",
       email: "chennai@hullectservices.com",
-      image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=300&h=200&fit=crop&crop=center",
+      image: "/Rajasthan.png",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=OMR+Road+Chennai+India",
       coordinates: "13.0827,80.2707", // Chennai coordinates
     },

@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect, useRef } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { FaChevronDown, FaBars, FaTimes } from "react-icons/fa"
@@ -139,7 +137,7 @@ const Header = () => {
                       <div className="dropdown-parent">
                         <span className="dropdown-heading">Security Services</span>
                         <ul className="dropdown-submenu">
-                          <li><Link to="/services/security" onClick={closeMenu}>Security Services</Link></li>
+                          <li><Link to="/services/SecurityServices" onClick={closeMenu}>Security Services</Link></li>
                         </ul>
                       </div>
                     </div>
