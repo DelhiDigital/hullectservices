@@ -131,11 +131,11 @@
 }
 
 .staffing-cta {
-  background: #1a73e8;
+  background: linear-gradient(135deg, #03a9f5, #247da9);
   color: white;
   padding: 90px 20px;
   text-align: center;
-  margin-top: 80px;
+  /* margin-top: 80px; */
 }
 
 .staffing-cta-content {

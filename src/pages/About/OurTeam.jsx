@@ -78,10 +78,9 @@ const OurTeam = () => {
       <section className="team-hero dark-bg">
         <div className="container">
           <div className="team-hero-content">
-            <h1>300+ YEARS OF MULTI-DISCIPLINARY EXPERTISE</h1>
+            <h1>4 YEARS OF MULTI-DISCIPLINARY EXPERTISE</h1>
             <p>
-              Our team comprises seasoned professionals from Big 4 consulting firms, global investment banks, and
-              marquee banking & wealth management institutions.
+              Our team comprises seasoned professionals from Big 4 consulting firms, global investment banks, and marquee banking & wealth management institutions.
             </p>
           </div>
         </div>

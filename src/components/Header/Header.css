@@ -434,7 +434,7 @@
 }
 
 /* MOBILE BREAKPOINT - 766px and below */
-@media (max-width: 766px) {
+@media (max-width: 862px) {
   .header .container {
     padding: 0 clamp(0.5rem, 3vw, 1.5rem);
   }
