@@ -16,21 +16,17 @@ const ManagedServices = () => {
   return (
     <div className="managed-services-page">
       {/* Banner */}
-      <section className="search-hero">
-        <div className="search-hero-wrapper">
-          <img
-            src={bannerImg}
-            alt="Managed Services Banner"
-            className="search-banner-image reduced-height"
-          />
-          <div className="search-hero-overlay">
-            <h1>Managed Services for FMCG Store Operations</h1>
-            <p className="tagline">
-              Simplifying Retail Execution with Tech-Driven Field Ops
-            </p>
-          </div>
-        </div>
-      </section>
+      <div className="search-hero">
+  <div className="search-hero-wrapper">
+    <img src={bannerImg} alt="Banner" className="search-banner-image reduced-height" />
+    <div className="search-hero-overlay"></div>
+  </div>
+  <div className="search-hero-content">
+    <h1>Managed Services for FMCG Store Operations</h1>
+    <p className="tagline">Simplifying Retail Execution with Tech-Driven Field Ops</p>
+  </div>
+</div>
+
 
       {/* Cards for Process Steps */}
       <section className="managed-services-cards">

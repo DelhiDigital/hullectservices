@@ -1,43 +1,28 @@
-/* Root container padding */
+/* ============================
+   Page Root
+============================ */
 .search-recruitment-page {
-  padding-top: 80px;
+  padding-top: 0px;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #ffffff;
 }
 
-/* Section spacing */
-.section-header {
-  text-align: center;
-  margin: 80px 0 40px;
-  
-}
-
-.section-header h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #002654 !important;
-  margin-bottom: 10px;
-}
-
-.section-header p {
-  font-size: 1rem;
-  color: #555;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* HERO SECTION */
+/* ============================
+   Hero Section
+============================ */
 .search-hero {
   position: relative;
   background: linear-gradient(135deg, #002654 0%, #0056a8 100%);
   color: white;
+  text-align: center;
   padding: 120px 20px;
   overflow: hidden;
-  text-align: center;
 }
 
 .search-hero-bg {
   position: absolute;
   inset: 0;
-  background: url("/background.svg") center / cover no-repeat;
+  background: url("/background.svg") center/cover no-repeat;
   opacity: 0.1;
   z-index: 1;
 }
@@ -49,31 +34,30 @@
   margin: 0 auto;
 }
 
-.search-hero h1 {
+.search-hero-content h1 {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 20px;
-  font-family: 'Segoe UI', sans-serif;
-  color: #0078d4 !important;
+  color: #ffffff;
 }
 
-.search-hero > p {
+.search-hero-content p {
   font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 40px;
   opacity: 0.95;
+  margin-bottom: 40px;
 }
 
+/* ============================
+   Hero Metrics
+============================ */
 .hero-metrics {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin-bottom: 0;
   flex-wrap: wrap;
 }
 
 .metric-number {
-  display: block;
   font-size: 2rem;
   font-weight: 700;
 }
@@ -83,7 +67,31 @@
   opacity: 0.85;
 }
 
-/* GRID SECTIONS */
+/* ============================
+   Section Header
+============================ */
+.search-recruitment-section-header {
+  text-align: center;
+  margin: 80px 0 40px;
+}
+
+.search-recruitment-section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #002654;
+  margin-bottom: 10px;
+}
+
+.search-recruitment-section-header p {
+  font-size: 1rem;
+  color: #555555;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================
+   Grids (Process / Specs / Benefits)
+============================ */
 .process-grid,
 .specializations-grid,
 .benefits-grid {
@@ -111,15 +119,18 @@
   }
 }
 
+/* ============================
+   Card Styling
+============================ */
 .process-card,
 .specialization-card,
 .benefit-card {
-  background: white;
+  background: #ffffff;
   padding: 32px 24px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
   text-align: center;
+  transition: transform 0.3s ease;
 }
 
 .process-card:hover,
@@ -129,34 +140,37 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.spec-icon,
-.benefit-icon {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
 .process-card h3,
 .specialization-card h3,
 .benefit-card h3 {
   font-size: 1.3rem;
-  margin-bottom: 10px;
   font-weight: 700;
   color: #002654;
+  margin-bottom: 10px;
 }
 
 .process-card p,
 .specialization-card p,
 .benefit-card p {
   font-size: 0.95rem;
-  color: #555;
+  color: #555555;
   line-height: 1.6;
 }
 
+.spec-icon,
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* ============================
+   Process Activities
+============================ */
 .process-activities {
   list-style: none;
   padding: 0;
-  text-align: left;
   margin-top: 12px;
+  text-align: left;
 }
 
 .process-activities li {
@@ -164,7 +178,7 @@
   position: relative;
   margin-bottom: 8px;
   font-size: 0.95rem;
-  color: #333;
+  color: #333333;
 }
 
 .process-activities li::before {
@@ -174,22 +188,27 @@
   color: #0078d4;
 }
 
+/* ============================
+   Process Phase Tag
+============================ */
 .process-phase {
   display: inline-block;
-  padding: 4px 12px;
   background: #002654;
   color: white;
-  border-radius: 4px;
+  padding: 4px 12px;
   font-size: 0.8rem;
-  margin-bottom: 12px;
+  border-radius: 4px;
   font-weight: 600;
+  margin-bottom: 12px;
 }
 
-/* CTA SECTION */
+/* ============================
+   CTA Section
+============================ */
 .search-cta {
-  padding: 100px 20px;
   background: linear-gradient(135deg, #002654 0%, #0056a8 100%);
   color: white;
+  padding: 100px 20px;
   text-align: center;
 }
 
@@ -198,20 +217,22 @@
   margin: 0 auto;
 }
 
-.search-cta h2 {
+.search-cta-content h2 {
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
-.search-cta p {
+.search-cta-content p {
   font-size: 1rem;
   margin-bottom: 30px;
   opacity: 0.95;
 }
 
-/* RESPONSIVE */
+/* ============================
+   Responsive
+============================ */
 @media (max-width: 768px) {
-  .search-hero h1 {
+  .search-hero-content h1 {
     font-size: 2rem;
   }
 
@@ -220,11 +241,11 @@
     gap: 20px;
   }
 
-  .search-cta h2 {
+  .search-cta-content h2 {
     font-size: 1.5rem;
   }
 
-  .search-cta p {
+  .search-cta-content p {
     font-size: 0.95rem;
   }
 

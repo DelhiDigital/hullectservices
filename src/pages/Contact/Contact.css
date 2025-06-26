@@ -209,7 +209,6 @@
   background: var(--gray-50);
 }
 
-/* ✅ Updated to force 2 cards per row */
 .locations-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -319,6 +318,68 @@
   box-shadow: var(--shadow-md);
 }
 
+/* Map Section Overlay */
+.map-section {
+  position: relative;
+  padding: var(--spacing-3xl) 0;
+  background: var(--gray-50);
+}
+
+.interactive-map-container {
+  position: relative;
+}
+
+.interactive-map {
+  width: 100%;
+  height: 500px;
+  border: 0;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.map-overlay-info {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background-color: var(--white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2xl);
+  z-index: 5;
+  max-width: 320px;
+}
+
+.map-info-card h4 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+}
+
+.map-info-card p {
+  font-size: var(--text-sm);
+  color: var(--gray-700);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.5;
+}
+
+.map-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.map-actions .btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--text-sm);
+}
+
+.map-controls-info {
+  margin-top: var(--spacing-lg);
+  font-size: var(--text-xs);
+  text-align: center;
+  color: var(--gray-500);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .contact-grid {
@@ -340,6 +401,20 @@
     flex-direction: row;
     gap: var(--spacing-sm);
   }
+
+  .map-overlay-info {
+    position: static;
+    margin-top: var(--spacing-xl);
+    max-width: 100%;
+  }
+
+  .map-actions {
+    flex-direction: column;
+  }
+
+  .interactive-map {
+    height: 350px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -352,6 +427,6 @@
   }
 
   .interactive-map {
-    height: 350px;
+    height: 300px;
   }
 }

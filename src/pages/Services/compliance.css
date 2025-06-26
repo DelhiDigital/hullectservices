@@ -1,58 +1,62 @@
 .compliance-page {
-  padding-top: 80px;
+  /* padding-top: 80px; */
   background-color: #fff;
   color: #000;
 }
 
-.compliance-hero-wrapper {
+.compliance-page .compliance-hero-wrapper {
+  margin-top: 60px;
   position: relative;
   width: 100%;
-  height: 360px;
+  max-height: 90vh;
   overflow: hidden;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
-.compliance-banner-image {
+.compliance-page .compliance-banner-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.compliance-hero-overlay {
+.compliance-page .compliance-hero-overlay {
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   color: #fff;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.compliance-hero-overlay h1 {
-  font-size: 2.5rem;
+.compliance-page .compliance-hero-overlay h1 {
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
   font-weight: 700;
   margin-bottom: 12px;
 }
 
-.compliance-hero-overlay p {
-  font-size: 1.125rem;
+.compliance-page .compliance-hero-overlay p {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
   max-width: 720px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.compliance-acts {
+.compliance-page .compliance-acts {
   padding: 60px 0 100px;
   background-color: #f9f9f9;
 }
 
-.acts-grid {
+.compliance-page .acts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
 }
 
-.act-card {
+.compliance-page .act-card {
   background: #fff;
   border: 1px dashed #ccc;
   border-radius: 10px;
@@ -62,84 +66,97 @@
   transition: 0.3s ease;
 }
 
-.act-card:hover {
+.compliance-page .act-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-.emoji-icon {
+.compliance-page .emoji-icon {
   font-size: 2rem;
   margin-bottom: 12px;
 }
 
-.act-card p {
+.compliance-page .act-card p {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 8px;
   color: #333;
 }
 
-.act-label {
+.compliance-page .act-label {
   font-size: 0.9rem;
   color: #777;
   font-style: italic;
 }
 
-.compliance-contact {
+.compliance-page .compliance-contact {
   background-color: #dddddd;
   text-align: center;
   padding: 80px 16px;
 }
 
-.compliance-contact h2 {
+.compliance-page .compliance-contact h2 {
   font-size: 2rem;
   font-weight: 700;
   color: #0b1119;
   margin-bottom: 16px;
 }
 
-.compliance-contact p {
+.compliance-page .compliance-contact p {
   font-size: 1.125rem;
   color: #555;
   margin-bottom: 32px;
 }
 
-.contact-actions {
+.compliance-page .contact-actions {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 16px;
 }
 
-.contact-actions a {
+.compliance-page .contact-actions a {
   padding: 12px 24px;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
 }
 
-.btn-primary {
+.compliance-page .btn-primary {
   background-color: #007bff;
   color: white;
 }
 
-.btn-outline {
+.compliance-page .btn-outline {
   border: 2px solid #007bff;
   color: #007bff;
 }
 
-.btn-primary:hover,
-.btn-outline:hover {
+.compliance-page .btn-primary:hover,
+.compliance-page .btn-outline:hover {
   opacity: 0.85;
 }
 
 @media (max-width: 768px) {
-  .compliance-hero-overlay h1 {
+  .compliance-page .compliance-hero-overlay h1 {
     font-size: 1.875rem;
   }
 
-  .act-card {
+  .compliance-page .compliance-hero-overlay p {
+    font-size: 1rem;
+  }
+
+  .compliance-page .act-card {
     padding: 16px;
   }
 }
 
+@media (max-width: 480px) {
+  .compliance-page .compliance-hero-overlay h1 {
+    font-size: 1.6rem;
+  }
+
+  .compliance-page .compliance-hero-overlay p {
+    font-size: 0.95rem;
+  }
+}

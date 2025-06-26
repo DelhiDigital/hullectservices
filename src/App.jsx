@@ -29,9 +29,9 @@ import "react-toastify/dist/ReactToastify.css"
 function App() {
   return (
     <div className="App">
-      <div style={{ position: "sticky", top: 0, zIndex: 1000, paddingBottom: "30px"}}>
+      {/* <div style={{ position: "sticky", top: 0, zIndex: 1000, paddingBottom: "30px"}}> */}
         <Header />
-      </div>
+      
       <ScrollToTop />
       <SocialSidebar />
       {/* Main content should be wrapped in a main tag for better semantics */}

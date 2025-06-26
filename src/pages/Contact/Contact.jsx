@@ -103,7 +103,7 @@ const Contact = () => {
   const headOffice = {
     address: "Office No - SF - 05E, 2nd Floor,Riverview Arcade Plot No - 4/17, Sector 4, Gomti Nagar Extension, Lucknow, Uttar Pradesh 226010",
     coordinates: "28.6315,77.2167",
-    mapUrl: "https://www.google.com/maps/search/?api=1&query=123+Business+District+Connaught+Place+New+Delhi+India",
+    mapUrl: "https://maps.app.goo.gl/RMNzB1A5uAQAv7XB8",
   }
 
   return (

@@ -20,6 +20,7 @@ body {
   justify-content: center;
   min-height: 50vh;
   text-align: center;
+  margin-top: 20px;
 }
 
 .loading-spinner {
@@ -48,6 +49,7 @@ body {
   padding: 80px 20px;
   position: relative;
   overflow: hidden;
+  margin-top: 40px;
 }
 
 .banner-section::before {

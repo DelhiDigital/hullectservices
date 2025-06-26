@@ -25,7 +25,7 @@ const CampusGrooming = () => {
       </p>
     </div>
     <div className="info-image">
-      <img src="/grooming_image.png" alt="Corporate Grooming Illustration" />
+      <img src="/SkillLearnCorporate.png" alt="Corporate Grooming Illustration" />
     </div>
   </div>
 </section>
