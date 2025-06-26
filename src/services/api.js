@@ -1,6 +1,6 @@
-export const BASE_URL = "http://localhost:5000/"  //base url for backend API for downloading files
+export const BASE_URL = "https://hullectservices-backend.vercel.app/"  //base url for backend API for downloading files
 
-const API_BASE_URL = "http://localhost:5000/api"
+const API_BASE_URL = "https://hullectservices-backend.vercel.app/api"
 // Helper function to handle API responses
 const handleResponse = async (response) => {
   const data = await response.json()
