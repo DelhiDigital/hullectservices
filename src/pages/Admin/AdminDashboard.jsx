@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ApplicationsModal from "./ApplicationsModal"
 import "./Admin.css"
-import { BASE_URL } from "../../services/api"
+// import { BASE_URL } from "../../services/api"
 import { ShieldUser } from 'lucide-react';
 
 const AdminDashboard = () => {
@@ -630,9 +630,7 @@ const AdminDashboard = () => {
                 ) : (
                   <div className="admin-applications-list">
                     {applications.map((application) => {
-                      const downloadUrl = application.resumeUrl?.startsWith("http")
-                        ? application.resumeUrl
-                        : `${BASE_URL}${application.resumeUrl}`
+                      const downloadUrl = application.resumeUrl || application.resume || "#"
 
                       return (
                         <div key={application._id} className="admin-application-card">

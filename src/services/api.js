@@ -2,7 +2,7 @@
 
 // const API_BASE_URL = "http://localhost:5000/api"
 
-export const BASE_URL = "https://hullectservices-backend.vercel.app/"  //base url for backend API for downloading files
+// export const BASE_URL = "https://hullectservices-backend.vercel.app/"  //base url for backend API for downloading files
 
 const API_BASE_URL = "https://hullectservices-backend.vercel.app/api"
 
