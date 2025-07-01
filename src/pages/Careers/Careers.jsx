@@ -1,10 +1,8 @@
+"use client";
 
-
-"use client"
-
-import { useState, useEffect, useRef } from "react"
-import { jobsAPI, applicationsAPI } from "../../services/api"
-import "./Careers.css"
+import { useState, useEffect, useRef } from "react";
+import { jobsAPI, applicationsAPI } from "../../services/api";
+import "./Careers.css";
 
 // Mock data for cities - you can replace this with your actual cities API
 const initialCities = [
@@ -38,22 +36,22 @@ const initialCities = [
   "Louisville, KY",
   "Baltimore, MD",
   "Milwaukee, WI",
-]
+];
 
 const Careers = () => {
-  const [jobs, setJobs] = useState([])
-  const [filteredJobs, setFilteredJobs] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [searchKeywords, setSearchKeywords] = useState("")
-  const [searchLocation, setSearchLocation] = useState("")
-  const [showLocationSuggestions, setShowLocationSuggestions] = useState(false)
-  const [locationSuggestions, setLocationSuggestions] = useState([])
-  const [selectedJob, setSelectedJob] = useState(null)
-  const [showJobModal, setShowJobModal] = useState(false)
-  const [showApplyModal, setShowApplyModal] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const locationInputRef = useRef(null)
-  const [cities, setCities] = useState(initialCities)
+  const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchKeywords, setSearchKeywords] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
+  const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [showJobModal, setShowJobModal] = useState(false);
+  const [showApplyModal, setShowApplyModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const locationInputRef = useRef(null);
+  const [cities, setCities] = useState(initialCities);
 
   // Application form state
   const [applicationData, setApplicationData] = useState({
@@ -67,95 +65,103 @@ const Careers = () => {
     zipCode: "",
     coverLetter: "",
     resume: null,
-  })
+  });
 
   // Load jobs on component mount
   useEffect(() => {
-    loadJobs()
-  }, [])
+    loadJobs();
+  }, []);
 
   const loadJobs = async () => {
     try {
-      setLoading(true)
-      const response = await jobsAPI.getJobs({ isActive: true })
+      setLoading(true);
+      const response = await jobsAPI.getJobs({ isActive: true });
 
       if (response.success) {
-        setJobs(response.data.jobs)
-        setFilteredJobs(response.data.jobs)
+        setJobs(response.data.jobs);
+        setFilteredJobs(response.data.jobs);
 
         // Extract unique cities from job locations
-        const uniqueCities = [...new Set(response.data.jobs.map((job) => job.location).filter((location) => location))]
-        setCities(uniqueCities)
+        const uniqueCities = [
+          ...new Set(
+            response.data.jobs
+              .map((job) => job.location)
+              .filter((location) => location)
+          ),
+        ];
+        setCities(uniqueCities);
 
-        console.log("Loaded cities:", uniqueCities)
-        console.log("Loaded jobs:", response.data.jobs)
+        console.log("Loaded cities:", uniqueCities);
+        console.log("Loaded jobs:", response.data.jobs);
       }
     } catch (error) {
-      console.error("Failed to load jobs:", error)
+      console.error("Failed to load jobs:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   // Handle location input change and show suggestions
   const handleLocationChange = (value) => {
-    setSearchLocation(value)
+    setSearchLocation(value);
     if (value.length > 0) {
-      const suggestions = cities.filter((city) => city.toLowerCase().includes(value.toLowerCase())).slice(0, 5)
-      setLocationSuggestions(suggestions)
-      setShowLocationSuggestions(true)
+      const suggestions = cities
+        .filter((city) => city.toLowerCase().includes(value.toLowerCase()))
+        .slice(0, 5);
+      setLocationSuggestions(suggestions);
+      setShowLocationSuggestions(true);
     } else {
-      setShowLocationSuggestions(false)
+      setShowLocationSuggestions(false);
     }
-  }
+  };
 
   // Handle search functionality with API
   const handleSearch = async () => {
     try {
-      const params = { isActive: true }
+      const params = { isActive: true };
 
       // Only add search params if they have values
       if (searchKeywords && searchKeywords.trim()) {
-        params.search = searchKeywords.trim()
+        params.search = searchKeywords.trim();
       }
       if (searchLocation && searchLocation.trim()) {
-        params.location = searchLocation.trim()
+        params.location = searchLocation.trim();
       }
 
-      const response = await jobsAPI.getJobs(params)
+      const response = await jobsAPI.getJobs(params);
 
       if (response.success) {
-        setFilteredJobs(response.data.jobs)
+        setFilteredJobs(response.data.jobs);
       }
     } catch (error) {
-      console.error("Search failed:", error)
+      console.error("Search failed:", error);
     }
-  }
+  };
 
   // Handle location suggestion selection
   const selectLocationSuggestion = (city) => {
-    setSearchLocation(city)
-    setShowLocationSuggestions(false)
-  }
+    setSearchLocation(city);
+    setShowLocationSuggestions(false);
+  };
 
   // Handle job modal
   const openJobModal = (job) => {
-    setSelectedJob(job)
-    setShowJobModal(true)
-  }
+    setSelectedJob(job);
+    setShowJobModal(true);
+  };
 
   const closeJobModal = () => {
-    setShowJobModal(false)
-    setSelectedJob(null)
-  }
+    setShowJobModal(false);
+    setSelectedJob(null);
+  };
 
   const openApplyModal = () => {
-    setShowJobModal(false)
-    setShowApplyModal(true)
-  }
+    setShowJobModal(false);
+    setShowApplyModal(true);
+  };
 
   const closeApplyModal = () => {
-    setShowApplyModal(false)
+    setShowApplyModal(false);
     setApplicationData({
       firstName: "",
       lastName: "",
@@ -167,79 +173,84 @@ const Careers = () => {
       zipCode: "",
       coverLetter: "",
       resume: null,
-    })
-  }
+    });
+  };
 
   // Handle form input changes
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setApplicationData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleFileChange = (e) => {
     setApplicationData((prev) => ({
       ...prev,
       resume: e.target.files[0],
-    }))
-  }
+    }));
+  };
 
   const handleSubmitApplication = async (e) => {
-    e.preventDefault()
-    setSubmitting(true)
+    e.preventDefault();
+    setSubmitting(true);
 
     try {
       // Create FormData for file upload
-      const formData = new FormData()
-      formData.append("jobId", selectedJob._id)
-      formData.append("firstName", applicationData.firstName)
-      formData.append("lastName", applicationData.lastName)
-      formData.append("email", applicationData.email)
-      formData.append("phone", applicationData.phone)
-      formData.append("address", applicationData.address)
-      formData.append("city", applicationData.city)
-      formData.append("state", applicationData.state)
-      formData.append("zipCode", applicationData.zipCode)
-      formData.append("coverLetter", applicationData.coverLetter)
-      formData.append("resume", applicationData.resume)
+      const formData = new FormData();
+      formData.append("jobId", selectedJob._id);
+      formData.append("firstName", applicationData.firstName);
+      formData.append("lastName", applicationData.lastName);
+      formData.append("email", applicationData.email);
+      formData.append("phone", applicationData.phone);
+      formData.append("address", applicationData.address);
+      formData.append("city", applicationData.city);
+      formData.append("state", applicationData.state);
+      formData.append("zipCode", applicationData.zipCode);
+      formData.append("coverLetter", applicationData.coverLetter);
+      formData.append("resume", applicationData.resume);
 
-      const response = await applicationsAPI.submitApplication(formData)
+      const response = await applicationsAPI.submitApplication(formData);
 
       if (response.success) {
-        alert("Application submitted successfully! You will receive a confirmation email shortly.")
-        closeApplyModal()
+        alert(
+          "Application submitted successfully! You will receive a confirmation email shortly."
+        );
+        closeApplyModal();
       }
     } catch (error) {
-      alert(error.message || "Failed to submit application. Please try again.")
+      alert(error.message || "Failed to submit application. Please try again.");
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
-  }
+  };
 
   // Close suggestions when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (locationInputRef.current && !locationInputRef.current.contains(event.target)) {
-        setShowLocationSuggestions(false)
+      if (
+        locationInputRef.current &&
+        !locationInputRef.current.contains(event.target)
+      ) {
+        setShowLocationSuggestions(false);
       }
-    }
+    };
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Auto-trigger search when search terms change
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      handleSearch()
-    }, 300) // Debounce search by 300ms
+      handleSearch();
+    }, 300); // Debounce search by 300ms
 
-    return () => clearTimeout(timeoutId)
-  }, [searchKeywords, searchLocation])
+    return () => clearTimeout(timeoutId);
+  }, [searchKeywords, searchLocation]);
 
   if (loading) {
     return (
@@ -249,7 +260,7 @@ const Careers = () => {
           <p>Loading jobs...</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -260,12 +271,14 @@ const Careers = () => {
           <h1>
             Welcome to
             <br />
-            <span className="brand-text">CAREERPAGE</span>
+            <span className="brand-text">Hullect Job portal </span>
           </h1>
           <p>
-            CareerPage is your first source for jobs in broadcasting because these jobs are posted by the source –
-            broadcasters from across the country. This comprehensive listing of open positions provides you with a wide
-            range of career opportunities.
+            At <strong>Hullect Services Private Limited</strong>, we specialize
+            in Recruitment, Staffing, and Managed HR Services across diverse
+            industries. Our mission is to connect top talent with the right
+            opportunities, supporting businesses with flexible workforce
+            solutions and job seekers with meaningful career paths.
           </p>
         </div>
       </div>
@@ -281,7 +294,12 @@ const Careers = () => {
                   What are you looking for?
                 </label>
                 <div className="input-wrapper">
-                  <svg className="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg
+                    className="input-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                   </svg>
@@ -297,12 +315,20 @@ const Careers = () => {
               </div>
 
               {/* Location Search with Suggestions */}
-              <div className="input-group location-group" ref={locationInputRef}>
+              <div
+                className="input-group location-group"
+                ref={locationInputRef}
+              >
                 <label htmlFor="location" className="input-label">
                   Where?
                 </label>
                 <div className="input-wrapper">
-                  <svg className="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg
+                    className="input-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                     <circle cx="12" cy="10" r="3"></circle>
                   </svg>
@@ -314,7 +340,12 @@ const Careers = () => {
                     onChange={(e) => handleLocationChange(e.target.value)}
                     className="search-input"
                   />
-                  <svg className="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg
+                    className="dropdown-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
                     <polyline points="6,9 12,15 18,9"></polyline>
                   </svg>
                 </div>
@@ -323,8 +354,17 @@ const Careers = () => {
                 {showLocationSuggestions && locationSuggestions.length > 0 && (
                   <div className="suggestions-dropdown">
                     {locationSuggestions.map((city, index) => (
-                      <button key={index} onClick={() => selectLocationSuggestion(city)} className="suggestion-item">
-                        <svg className="suggestion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <button
+                        key={index}
+                        onClick={() => selectLocationSuggestion(city)}
+                        className="suggestion-item"
+                      >
+                        <svg
+                          className="suggestion-icon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                        >
                           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                           <circle cx="12" cy="10" r="3"></circle>
                         </svg>
@@ -343,9 +383,9 @@ const Careers = () => {
                 {(searchKeywords || searchLocation) && (
                   <button
                     onClick={() => {
-                      setSearchKeywords("")
-                      setSearchLocation("")
-                      setShowLocationSuggestions(false)
+                      setSearchKeywords("");
+                      setSearchLocation("");
+                      setShowLocationSuggestions(false);
                     }}
                     className="clear-button"
                   >
@@ -360,14 +400,18 @@ const Careers = () => {
 
       {/* Jobs Section */}
       <div className="jobs-section">
-        
         <div className="jobs-header">
           <h2 className="jobs-title">
-            {filteredJobs.length} Job{filteredJobs.length !== 1 ? "s" : ""} Found
+            {filteredJobs.length} Job{filteredJobs.length !== 1 ? "s" : ""}{" "}
+            Found
           </h2>
           <p className="jobs-subtitle">
             {searchKeywords || searchLocation
-              ? `Showing results for ${searchKeywords ? `"${searchKeywords}"` : ""} ${searchKeywords && searchLocation ? "in" : ""} ${searchLocation ? `"${searchLocation}"` : ""}`
+              ? `Showing results for ${
+                  searchKeywords ? `"${searchKeywords}"` : ""
+                } ${searchKeywords && searchLocation ? "in" : ""} ${
+                  searchLocation ? `"${searchLocation}"` : ""
+                }`
               : "Browse all available positions"}
           </p>
         </div>
@@ -386,13 +430,22 @@ const Careers = () => {
         ) : (
           <div className="jobs-grid">
             {filteredJobs.map((job) => (
-              <div key={job._id} className="job-card" onClick={() => openJobModal(job)}>
+              <div
+                key={job._id}
+                className="job-card"
+                onClick={() => openJobModal(job)}
+              >
                 <div className="job-header">
                   <div className="job-info">
-                     <p className="admin-job-id">Job ID: {job?.jobId}</p> 
+                    <p className="admin-job-id">Job ID: {job?.jobId}</p>
                     <h3 className="job-title">{job.title}</h3>
                     <div className="job-company">
-                      <svg className="company-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <svg
+                        className="company-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
                         <path d="M3 21h18"></path>
                         <path d="M5 21V7l8-4v18"></path>
                         <path d="M19 21V11l-6-4"></path>
@@ -400,7 +453,12 @@ const Careers = () => {
                       <span>{job.company}</span>
                     </div>
                     <div className="job-location">
-                      <svg className="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <svg
+                        className="location-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                      >
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                         <circle cx="12" cy="10" r="3"></circle>
                       </svg>
@@ -408,8 +466,13 @@ const Careers = () => {
                     </div>
                   </div>
                   <div className="job-meta">
-                    <span className={`job-type ${job.type?.toLowerCase().replace(" ", "-")}`}>{job.type}</span>
-                    
+                    <span
+                      className={`job-type ${job.type
+                        ?.toLowerCase()
+                        .replace(" ", "-")}`}
+                    >
+                      {job.type}
+                    </span>
                   </div>
                 </div>
                 <div className="job-description">
@@ -421,14 +484,26 @@ const Careers = () => {
                 </div>
                 <div className="job-footer">
                   <div className="job-posted">
-                    <svg className="clock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <svg
+                      className="clock-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
                       <circle cx="12" cy="12" r="10"></circle>
                       <polyline points="12,6 12,12 16,14"></polyline>
                     </svg>
-                    <span>Posted {new Date(job.createdAt).toLocaleDateString()}</span>
+                    <span>
+                      Posted {new Date(job.createdAt).toLocaleDateString()}
+                    </span>
                   </div>
                   <div className="job-applicants">
-                    <svg className="users-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <svg
+                      className="users-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                       <circle cx="9" cy="7" r="4"></circle>
                       <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -437,7 +512,6 @@ const Careers = () => {
                     <span>{job.applicationCount || 0} applicants</span>
                   </div>
                 </div>
-                  
               </div>
             ))}
           </div>
@@ -466,18 +540,25 @@ const Careers = () => {
                     </div>
                     <div className="meta-item">
                       <strong>Type:</strong>
-                      <span className={`job-type ${selectedJob.type?.toLowerCase().replace(" ", "-")}`}>
+                      <span
+                        className={`job-type ${selectedJob.type
+                          ?.toLowerCase()
+                          .replace(" ", "-")}`}
+                      >
                         {selectedJob.type}
                       </span>
                     </div>
                     <div className="meta-item">
-                      <strong>Posted:</strong> {new Date(selectedJob.createdAt).toLocaleDateString()}
+                      <strong>Posted:</strong>{" "}
+                      {new Date(selectedJob.createdAt).toLocaleDateString()}
                     </div>
                     <div className="meta-item">
-                      <strong>Deadline:</strong> {new Date(selectedJob.closingDate).toLocaleDateString()}
+                      <strong>Deadline:</strong>{" "}
+                      {new Date(selectedJob.closingDate).toLocaleDateString()}
                     </div>
                     <div className="meta-item">
-                      <strong>Applications:</strong> {selectedJob.applicationCount || 0}
+                      <strong>Applications:</strong>{" "}
+                      {selectedJob.applicationCount || 0}
                     </div>
                   </div>
                 </div>
@@ -487,27 +568,29 @@ const Careers = () => {
                   <p>{selectedJob.description}</p>
                 </div>
 
-                {selectedJob.requirements && selectedJob.requirements.length > 0 && (
-                  <div className="job-requirements">
-                    <h3>Requirements</h3>
-                    <ul>
-                      {selectedJob.requirements.map((req, index) => (
-                        <li key={index}>{req}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                {selectedJob.requirements &&
+                  selectedJob.requirements.length > 0 && (
+                    <div className="job-requirements">
+                      <h3>Requirements</h3>
+                      <ul>
+                        {selectedJob.requirements.map((req, index) => (
+                          <li key={index}>{req}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
-                {selectedJob.responsibilities && selectedJob.responsibilities.length > 0 && (
-                  <div className="job-responsibilities">
-                    <h3>Responsibilities</h3>
-                    <ul>
-                      {selectedJob.responsibilities.map((resp, index) => (
-                        <li key={index}>{resp}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                {selectedJob.responsibilities &&
+                  selectedJob.responsibilities.length > 0 && (
+                    <div className="job-responsibilities">
+                      <h3>Responsibilities</h3>
+                      <ul>
+                        {selectedJob.responsibilities.map((resp, index) => (
+                          <li key={index}>{resp}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
               </div>
             </div>
             <div className="modal-footer">
@@ -522,7 +605,10 @@ const Careers = () => {
       {/* Application Modal */}
       {showApplyModal && selectedJob && (
         <div className="modal-overlay" onClick={closeApplyModal}>
-          <div className="modal-content application-modal" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="modal-content application-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="modal-header">
               <h2>Apply for {selectedJob.title}</h2>
               <button className="close-button" onClick={closeApplyModal}>
@@ -530,7 +616,10 @@ const Careers = () => {
               </button>
             </div>
             <div className="modal-body">
-              <form onSubmit={handleSubmitApplication} className="application-form">
+              <form
+                onSubmit={handleSubmitApplication}
+                className="application-form"
+              >
                 <div className="form-row">
                   <div className="form-group">
                     <label>First Name *</label>
@@ -651,10 +740,19 @@ const Careers = () => {
                 </div>
 
                 <div className="form-actions">
-                  <button type="button" onClick={closeApplyModal} className="cancel-button" disabled={submitting}>
+                  <button
+                    type="button"
+                    onClick={closeApplyModal}
+                    className="cancel-button"
+                    disabled={submitting}
+                  >
                     Cancel
                   </button>
-                  <button type="submit" className="submit-button" disabled={submitting}>
+                  <button
+                    type="submit"
+                    className="submit-button"
+                    disabled={submitting}
+                  >
                     {submitting ? "Submitting..." : "Submit Application"}
                   </button>
                 </div>
@@ -664,7 +762,7 @@ const Careers = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Careers
+export default Careers;
